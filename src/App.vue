@@ -46,7 +46,7 @@
   </q-toolbar>
   <q-layout view="lHh Lpr lFf">
     <q-page-container>
-      <router-view :key="$route.fullPath" />
+      <router-view :key="$route.path" />
     </q-page-container>
   </q-layout>
 </template>

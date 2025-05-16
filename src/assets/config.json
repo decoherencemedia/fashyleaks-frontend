@@ -3,5 +3,219 @@
     "iron-march": ["messages", "posts", "threads", "users"],
     "fascist-forge": ["posts", "threads", "users"],
     "rope-culture": ["articles", "comments", "users", "commenters", "emails"]
+  },
+  "fields": {
+    "posts": [
+      {
+        "label": "Search Term",
+        "variable": "term"
+      },
+      {
+        "label": "User Name or ID",
+        "variable": "user_id",
+        "component": "AutocompleteField",
+        "additional": {
+          "type": "users"
+        }
+      },
+      {
+        "label": "Thread ID",
+        "variable": "thread_id"
+      },
+      {
+        "label": "Thread Category",
+        "variable": "thread_category",
+        "component": "AutocompleteField",
+        "additional": {
+          "type": "thread_categories"
+        }
+      },
+      {
+        "label": "Post ID",
+        "variable": "id"
+      }
+    ],
+    "threads": [
+      {
+        "label": "Title Search Term",
+        "variable": "term"
+      },
+      {
+        "label": "User Name or ID",
+        "variable": "user_id",
+        "component": "AutocompleteField",
+        "additional": {
+          "type": "users"
+        }
+      },
+      {
+        "label": "Thread Category",
+        "variable": "category",
+        "component": "AutocompleteField",
+        "additional": {
+          "type": "thread_categories"
+        }
+      },
+      {
+        "label": "Thread ID",
+        "variable": "id"
+      }
+    ],
+    "messages": [
+      {
+        "label": "Search Term",
+        "variable": "term"
+      },
+      {
+        "label": "User Name or ID 1",
+        "variable": "user_id_1",
+        "component": "AutocompleteField",
+        "additional": {
+          "type": "users"
+        }
+      },
+      {
+        "label": "User Name or ID 2",
+        "variable": "user_id_2",
+        "component": "AutocompleteField",
+        "additional": {
+          "type": "users"
+        }
+      },
+      {
+        "label": "Conversation ID",
+        "variable": "conversation_id"
+      },
+      {
+        "label": "Message ID",
+        "variable": "id"
+      }
+    ],
+    "users": [
+      {
+        "label": "User Name or ID",
+        "variable": "id",
+        "component": "AutocompleteField",
+        "additional": {
+          "type": "users"
+        }
+      }
+    ],
+    "articles": [
+      {
+        "label": "Search Term",
+        "variable": "term"
+      },
+      {
+        "label": "Title Search Term",
+        "variable": "title_term"
+      },
+      {
+        "label": "User Name or ID",
+        "variable": "user_id",
+        "component": "AutocompleteField",
+        "additional": {
+          "type": "users"
+        }
+      },
+      {
+        "label": "Article ID",
+        "variable": "id"
+      }
+    ],
+    "comments": [
+      {
+        "label": "Search Term",
+        "variable": "term"
+      },
+      {
+        "label": "Commenter Name or Email",
+        "variable": "user_email",
+        "component": "AutocompleteField",
+        "additional": {
+          "type": "commenters"
+        }
+      },
+      {
+        "label": "Article ID",
+        "variable": "article_id"
+      },
+      {
+        "label": "Parent ID",
+        "variable": "parent_id"
+      },
+      {
+        "label": "Comment ID",
+        "variable": "id"
+      }
+    ],
+    "commenters": [
+      {
+        "label": "Commenter Name or Email",
+        "variable": "id",
+        "component": "AutocompleteField",
+        "additional": {
+          "type": "commenters"
+        }
+      }
+    ],
+    "emails": [
+      {
+        "label": "Search Term",
+        "variable": "term"
+      },
+      {
+        "label": "Email Address 1",
+        "variable": "address_1",
+        "component": "AutocompleteField",
+        "additional": {
+          "type": "addresses"
+        }
+      },
+      {
+        "label": "Email Address 2",
+        "variable": "address_2",
+        "component": "AutocompleteField",
+        "additional": {
+          "type": "addresses"
+        }
+      },
+      {
+        "label": "Conversation ID",
+        "variable": "conversation_id"
+      },
+      {
+        "label": "Email ID",
+        "variable": "id"
+      }
+    ]
+  },
+  "lists": {
+    "iron-march": ["users", "thread_categories", "user_table"],
+    "fascist-forge": ["users", "thread_categories", "user_table"],
+    "rope-culture": ["users", "commenters", "addresses", "user_table", "commenter_table"]
+  },
+  "singleCollections": ["users", "commenters"],
+  "autocompletes": {
+    "users": {
+      "label": "User Name or ID",
+      "itemText": "user_name",
+      "itemValue": "id"
+    },
+    "commenters": {
+      "label": "Commenter Name or Email",
+      "itemText": "author_name",
+      "itemValue": "author_email"
+    },
+    "thread_categories": {
+      "label": "Thread Category",
+      "itemText": "category",
+      "itemValue": "category"
+    },
+    "addresses": {
+      "label": "Email Address",
+      "itemText": "address",
+      "itemValue": "address"
+    }
   }
 }

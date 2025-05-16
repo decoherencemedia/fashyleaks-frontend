@@ -22,6 +22,7 @@
         :value="collection"
       >
         <div class="text-h6">{{ collection }}</div>
+        <search-page :dataset="dataset" :collection="collection" />
       </q-tab-panel>
       <q-tab-panel key="about" name="about" :transition="false" :reverse-transition="false">
         <component :is="aboutComponent" />
@@ -31,8 +32,9 @@
 </template>
 
 <script setup>
-import { ref, markRaw } from 'vue'
+import { ref, watch, onMounted, onBeforeUnmount, markRaw } from 'vue'
 import config from '../assets/config.json'
+import SearchPage from '../components/SearchPage.vue'
 
 const props = defineProps({
   dataset: {
@@ -40,6 +42,10 @@ const props = defineProps({
     required: true,
   },
 })
+
+const collections = config.collections[props.dataset] || []
+const validTabs = [...collections, 'about']
+const defaultTab = collections[0] || 'about'
 
 const title = props.dataset
   .toLowerCase()
@@ -49,7 +55,7 @@ const title = props.dataset
 
 const oneWordTitle = title.replace(' ', '')
 
-const tab = ref(config.collections[props.dataset]?.[0] || 'about')
+const tab = ref(defaultTab)
 const iconComponent = ref(null)
 const aboutComponent = ref(null)
 
@@ -64,4 +70,24 @@ const loadAbout = async () => {
 }
 loadIcon()
 loadAbout()
+
+function syncTabWithHash() {
+  const hash = window.location.hash.replace('#', '')
+  if (validTabs.includes(hash)) {
+    tab.value = hash
+  }
+}
+
+onMounted(() => {
+  syncTabWithHash()
+  window.addEventListener('hashchange', syncTabWithHash)
+})
+onBeforeUnmount(() => {
+  window.removeEventListener('hashchange', syncTabWithHash)
+})
+
+// Update hash when tab changes
+watch(tab, (newVal) => {
+  window.location.hash = newVal
+})
 </script>

@@ -10,7 +10,7 @@
           member
           <a href="https://www.bbc.com/news/uk-53128169">Matthew Baccari</a>
           (under the alias <i>Mathias</i>) in May 2018. Fascist Forge never achieved the influence
-          or notoriety of its presecessor forum
+          or notoriety of its predecessor forum
           <router-link to="/iron-march?tab=about">Iron March</router-link>, and was taken offline in
           late February 2020 after the
           <a
