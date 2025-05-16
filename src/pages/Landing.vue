@@ -1,5 +1,5 @@
 <template>
-  <q-page>
+  <q-page class="q-pa-none">
     <div class="row justify-center">
       <TextBox>
         <template #title> Decoherence Archives </template>
@@ -12,9 +12,15 @@
         </template>
       </TextBox>
     </div>
+    <div class="row justify-center q-gutter-md q-mx-xl q-mt-lg">
+      <DatasetLink dataset="iron-march" />
+      <DatasetLink dataset="rope-culture" />
+      <DatasetLink dataset="fascist-forge" />
+    </div>
   </q-page>
 </template>
 
 <script setup>
 import TextBox from '../components/TextBox.vue'
+import DatasetLink from '../components/DatasetLink.vue'
 </script>

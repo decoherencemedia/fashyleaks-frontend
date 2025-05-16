@@ -71,7 +71,10 @@ const variable = computed({
 })
 
 onMounted(() => {
-  store.loadList({ dataset: props.dataset, endpoint: endpoint.value })
+  const existingList = store.lists[props.dataset]?.[endpoint.value]
+  if (!Array.isArray(existingList) || existingList.length === 0) {
+    store.loadList({ dataset: props.dataset, endpoint: endpoint.value })
+  }
 })
 
 const items = computed(() => store.lists[props.dataset]?.[endpoint.value] ?? [])

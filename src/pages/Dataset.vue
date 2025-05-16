@@ -2,7 +2,7 @@
   <div :id="dataset">
     <q-toolbar class="text-primary bg-grey-9 text-white">
       <component :is="iconComponent" color="blue" size="2rem" />
-      <q-tabs v-model="tab" inline-label>
+      <q-tabs v-model="tab" inline-label indicator-color="blue">
         <q-tab
           v-for="collection in config.collections[props.dataset]"
           :key="collection"
