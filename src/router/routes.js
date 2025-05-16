@@ -1,19 +1,53 @@
-const routes = [
+const viewModules = import.meta.glob('../pages/*.vue')
+
+const routerOptions = [
   {
     path: '/',
-    component: () => import('pages/SiteLanding.vue'),
+    component: 'Landing',
+    meta: { title: 'Decoherence Archives' },
+  },
+  {
+    path: '/iron-march',
+    component: 'Dataset',
+    meta: { title: 'Decoherence Archives | Iron March' },
+    props: { dataset: 'iron-march' },
+  },
+  {
+    path: '/fascist-forge',
+    component: 'Dataset',
+    meta: { title: 'Decoherence Archives | Fascist Forge' },
+    props: { dataset: 'fascist-forge' },
+  },
+  {
+    path: '/rope-culture',
+    component: 'Dataset',
+    meta: { title: 'Decoherence Archives | Rope Culture' },
+    props: { dataset: 'rope-culture' },
   },
   {
     path: '/about',
-    component: () => import('pages/SiteAbout.vue'),
+    component: 'About.vue',
   },
-
-  // Always leave this as last one,
-  // but you can also remove it
+  {
+    path: '/about',
+    component: 'About',
+    meta: { title: 'Decoherence Archives | About' },
+  },
   {
     path: '/:catchAll(.*)*',
-    component: () => import('pages/ErrorNotFound.vue'),
+    component: 'NotFound',
+    meta: { title: 'Decoherence Archives | Page Not Found' },
   },
 ]
+
+const routes = routerOptions.map((route) => {
+  const componentPath = `../pages/${route.component}.vue`
+  const loader = viewModules[componentPath]
+
+  return {
+    ...route,
+    component: loader,
+  }
+})
 
 export default routes

@@ -1,0 +1,7 @@
+{
+  "collections": {
+    "iron-march": ["messages", "posts", "threads", "users"],
+    "fascist-forge": ["posts", "threads", "users"],
+    "rope-culture": ["articles", "comments", "users", "commenters", "emails"]
+  }
+}

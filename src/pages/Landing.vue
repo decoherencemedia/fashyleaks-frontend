@@ -1,5 +1,5 @@
 <template>
-  <q-page class="q-pa-md">
+  <q-page>
     <div class="row justify-center">
       <TextBox>
         <template #title> Decoherence Archives </template>

@@ -8,7 +8,14 @@
 
     <q-btn-dropdown stretch flat label="Datasets">
       <q-list>
-        <q-item v-for="item in menuItems" :key="item.title" clickable v-close-popup tabindex="0">
+        <q-item
+          v-for="item in menuItems"
+          :key="item.title"
+          clickable
+          v-close-popup
+          tabindex="0"
+          :to="item.path"
+        >
           <q-item-section side>
             <component :is="item.icon" color="blue" size="2rem" />
           </q-item-section>
@@ -38,7 +45,9 @@
     </q-btn>
   </q-toolbar>
   <q-layout view="lHh Lpr lFf">
-    <q-page-container><router-view /></q-page-container>
+    <q-page-container>
+      <router-view :key="$route.fullPath" />
+    </q-page-container>
   </q-layout>
 </template>
 
