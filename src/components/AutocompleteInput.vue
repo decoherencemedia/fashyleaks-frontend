@@ -79,7 +79,6 @@ onMounted(() => {
 
 const items = computed(() => store.lists[props.dataset]?.[endpoint.value] ?? [])
 
-console.log('items: ', items.value)
 const isLoading = computed(() => store.listsLoading[props.dataset]?.[endpoint.value] ?? false)
 
 const filteredItems = ref([])

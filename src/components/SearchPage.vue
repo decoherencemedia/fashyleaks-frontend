@@ -30,7 +30,15 @@
 
     <q-linear-progress v-if="isLoading" indeterminate color="cyan-7" class="q-mt-md" />
 
-    <component :is="resultComponent" :dataset="dataset" :collection="collection" />
+    <component
+      :is="resultComponent"
+      :data="results"
+      :dataset="dataset"
+      :collection="collection"
+      :use-markdown="useMarkdown"
+      @clickedRow="sendData()"
+      @clearedData="clearData()"
+    />
   </div>
 </template>
 
@@ -59,13 +67,13 @@ const router = useRouter()
 
 const errorMessage = computed(() => store.error?.[props.dataset]?.[props.collection])
 const isLoading = computed(() => store.loading?.[props.dataset]?.[props.collection])
-// const results = computed(() => store.results?.[props.dataset]?.[props.collection])
+const results = computed(() => store.results?.[props.dataset]?.[props.collection])
 
 const isSingle = computed(() => config.singleCollections.includes(props.collection))
 
-// const useMarkdown = computed(() => {
-//   return config.useMarkdown?.[props.dataset]?.includes(props.collection) ?? false
-// })
+const useMarkdown = computed(() => {
+  return config.useMarkdown?.[props.dataset]?.includes(props.collection) ?? false
+})
 
 const resultComponent = computed(() => (isSingle.value ? ContentResult : ContentResults))
 

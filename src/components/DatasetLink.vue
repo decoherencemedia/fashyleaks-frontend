@@ -1,5 +1,5 @@
 <template>
-  <q-col cols="12" sm="4" class="flex flex-center q-mx-lg q-mb-lg">
+  <div cols="12" sm="4" class="flex flex-center q-mx-lg q-mb-lg">
     <q-btn flat stretch :to="`/${props.dataset}`">
       <div>
         <div class="no-caps text-h4 text-purple q-mb-sm text-weight-medium">
@@ -8,7 +8,7 @@
         <component :is="iconComponent" style="font-size: 80px" color="purple" />
       </div>
     </q-btn>
-  </q-col>
+  </div>
 </template>
 
 <script setup>
@@ -26,8 +26,6 @@ const title = props.dataset
   .split('-')
   .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
   .join(' ')
-
-console.log('title: ', title)
 
 const iconComponent = ref(null)
 
