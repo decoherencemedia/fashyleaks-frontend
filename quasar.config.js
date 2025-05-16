@@ -74,6 +74,16 @@ export default defineConfig((/* ctx */) => {
     devServer: {
       // https: true,
       open: true, // opens browser window automatically
+      proxy: {
+        '/api': {
+          target: 'https://fashdata-backend-qbql9.ondigitalocean.app',
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api/, ''),
+        },
+      },
+
+      // Optionally, if you want to allow certain hosts (like your Vue 2 config):
+      allowedHosts: ['.fashdata.io', '.ondigitalocean.app'],
     },
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#framework

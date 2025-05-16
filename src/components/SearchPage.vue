@@ -4,7 +4,6 @@
       <q-card flat>
         <q-card-section>
           <div class="q-gutter-md row">
-            <q-input v-model="user_id" label="User ID" class="q-mx-md" outlined dense clearable />
             <component
               :is="determineComponent(item)"
               v-for="item in config.fields[collection]"
@@ -53,8 +52,6 @@ const props = defineProps({
   collection: String,
 })
 
-const user_id = null
-
 const store = useFieldStore()
 
 const route = useRoute()
@@ -87,7 +84,7 @@ function sendData() {
 }
 
 function clearData() {
-  store.dispatch('resetSearch', {
+  store.resetSearch({
     dataset: props.dataset,
     collection: props.collection,
   })
@@ -100,13 +97,13 @@ function processRoute() {
   delete params.tab
   const query = queryString.stringify(params, { skipEmptyString: true })
   if (query !== store.querystrings?.[props.dataset]?.[props.collection]) {
-    store.dispatch('search', {
+    store.search({
       dataset: props.dataset,
       collection: props.collection,
       queryString: query,
       resetPagination: true,
     })
-    store.commit('setQueryString', {
+    store.setQueryString({
       dataset: props.dataset,
       collection: props.collection,
       value: query,
