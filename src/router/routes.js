@@ -35,7 +35,7 @@ const routerOptions = [
   },
   {
     path: '/:catchAll(.*)*',
-    component: 'NotFound',
+    component: 'ErrorNotFound',
     meta: { title: 'Decoherence Archives | Page Not Found' },
   },
 ]
