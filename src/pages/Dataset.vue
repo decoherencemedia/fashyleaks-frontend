@@ -32,9 +32,10 @@
 </template>
 
 <script setup>
-import { ref, watch, onMounted, onBeforeUnmount, markRaw } from 'vue'
+import { ref, watch, onMounted, markRaw } from 'vue'
 import config from '../assets/config.json'
 import SearchPage from '../components/SearchPage.vue'
+import { useRoute } from 'vue-router'
 
 const props = defineProps({
   dataset: {
@@ -71,23 +72,27 @@ const loadAbout = async () => {
 loadIcon()
 loadAbout()
 
-function syncTabWithHash() {
-  const hash = window.location.hash.replace('#', '')
-  if (validTabs.includes(hash)) {
-    tab.value = hash
+const route = useRoute()
+
+function syncTabWithQuery() {
+  console.log('route.query: ', route.query)
+  const queryTab = route.query.tab
+  if (validTabs.includes(queryTab)) {
+    tab.value = queryTab
   }
 }
 
 onMounted(() => {
-  syncTabWithHash()
-  window.addEventListener('hashchange', syncTabWithHash)
-})
-onBeforeUnmount(() => {
-  window.removeEventListener('hashchange', syncTabWithHash)
+  syncTabWithQuery()
 })
 
-// Update hash when tab changes
-watch(tab, (newVal) => {
-  window.location.hash = newVal
-})
+// Watch for route query changes (in case someone changes the query manually)
+watch(
+  () => route.query.tab,
+  (newTab) => {
+    if (validTabs.includes(newTab)) {
+      tab.value = newTab
+    }
+  },
+)
 </script>
