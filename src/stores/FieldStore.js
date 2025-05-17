@@ -1,9 +1,11 @@
 import { defineStore } from 'pinia'
 import config from '../assets/config.json'
 
+const api_url = process.env.DEV ? '/api' : process.env.API_URL
+
 let apiFetch = function (path) {
   return new Promise((resolve, reject) => {
-    fetch(`/api${path}`).then(async (response) => {
+    fetch(`${api_url}${path}`).then(async (response) => {
       const isJson = response.headers.get('content-type')?.includes('application/json')
       const data = isJson ? await response.json() : null
       if (!response.ok) {

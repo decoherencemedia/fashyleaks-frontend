@@ -2,6 +2,8 @@
 // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file
 
 import { defineConfig } from '#q-app/wrappers'
+import { config } from 'dotenv'
+config()
 
 export default defineConfig((/* ctx */) => {
   return {
@@ -76,7 +78,7 @@ export default defineConfig((/* ctx */) => {
       open: true, // opens browser window automatically
       proxy: {
         '/api': {
-          target: 'https://fashdata-backend-qbql9.ondigitalocean.app',
+          target: process.env.API_URL,
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, ''),
         },
