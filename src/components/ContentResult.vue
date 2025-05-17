@@ -5,9 +5,9 @@
     </div>
     <div v-show="showCard">
       <div class="row justify-center q-my-md">
-        <q-card class="q-pa-md" style="max-width: 750px; width: 100%" bordered flat>
+        <q-card class="q-pa-0" style="max-width: 750px; width: 100%" bordered flat>
           <div class="row items-start">
-            <div v-if="datum.images" class="col-auto q-pr-sm">
+            <div v-if="datum.images" class="q-pr-md">
               <a :href="datum.images[0]" target="_blank">
                 <q-tooltip>{{ imageTooltip(datum.images[0]) }}</q-tooltip>
                 <img
@@ -32,11 +32,11 @@
             </div>
           </div>
 
-          <q-markup-table flat class="q-mt-md">
+          <q-markup-table flat>
             <tbody>
               <tr v-for="item in displayFields" :key="item.text">
-                <td class="text-bold">{{ item.text }}</td>
-                <td class="text-right">
+                <td class="wrap-cell text-bold">{{ item.text }}</td>
+                <td class="wrap-cell text-right">
                   <router-link
                     v-if="item.link"
                     :to="item.link.path + encodeURIComponent(datum[item.link.field])"
@@ -53,7 +53,7 @@
             </tbody>
           </q-markup-table>
 
-          <div class="row q-col-gutter-sm q-mt-sm">
+          <div class="row q-col-gutter-sm">
             <div v-for="n in numberImages" :key="n" class="col-3">
               <a :href="datum.images[n]" target="_blank">
                 <q-tooltip>{{ imageTooltip(datum.images[n]) }}</q-tooltip>
@@ -61,7 +61,7 @@
                   :src="datum.images[n]"
                   ratio="1"
                   class="bg-grey-2"
-                  style="object-fit: cover"
+                  style="max-height: 100px; max-width: 100px"
                 />
               </a>
             </div>
@@ -168,5 +168,21 @@ function imageTooltip(url) {
 img {
   max-height: 100px;
   max-width: 100px;
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+a {
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+.wrap-cell {
+  max-width: 250px;
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 </style>

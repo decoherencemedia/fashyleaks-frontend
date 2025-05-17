@@ -1,7 +1,7 @@
 <template>
   <div>
     <q-form @submit.prevent="sendData">
-      <q-card flat>
+      <q-card flat class="q-pa-none">
         <q-card-section>
           <div class="q-gutter-md row">
             <component

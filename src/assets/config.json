@@ -374,5 +374,133 @@
   "useMarkdown": {
     "fascist-forge": ["posts"],
     "rope-culture": ["comments", "emails"]
+  },
+  "headers": {
+    "iron-march": {
+      "users": [
+        {
+          "label": "User ID",
+          "field": "id"
+        },
+        {
+          "label": "Name",
+          "field": "user_name"
+        },
+        {
+          "label": "Other Names",
+          "field": "other_user_names"
+        },
+        {
+          "label": "Email Address",
+          "field": "email"
+        },
+        {
+          "label": "Joined",
+          "field": "joined_date"
+        },
+        {
+          "label": "IP Address",
+          "field": "ip_address"
+        },
+        {
+          "label": "Posts",
+          "field": "posts"
+        },
+        {
+          "label": "Threads",
+          "field": "threads"
+        },
+        {
+          "label": "Messages",
+          "field": "messages"
+        }
+      ]
+    },
+    "fascist-forge": {
+      "users": [
+        {
+          "label": "User ID",
+          "field": "id"
+        },
+        {
+          "label": "Name",
+          "field": "user_name"
+        },
+        {
+          "label": "Other Names",
+          "field": "other_user_names"
+        },
+        {
+          "label": "Age",
+          "field": "age"
+        },
+        {
+          "label": "Ideology",
+          "field": "ideology"
+        },
+        {
+          "label": "Religion",
+          "field": "religion"
+        },
+        {
+          "label": "Posts",
+          "field": "posts"
+        },
+        {
+          "label": "Threads",
+          "field": "threads"
+        }
+      ]
+    },
+    "rope-culture": {
+      "users": [
+        {
+          "label": "User ID",
+          "field": "id"
+        },
+        {
+          "label": "User Name",
+          "field": "user_name"
+        },
+        {
+          "label": "Other Names",
+          "field": "other_user_names"
+        },
+        {
+          "label": "Email",
+          "field": "email"
+        },
+        {
+          "label": "Password",
+          "field": "password"
+        }
+      ],
+      "commenters": [
+        {
+          "label": "Name",
+          "field": "author_name"
+        },
+        {
+          "label": "Email Address",
+          "field": "id"
+        },
+        {
+          "label": "Other Names",
+          "field": "other_author_names"
+        },
+        {
+          "label": "IP Address",
+          "field": "author_ip"
+        },
+        {
+          "label": "Comments",
+          "field": "comments"
+        },
+        {
+          "label": "Iron March User ID",
+          "field": "im_user_id"
+        }
+      ]
+    }
   }
 }
