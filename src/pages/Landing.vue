@@ -2,7 +2,7 @@
   <q-page class="q-pa-none">
     <div class="row justify-center">
       <TextBox>
-        <template #title> Decoherence Archives </template>
+        <template #title> Decoherence Archive </template>
 
         <template #body>
           This site provides an easy-to-use advanced search interface for Nazi forum datasets,

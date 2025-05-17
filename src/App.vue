@@ -1,7 +1,7 @@
 <template>
   <q-toolbar class="text-primary bg-grey-9 text-white">
     <q-btn no-caps flat stretch to="/">
-      <q-toolbar-title> Decoherence Archives </q-toolbar-title>
+      <q-toolbar-title> Decoherence Archive </q-toolbar-title>
     </q-btn>
 
     <q-space />
@@ -34,16 +34,16 @@
       </q-btn-dropdown>
     </div>
     <q-btn stretch flat label="About" to="/about">
-      <q-tooltip> Acout Decoherence Archives </q-tooltip>
+      <q-tooltip> Acout Decoherence Archive </q-tooltip>
     </q-btn>
     <q-btn
       stretch
       flat
       href="https://github.com/decoherencemedia/fashdata-frontend"
       target="_blank"
-      aria-label="Decoherence Archives on GitHub"
+      aria-label="Decoherence Archive on GitHub"
     >
-      <q-tooltip> Decoherence Archives on GitHub </q-tooltip>
+      <q-tooltip> Decoherence Archive on GitHub </q-tooltip>
       <q-icon color="accent">
         <svg width="98" height="96" viewBox="0 0 98 96" xmlns="http://www.w3.org/2000/svg">
           <path

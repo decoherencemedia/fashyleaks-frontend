@@ -78,7 +78,7 @@ export default defineConfig((/* ctx */) => {
       open: true, // opens browser window automatically
       proxy: {
         '/api': {
-          target: process.env.API_URL,
+          target: process.env.DEV_API_URL,
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, ''),
         },

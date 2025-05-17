@@ -1,7 +1,7 @@
 <template>
   <q-page>
     <TextBox>
-      <template #title> About <i>Decoherence Archives</i> </template>
+      <template #title> About <i>Decoherence Archive</i> </template>
 
       <template #body>
         The goal of this website is to provide an easy-to-use advanced search interface for Nazi
