@@ -37,12 +37,12 @@
               <tr v-for="item in displayFields" :key="item.text">
                 <td class="text-bold">{{ item.text }}</td>
                 <td class="text-right">
-                  <a
+                  <router-link
                     v-if="item.link"
-                    :href="item.link.path + encodeURIComponent(datum[item.link.field])"
+                    :to="item.link.path + encodeURIComponent(datum[item.link.field])"
                   >
                     {{ datum[item.property] }}
-                  </a>
+                  </router-link>
                   <span v-else>{{ datum[item.property] }}</span>
                 </td>
               </tr>
@@ -105,10 +105,6 @@ const props = defineProps({
 })
 
 const $q = useQuasar()
-
-// console.log('collection: ', props.collection)
-// console.log('config: ', config)
-// console.log('datum: ', datum)
 
 const emit = defineEmits(['clickedRow', 'clearedData'])
 

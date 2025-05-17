@@ -68,8 +68,8 @@ const props = defineProps({
 const store = useFieldStore()
 const page = ref(store.pagination[props.dataset]?.[props.collection] || 1)
 
-watch(page, (value, oldValue) => {
-  updateServerPagination(value, oldValue)
+watch(page, (value) => {
+  updateServerPagination(value)
   store.setPagination(props.dataset, props.collection, value)
 })
 
@@ -89,13 +89,12 @@ const pagedData = computed(() => {
   return props.data.slice(clientOffset.value, clientOffset.value + config.pagination.resultsPerPage)
 })
 
-function updateServerPagination(value, oldValue) {
+function updateServerPagination(value) {
   const currentValue = store.pagination[props.dataset]?.[props.collection] || 1
   const offset = store.offsets[props.dataset]?.[props.collection] || 0
 
   let newOffset = 0
   let needToFetch = false
-  console.log(oldValue)
 
   if (
     value > currentValue &&

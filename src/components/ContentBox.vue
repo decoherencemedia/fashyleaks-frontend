@@ -1,15 +1,50 @@
 <template>
   <div class="post-wrapper" :style="{ backgroundColor }">
     <div>
-      <PostContentInfo :item="item" :dataset="dataset" :info-fields="infoFields" />
+      <PostContentInfo
+        v-if="collection == 'posts'"
+        :item="item"
+        :dataset="dataset"
+        :info-fields="infoFields"
+      />
+      <MessageContentInfo
+        v-else-if="collection == 'messages'"
+        :item="item"
+        :dataset="dataset"
+        :info-fields="infoFields"
+      />
+      <ThreadContentInfo
+        v-else-if="collection == 'threads'"
+        :item="item"
+        :dataset="dataset"
+        :info-fields="infoFields"
+      />
+      <ArticleContentInfo
+        v-else-if="collection == 'articles'"
+        :item="item"
+        :dataset="dataset"
+        :info-fields="infoFields"
+      />
+      <CommentContentInfo
+        v-else-if="collection == 'comments'"
+        :item="item"
+        :dataset="dataset"
+        :info-fields="infoFields"
+      />
+      <EmailContentInfo
+        v-else-if="collection == 'emails'"
+        :item="item"
+        :dataset="dataset"
+        :info-fields="infoFields"
+      />
 
       <q-btn
         class="mb-1"
         size="sm"
-        color="cyan-8"
+        color="blue"
         @click="copyPermalink"
         label="Permalink"
-        icon="mdi-link-variant"
+        icon="link"
         unelevated
       >
         <q-tooltip>Copy permanent link to this {{ collection.slice(0, -1) }}</q-tooltip>
@@ -31,11 +66,10 @@
           v-if="isOverflowing || expanded"
           class="mb-1"
           size="sm"
-          color="grey-4"
+          color="grey-6"
           @click="toggleButton"
           :label="buttonText"
           :icon-right="buttonIcon"
-          flat
         />
       </div>
     </div>
@@ -46,7 +80,12 @@
 import { ref, computed, onMounted } from 'vue'
 import { useQuasar } from 'quasar'
 import { marked } from 'marked'
-import PostContentInfo from './PostContentInfo.vue'
+import PostContentInfo from './info/PostContentInfo.vue'
+import MessageContentInfo from './info/MessageContentInfo.vue'
+import ThreadContentInfo from './info/ThreadContentInfo.vue'
+import ArticleContentInfo from './info/ArticleContentInfo.vue'
+import CommentContentInfo from './info/CommentContentInfo.vue'
+import EmailContentInfo from './info/EmailContentInfo.vue'
 
 const props = defineProps({
   item: Object,
@@ -92,9 +131,7 @@ const isOverflowing = computed(() => {
 })
 
 const buttonText = computed(() => (expanded.value ? 'Show Less' : 'Show More'))
-const buttonIcon = computed(() =>
-  expanded.value ? 'mdi-arrow-expand-up' : 'mdi-arrow-expand-down',
-)
+const buttonIcon = computed(() => (expanded.value ? 'expand_less' : 'expand_more'))
 
 const postClass = computed(() => {
   return `post-span ${expanded.value ? 'expanded' : 'contracted'} ${
@@ -115,10 +152,9 @@ async function copyPermalink() {
       timeout: 2000,
     })
   } catch (e) {
-    console.log(`error message ${e}`)
     $q.notify({
       type: 'negative',
-      message: 'Copy failed',
+      message: `Copy failed with error ${e}`,
       timeout: 2000,
     })
   }

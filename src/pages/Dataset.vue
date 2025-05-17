@@ -21,8 +21,8 @@
         :key="collection"
         :value="collection"
       >
-        <div class="text-h6">{{ collection }}</div>
-        <search-page :dataset="dataset" :collection="collection" />
+        <div class="text-h6">Searching {{ title }} {{ tab }}</div>
+        <search-page :dataset="dataset" :collection="tab" />
       </q-tab-panel>
       <q-tab-panel key="about" name="about" :transition="false" :reverse-transition="false">
         <component :is="aboutComponent" />
@@ -35,7 +35,7 @@
 import { ref, watch, onMounted, markRaw } from 'vue'
 import config from '../assets/config.json'
 import SearchPage from '../components/SearchPage.vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
 const props = defineProps({
   dataset: {
@@ -73,20 +73,29 @@ loadIcon()
 loadAbout()
 
 const route = useRoute()
+const router = useRouter()
 
-function syncTabWithQuery() {
-  console.log('route.query: ', route.query)
+function initializeTab() {
   const queryTab = route.query.tab
   if (validTabs.includes(queryTab)) {
     tab.value = queryTab
+  } else {
+    tab.value = defaultTab
+    // Set query string immediately if not present
+    router.replace({
+      query: {
+        ...route.query,
+        tab: defaultTab,
+      },
+    })
   }
 }
 
 onMounted(() => {
-  syncTabWithQuery()
+  initializeTab()
 })
 
-// Watch for route query changes (in case someone changes the query manually)
+// Update the tab ref if the query string changes (e.g., back/forward nav)
 watch(
   () => route.query.tab,
   (newTab) => {
@@ -95,4 +104,16 @@ watch(
     }
   },
 )
+
+// Keep query string in sync with tab ref
+watch(tab, (newTab) => {
+  if (route.query.tab !== newTab) {
+    router.replace({
+      query: {
+        ...route.query,
+        tab: newTab,
+      },
+    })
+  }
+})
 </script>

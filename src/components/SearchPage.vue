@@ -16,7 +16,7 @@
               @onEnter="sendData"
             />
 
-            <q-btn class="q-ml-md" color="primary" label="Search" @click="sendData">
+            <q-btn class="q-ml-md" color="blue" label="Search" @click="sendData">
               <q-tooltip>Search for posts matching query</q-tooltip>
             </q-btn>
           </div>
