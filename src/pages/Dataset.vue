@@ -81,7 +81,6 @@ function initializeTab() {
     tab.value = queryTab
   } else {
     tab.value = defaultTab
-    // Set query string immediately if not present
     router.replace({
       query: {
         ...route.query,
@@ -95,7 +94,6 @@ onMounted(() => {
   initializeTab()
 })
 
-// Update the tab ref if the query string changes (e.g., back/forward nav)
 watch(
   () => route.query.tab,
   (newTab) => {
@@ -105,7 +103,6 @@ watch(
   },
 )
 
-// Keep query string in sync with tab ref
 watch(tab, (newTab) => {
   if (route.query.tab !== newTab) {
     router.replace({
