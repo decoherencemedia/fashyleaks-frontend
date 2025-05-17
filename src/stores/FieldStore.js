@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import config from '../assets/config.json'
 
-const api_url = process.env.NODE_ENV === 'production' ? '/api' : import.meta.env.VITE_API_URL
+const api_url = 'https://api.decoherencemedia.com'
 
 let apiFetch = function (path) {
   return new Promise((resolve, reject) => {
