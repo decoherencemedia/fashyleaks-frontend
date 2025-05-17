@@ -1,5 +1,6 @@
 <template>
   <div cols="12" sm="4" class="flex flex-center q-mx-lg q-mb-lg">
+    <q-tooltip>Search {{ title }} dataset</q-tooltip>
     <q-btn flat stretch :to="`/${props.dataset}`">
       <div>
         <div class="no-caps text-h4 text-blue q-mb-sm text-weight-medium">

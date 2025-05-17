@@ -5,33 +5,45 @@
     </q-btn>
 
     <q-space />
-
-    <q-btn-dropdown stretch flat label="Datasets">
-      <q-list>
-        <q-item
-          v-for="item in menuItems"
-          :key="item.title"
-          clickable
-          v-close-popup
-          tabindex="0"
-          :to="item.path"
-        >
-          <q-item-section side>
-            <component :is="item.icon" color="blue" size="2rem" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>{{ item.title }}</q-item-label>
-          </q-item-section>
-        </q-item>
-      </q-list>
-    </q-btn-dropdown>
-    <q-btn stretch flat label="About" to="/about" />
+    <div>
+      <q-tooltip> Search a dataset </q-tooltip>
+      <q-btn-dropdown
+        stretch
+        flat
+        label="Datasets"
+        menu-anchor="bottom start"
+        menu-self="top start"
+      >
+        <q-list>
+          <q-item
+            v-for="item in menuItems"
+            :key="item.title"
+            clickable
+            v-close-popup
+            tabindex="0"
+            :to="item.path"
+          >
+            <q-item-section side>
+              <component :is="item.icon" color="blue" size="2rem" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>{{ item.title }}</q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-list>
+      </q-btn-dropdown>
+    </div>
+    <q-btn stretch flat label="About" to="/about">
+      <q-tooltip> Acout Decoherence Archives </q-tooltip>
+    </q-btn>
     <q-btn
       stretch
       flat
       href="https://github.com/decoherencemedia/fashdata-frontend"
       target="_blank"
+      aria-label="Decoherence Archives on GitHub"
     >
+      <q-tooltip> Decoherence Archives on GitHub </q-tooltip>
       <q-icon color="accent">
         <svg width="98" height="96" viewBox="0 0 98 96" xmlns="http://www.w3.org/2000/svg">
           <path
