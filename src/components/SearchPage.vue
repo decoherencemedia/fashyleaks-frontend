@@ -24,7 +24,10 @@
       </q-card>
     </q-form>
 
-    <q-banner v-if="errorMessage" class="q-mt-md" dense rounded color="negative" text-color="white">
+    <q-banner v-if="errorMessage" class="q-mt-md text-white bg-negative" style="text-align: center">
+      <template v-slot:avatar>
+        <q-icon name="warning" color="white" size="lg" />
+      </template>
       {{ errorMessage }}
     </q-banner>
 
