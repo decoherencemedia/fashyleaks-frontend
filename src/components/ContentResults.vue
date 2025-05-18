@@ -1,19 +1,22 @@
 <template>
   <q-page class="q-pa-none">
-    <q-pagination
-      v-if="data.length > config.pagination.resultsPerPage"
-      v-model="page"
-      class="top-pagination"
-      :max="length"
-      :max-pages="config.pagination.totalVisible"
-      color="cyan-8"
-      boundary-numbers
-      unelevated
-      input
-    />
+    <div class="row justify-center">
+      <q-pagination
+        v-if="data.length > config.pagination.resultsPerPage"
+        v-model="page"
+        class="top-pagination"
+        :max="length"
+        :max-pages="config.pagination.totalVisible"
+        color="secondary"
+        boundary-numbers
+        unelevated
+        input
+      />
 
-    <div v-else-if="data.length > 0" class="top-pagination" />
-    <div v-else />
+      <div v-else-if="data.length > 0" class="top-pagination" />
+      <div v-else />
+    </div>
+    <hr v-if="data.length > 0" />
 
     <div v-for="(item, index) in pagedData" :key="item.id">
       <ContentBox
@@ -31,7 +34,7 @@
       class="bottom-pagination"
       :max="length"
       :max-pages="config.pagination.totalVisible"
-      color="cyan-8"
+      color="secondary"
       boundary-numbers
       unelevated
       input
@@ -129,7 +132,7 @@ function updateServerPagination(value) {
 
 <style scoped>
 .top-pagination {
-  border-bottom: 1px solid #999;
+  /* border-bottom: 1px solid #999; */
   padding-bottom: 1em;
 }
 

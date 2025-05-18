@@ -14,9 +14,9 @@
     emit-value
     map-options
     clearable
-    outlined
     dense
     class="q-mx-md"
+    color="secondary"
   >
     <template v-slot:option="scope">
       <q-item v-bind="scope.itemProps" clickable>

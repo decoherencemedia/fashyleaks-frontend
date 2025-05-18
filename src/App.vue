@@ -1,42 +1,47 @@
 <template>
   <q-toolbar class="bg-primary text-white">
-    <q-btn no-caps flat stretch to="/">
+    <q-btn no-caps flat stretch to="/" title="Decoherence Archive Home">
       <q-toolbar-title class="text-accent"> Decoherence Archive </q-toolbar-title>
     </q-btn>
 
     <q-space />
-    <div>
-      <q-tooltip> Search a dataset </q-tooltip>
-      <q-btn-dropdown
-        stretch
-        flat
-        label="Datasets"
-        menu-anchor="bottom start"
-        menu-self="top start"
-        class="text-accent"
-        style="letter-spacing: 0.0892857143em; font-weight: 400"
-      >
-        <q-list>
-          <q-item
-            v-for="item in menuItems"
-            :key="item.title"
-            clickable
-            v-close-popup
-            tabindex="0"
-            :to="item.path"
-          >
-            <q-item-section side>
-              <component :is="item.icon" color="secondary" size="2rem" />
-            </q-item-section>
-            <q-item-section>
-              <q-item-label>{{ item.title }}</q-item-label>
-            </q-item-section>
-          </q-item>
-        </q-list>
-      </q-btn-dropdown>
-    </div>
-    <q-btn class="text-accent" stretch flat label="About" to="/about">
-      <q-tooltip> Acout Decoherence Archive </q-tooltip>
+    <q-btn-dropdown
+      stretch
+      flat
+      label="Datasets"
+      title="Search a dataset"
+      menu-anchor="bottom start"
+      menu-self="top start"
+      class="text-accent"
+      style="letter-spacing: 0.0892857143em; font-weight: 400"
+    >
+      <q-list>
+        <q-item
+          v-for="item in menuItems"
+          :key="item.title"
+          clickable
+          v-close-popup
+          tabindex="0"
+          :to="item.path"
+          :title="`Search ${item.title} dataset`"
+        >
+          <q-item-section side>
+            <component :is="item.icon" color="secondary" size="2rem" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>{{ item.title }}</q-item-label>
+          </q-item-section>
+        </q-item>
+      </q-list>
+    </q-btn-dropdown>
+    <q-btn
+      class="text-accent"
+      stretch
+      flat
+      label="About"
+      to="/about"
+      title="Acout Decoherence Archive"
+    >
     </q-btn>
     <q-btn
       stretch
@@ -44,8 +49,8 @@
       href="https://github.com/decoherencemedia/fashdata-frontend"
       target="_blank"
       aria-label="Decoherence Archive on GitHub"
+      title="Decoherence Archive on GitHub"
     >
-      <q-tooltip> Decoherence Archive on GitHub </q-tooltip>
       <q-icon color="accent">
         <svg width="98" height="96" viewBox="0 0 98 96" xmlns="http://www.w3.org/2000/svg">
           <path

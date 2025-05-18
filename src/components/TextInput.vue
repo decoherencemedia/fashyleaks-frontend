@@ -1,12 +1,13 @@
 <template>
   <q-input
     v-model="variable"
-    class="q-mx-md"
     :label="label"
     @keyup.enter="emitSendData"
-    outlined
     dense
     clearable
+    color="secondary"
+    class="q-mx-md full-width"
+    style="min-width: 0"
   />
 </template>
 

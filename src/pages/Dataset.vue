@@ -1,7 +1,7 @@
 <template>
   <div :id="dataset">
     <q-toolbar class="text-accent bg-primary">
-      <component :is="iconComponent" color="secondary" size="2rem" />
+      <component :is="iconComponent" color="secondary" size="2rem" :title="title"> </component>
       <q-tabs v-model="tab" inline-label indicator-color="secondary">
         <q-tab
           v-for="collection in config.collections[props.dataset]"
@@ -21,7 +21,6 @@
         :key="collection"
         :value="collection"
       >
-        <div class="text-h6">Searching {{ title }} {{ tab }}</div>
         <search-page :dataset="dataset" :collection="tab" />
       </q-tab-panel>
       <q-tab-panel key="about" name="about" :transition="false" :reverse-transition="false">

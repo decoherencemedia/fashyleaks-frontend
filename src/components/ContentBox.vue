@@ -46,8 +46,8 @@
         label="Permalink"
         icon="link"
         unelevated
+        :title="`Copy permanent link to this ${collection.slice(0, -1)}`"
       >
-        <q-tooltip>Copy permanent link to this {{ collection.slice(0, -1) }}</q-tooltip>
       </q-btn>
     </div>
 

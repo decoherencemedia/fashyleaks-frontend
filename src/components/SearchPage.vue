@@ -1,9 +1,10 @@
 <template>
   <div>
     <q-form @submit.prevent="sendData">
-      <q-card flat class="q-pa-none">
+      <q-card flat class="q-pa-none q-mx-xl">
+        <div row class="text-h6">Searching {{ title }} {{ collection }}</div>
         <q-card-section>
-          <div class="q-gutter-md row">
+          <div class="q-gutter-lg row">
             <component
               :is="determineComponent(item)"
               v-for="item in config.fields[collection]"
@@ -14,10 +15,16 @@
               :collection="collection"
               :additional="item.additional ?? {}"
               @onEnter="sendData"
+              class="col"
             />
 
-            <q-btn class="q-ml-md" color="secondary" label="Search" @click="sendData">
-              <q-tooltip>Search for posts matching query</q-tooltip>
+            <q-btn
+              class="col-auto q-ml-md"
+              color="secondary"
+              label="Search"
+              @click="sendData"
+              :title="`Search for ${collection} matching query`"
+            >
             </q-btn>
           </div>
         </q-card-section>
@@ -87,6 +94,7 @@ function determineComponent(item) {
 
 function sendData() {
   const fields = { ...store.fields?.[props.dataset]?.[props.collection] }
+  if (Object.values(fields).every((val) => val === '' || val === undefined)) return
   Object.keys(fields).forEach((k) => {
     if (!fields[k]) delete fields[k]
   })
@@ -129,6 +137,12 @@ function handleFetchMore(newQuery) {
     resetPagination: false,
   })
 }
+
+const title = props.dataset
+  .toLowerCase()
+  .split('-')
+  .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+  .join(' ')
 
 onMounted(processRoute)
 watch(route, processRoute, { immediate: true })
