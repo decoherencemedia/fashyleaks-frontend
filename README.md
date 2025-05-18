@@ -11,7 +11,6 @@ A Quasar Project
 - make colors consistent
 - make sure ContentInfo are consistent across collections
 - get warnings working
-- figure out issue with RopeCulture commenter names with no email
 - make spacing in TextBox pages look better
 - get pagination working (ideally simplify it)
 - make search bar not really wide
@@ -20,6 +19,7 @@ A Quasar Project
 - make box in datasets tab align left
 - try svg in toolbar title
 - implement mobile
+- consolidate config.json data
 
 ## Install the dependencies
 

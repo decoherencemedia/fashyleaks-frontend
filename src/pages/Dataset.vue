@@ -1,8 +1,8 @@
 <template>
   <div :id="dataset">
-    <q-toolbar class="text-primary bg-grey-9 text-white">
-      <component :is="iconComponent" color="blue" size="2rem" />
-      <q-tabs v-model="tab" inline-label indicator-color="blue">
+    <q-toolbar class="text-accent bg-primary">
+      <component :is="iconComponent" color="secondary" size="2rem" />
+      <q-tabs v-model="tab" inline-label indicator-color="secondary">
         <q-tab
           v-for="collection in config.collections[props.dataset]"
           :key="collection"
@@ -36,6 +36,7 @@ import { ref, watch, onMounted, markRaw } from 'vue'
 import config from '../assets/config.json'
 import SearchPage from '../components/SearchPage.vue'
 import { useRoute, useRouter } from 'vue-router'
+import { useFieldStore } from '../stores/FieldStore'
 
 const props = defineProps({
   dataset: {
@@ -43,6 +44,8 @@ const props = defineProps({
     required: true,
   },
 })
+
+const store = useFieldStore()
 
 const collections = config.collections[props.dataset] || []
 const validTabs = [...collections, 'about']
@@ -75,23 +78,32 @@ loadAbout()
 const route = useRoute()
 const router = useRouter()
 
-function initializeTab() {
+function initializeTabFromURL() {
   const queryTab = route.query.tab
   if (validTabs.includes(queryTab)) {
     tab.value = queryTab
   } else {
     tab.value = defaultTab
-    router.replace({
-      query: {
-        ...route.query,
-        tab: defaultTab,
-      },
-    })
+    if (route.query) {
+      router.replace({
+        query: {
+          ...route.query,
+          tab: defaultTab,
+        },
+      })
+    } else {
+      router.replace({
+        query: {
+          tab: defaultTab,
+          ...route.query,
+        },
+      })
+    }
   }
 }
 
 onMounted(() => {
-  initializeTab()
+  initializeTabFromURL()
 })
 
 watch(
@@ -104,13 +116,20 @@ watch(
 )
 
 watch(tab, (newTab) => {
-  if (route.query.tab !== newTab) {
-    router.replace({
-      query: {
-        ...route.query,
-        tab: newTab,
-      },
-    })
-  }
+  if (route.query.tab === newTab) return
+
+  const queryString = store.querystrings?.[props.dataset]?.[newTab] || ''
+  console.log('queryString: ', queryString)
+
+  // Convert query string back into an object
+  const queryParams = Object.fromEntries(new URLSearchParams(queryString))
+
+  console.log('queryParams: ', queryParams)
+  router.replace({
+    query: {
+      tab: newTab,
+      ...queryParams,
+    },
+  })
 })
 </script>

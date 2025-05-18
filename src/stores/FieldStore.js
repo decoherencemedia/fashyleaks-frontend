@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import config from '../assets/config.json'
 
 const api_url = 'https://api.decoherencemedia.com'
+// const api_url = 'http://localhost:5000/'
 
 let apiFetch = function (path) {
   return new Promise((resolve, reject) => {

@@ -1,5 +1,5 @@
 <template>
-  <q-row class="wrapper">
+  <div class="row wrapper">
     <div class="post-info-right">
       <span class="channel-name">
         <RouterLink v-if="authorLink" :to="authorLink">
@@ -28,7 +28,7 @@
       </span>
       <span>Views: {{ item.views }}</span>
     </div>
-  </q-row>
+  </div>
 </template>
 
 <script setup>

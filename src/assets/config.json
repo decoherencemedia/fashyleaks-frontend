@@ -210,7 +210,7 @@
     "commenters": {
       "label": "Commenter Name or Email",
       "itemText": "author_name",
-      "itemValue": "author_email"
+      "itemValue": "id"
     },
     "thread_categories": {
       "label": "Thread Category",
