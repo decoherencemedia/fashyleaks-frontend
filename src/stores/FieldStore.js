@@ -123,7 +123,6 @@ export const useFieldStore = defineStore('fields', {
     },
 
     async search({ dataset, collection, queryString, resetPagination }) {
-      console.log('IN STORE.SEARCH; queryString: ', queryString)
       if (resetPagination) {
         this.setLoading({ dataset, collection, value: true })
       }

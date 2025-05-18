@@ -83,13 +83,11 @@ function determineComponent(item) {
 
 function sendData() {
   const fields = { ...store.fields?.[props.dataset]?.[props.collection] }
-  console.log('IN SEARCHPAGE.SENDDATA | fields: ', fields)
   Object.keys(fields).forEach((k) => {
     if (!fields[k]) delete fields[k]
   })
   const query = objectToQueryString(fields)
   const path = `/${props.dataset}?tab=${props.collection}&${query}`
-  console.log('IN SEARCHPAGE.SENDDATA | route.fullPath, path: ', route.fullPath, path)
   if (route.fullPath !== path) {
     router.replace(path)
   }
@@ -105,21 +103,16 @@ function clearData() {
 function processRoute() {
   if (route.path.slice(1) !== props.dataset) return
   const params = { ...route.query }
-  console.log('IN SEARCHPAGE.PROCESSROUTE | params: ', params)
   if (params.tab !== props.collection) return
   delete params.tab
   const query = objectToQueryString(params)
+  if (!query) return
   if (query !== store.querystrings?.[props.dataset]?.[props.collection]) {
     store.search({
       dataset: props.dataset,
       collection: props.collection,
       queryString: query,
       resetPagination: true,
-    })
-    store.setQueryString({
-      dataset: props.dataset,
-      collection: props.collection,
-      queryString: query,
     })
   }
 }
