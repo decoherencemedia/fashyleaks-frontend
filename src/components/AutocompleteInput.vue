@@ -15,7 +15,7 @@
     map-options
     clearable
     dense
-    class="q-mx-md"
+    class="q-mx-md full-width"
     color="secondary"
   >
     <template v-slot:option="scope">

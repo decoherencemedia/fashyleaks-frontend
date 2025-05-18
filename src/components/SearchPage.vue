@@ -15,7 +15,7 @@
               :collection="collection"
               :additional="item.additional ?? {}"
               @onEnter="sendData"
-              class="col"
+              :class="$q.platform.is.mobile ? 'row' : 'col q-px-lg'"
             />
 
             <q-btn

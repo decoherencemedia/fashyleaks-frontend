@@ -5,37 +5,39 @@
       <q-toolbar-title class="text-accent"> Decoherence Archive </q-toolbar-title>
     </q-btn>
     <q-space> </q-space>
-    <q-btn-dropdown flat round dense icon="menu" dropdown-icon="none" stretch tab>
-      <q-list>
-        <q-item
-          v-for="item in menuItems"
-          :key="item.title"
-          clickable
-          v-close-popup
-          tabindex="0"
-          :to="item.path"
-          :title="`Search ${item.title} dataset`"
-        >
-          <q-item-section side>
-            <component :is="item.icon" color="secondary" size="2rem" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>{{ item.title }}</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item to="/about" class="justify-center">
-          <q-item-section class="text-center">About</q-item-section>
-        </q-item>
-        <q-item
-          href="https://github.com/decoherencemedia/fashdata-frontend"
-          class="justify-center items-center"
-        >
-          <q-item-section class="flex justify-center items-center">
-            <git-hub-icon color="black" size="1.5em" />
-          </q-item-section>
-        </q-item>
-      </q-list>
-    </q-btn-dropdown>
+    <q-btn flat round dense icon="menu" stretch tab>
+      <q-menu>
+        <q-list>
+          <q-item
+            v-for="item in menuItems"
+            :key="item.title"
+            clickable
+            v-close-popup
+            :to="item.path"
+            :title="`Search ${item.title} dataset`"
+          >
+            <q-item-section side>
+              <component :is="item.icon" color="secondary" size="2rem" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label class="text-h6">{{ item.title }}</q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-separator color="grey-6" />
+          <q-item to="/about" class="justify-center">
+            <q-item-section class="text-h6 text-center">About</q-item-section>
+          </q-item>
+          <q-item
+            href="https://github.com/decoherencemedia/fashdata-frontend"
+            class="justify-center items-center"
+          >
+            <q-item-section class="flex justify-center items-center">
+              <git-hub-icon color="black" size="2em" />
+            </q-item-section>
+          </q-item>
+        </q-list>
+      </q-menu>
+    </q-btn>
   </q-toolbar>
   <!-- Non-mobile toolbar -->
   <q-toolbar v-else class="bg-primary">
