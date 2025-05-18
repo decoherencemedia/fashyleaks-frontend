@@ -152,9 +152,10 @@ async function copyPermalink() {
       timeout: 2000,
     })
   } catch (e) {
+    console.log(`Copying permalink failed with error ${e}`)
     $q.notify({
       type: 'negative',
-      message: `Copy failed with error ${e}`,
+      message: `Copying failed`,
       timeout: 2000,
     })
   }

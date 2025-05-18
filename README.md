@@ -6,10 +6,9 @@ A Quasar Project
 
 Functionality
 
-- get warnings working
 - implement mobile
 - change pagination such that
-  - old batch isn't displayed
+  - old batch isn't displayed going from 10th to 11th page
     loading bar displays when loading a new batch
 
 Style

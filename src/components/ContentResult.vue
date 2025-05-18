@@ -69,8 +69,16 @@
         </q-card>
       </div>
 
-      <div class="q-ml-sm q-mt-sm">
-        <q-btn color="primary" icon="link" label="Permalink" size="sm" @click="copyPermalink">
+      <div class="row justify-center q-ml-sm q-mt-sm">
+        <q-btn
+          class="mb-1"
+          size="sm"
+          color="secondary"
+          @click="copyPermalink"
+          label="Permalink"
+          icon="link"
+          unelevated
+        >
           <q-tooltip> Copy permanent link to this {{ collection.slice(0, -1) }} </q-tooltip>
         </q-btn>
       </div>
@@ -130,17 +138,22 @@ const displayFields = computed(() => {
   )
 })
 
-function copyPermalink() {
-  navigator.clipboard
-    .writeText(permalink.value)
-    .then(() => {
-      $q.notify({
-        type: 'positive',
-        message: 'Copied to clipboard',
-        timeout: 2000,
-      })
+async function copyPermalink() {
+  try {
+    await navigator.clipboard.writeText(permalink.value)
+    $q.notify({
+      type: 'positive',
+      message: 'Copied to clipboard',
+      timeout: 2000,
     })
-    .catch(() => alert('Copy failed'))
+  } catch (e) {
+    console.log(`Copying permalink failed with error ${e}`)
+    $q.notify({
+      type: 'negative',
+      message: `Copying failed`,
+      timeout: 2000,
+    })
+  }
 }
 
 function clickRow() {
