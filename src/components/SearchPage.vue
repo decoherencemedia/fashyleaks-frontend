@@ -45,15 +45,15 @@
 <script setup>
 import { computed, watch, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import queryString from 'query-string'
 
 import ContentResult from './ContentResult.vue'
 import ContentResults from './ContentResults.vue'
 import TextInput from './TextInput.vue'
 import AutocompleteInput from './AutocompleteInput.vue'
-import config from '../assets/config.json'
+import config from '@/assets/config.json'
+import { objectToQueryString } from '@/utils/query'
 
-import { useFieldStore } from '../stores/FieldStore'
+import { useFieldStore } from '@/stores/FieldStore'
 
 const props = defineProps({
   dataset: String,
@@ -83,12 +83,16 @@ function determineComponent(item) {
 
 function sendData() {
   const fields = { ...store.fields?.[props.dataset]?.[props.collection] }
+  console.log('IN SEARCHPAGE.SENDDATA | fields: ', fields)
   Object.keys(fields).forEach((k) => {
     if (!fields[k]) delete fields[k]
   })
-  const query = queryString.stringify(fields, { skipEmptyString: true })
+  const query = objectToQueryString(fields)
   const path = `/${props.dataset}?tab=${props.collection}&${query}`
-  if (route.fullPath !== path) router.replace(path)
+  console.log('IN SEARCHPAGE.SENDDATA | route.fullPath, path: ', route.fullPath, path)
+  if (route.fullPath !== path) {
+    router.replace(path)
+  }
 }
 
 function clearData() {
@@ -101,9 +105,10 @@ function clearData() {
 function processRoute() {
   if (route.path.slice(1) !== props.dataset) return
   const params = { ...route.query }
+  console.log('IN SEARCHPAGE.PROCESSROUTE | params: ', params)
   if (params.tab !== props.collection) return
   delete params.tab
-  const query = queryString.stringify(params, { skipEmptyString: true })
+  const query = objectToQueryString(params)
   if (query !== store.querystrings?.[props.dataset]?.[props.collection]) {
     store.search({
       dataset: props.dataset,
@@ -114,15 +119,13 @@ function processRoute() {
     store.setQueryString({
       dataset: props.dataset,
       collection: props.collection,
-      value: query,
+      queryString: query,
     })
-  } else if (Object.keys(params).length === 0) {
-    clearData()
   }
 }
 
-watch(route, processRoute, { immediate: true })
 onMounted(processRoute)
+watch(route, processRoute, { immediate: true })
 </script>
 
 <style scoped>

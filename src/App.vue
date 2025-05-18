@@ -65,9 +65,9 @@
 </template>
 
 <script setup>
-import IronMarchIcon from './components/icons/IronMarchIcon.vue'
-import FascistForgeIcon from './components/icons/FascistForgeIcon.vue'
-import RopeCultureIcon from './components/icons/RopeCultureIcon.vue'
+import IronMarchIcon from '@/components/icons/IronMarchIcon.vue'
+import FascistForgeIcon from '@/components/icons/FascistForgeIcon.vue'
+import RopeCultureIcon from '@/components/icons/RopeCultureIcon.vue'
 
 const menuItems = [
   {

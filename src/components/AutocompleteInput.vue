@@ -35,8 +35,8 @@
 
 <script setup>
 import { ref, computed, watch, onMounted } from 'vue'
-import { useFieldStore } from '../stores/FieldStore'
-import config from '../assets/config.json'
+import { useFieldStore } from '@/stores/FieldStore'
+import config from '@/assets/config.json'
 
 const props = defineProps({
   dataset: String,

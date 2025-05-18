@@ -14,5 +14,5 @@
 </template>
 
 <script setup>
-import TextBox from '../components/TextBox.vue'
+import TextBox from '@/components/TextBox.vue'
 </script>

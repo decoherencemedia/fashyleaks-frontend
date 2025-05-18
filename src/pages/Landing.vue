@@ -21,6 +21,6 @@
 </template>
 
 <script setup>
-import TextBox from '../components/TextBox.vue'
-import DatasetLink from '../components/DatasetLink.vue'
+import TextBox from '@/components/TextBox.vue'
+import DatasetLink from '@/components/DatasetLink.vue'
 </script>

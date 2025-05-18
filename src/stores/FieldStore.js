@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
-import config from '../assets/config.json'
+import config from '@/assets/config.json'
+// import { queryStringToObject } from '@/utils/query'
 
 const api_url = 'https://api.decoherencemedia.com'
 // const api_url = 'http://localhost:5000/'
@@ -59,13 +60,6 @@ export const useFieldStore = defineStore('fields', {
     setActiveTab(tab) {
       this.activeTab = tab
     },
-    setConstantList(values) {
-      // Note: constantLists was in Vuex but not declared in state; adjust if needed
-      if (!this.constantLists) this.constantLists = {}
-      if (!this.constantLists[this.activeDataset]) this.constantLists[this.activeDataset] = {}
-      this.constantLists[this.activeDataset][this.activeTab] = values
-    },
-
     setResult({ dataset, collection, value }) {
       this.results[dataset][collection] = value
     },
@@ -129,6 +123,7 @@ export const useFieldStore = defineStore('fields', {
     },
 
     async search({ dataset, collection, queryString, resetPagination }) {
+      console.log('IN STORE.SEARCH; queryString: ', queryString)
       if (resetPagination) {
         this.setLoading({ dataset, collection, value: true })
       }

@@ -31,7 +31,7 @@ const title = props.dataset
 const iconComponent = ref(null)
 
 const loadIcon = async () => {
-  const icon = await import(`../components/icons/${title.replace(' ', '')}Icon.vue`)
+  const icon = await import(`@/components/icons/${title.replace(' ', '')}Icon.vue`)
   iconComponent.value = markRaw(icon.default)
 }
 

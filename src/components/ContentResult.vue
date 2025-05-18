@@ -82,7 +82,7 @@
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useQuasar } from 'quasar'
-import config from '../assets/config.json'
+import config from '@/assets/config.json'
 import UserTable from './UserTable.vue'
 
 const props = defineProps({

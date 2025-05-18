@@ -37,8 +37,8 @@
 
 <script setup>
 import { computed, ref, onMounted } from 'vue'
-import { useFieldStore } from '../stores/FieldStore'
-import config from '../assets/config.json'
+import { useFieldStore } from '@/stores/FieldStore'
+import config from '@/assets/config.json'
 
 const props = defineProps({
   dataset: String,
@@ -80,7 +80,6 @@ const items = computed(() => {
     })
     return {
       ...obj,
-      //   joined_date: obj.joined_date ? new Date(obj.joined_date).toISOString() : null,
     }
   })
 })
@@ -91,7 +90,7 @@ const headers = computed(() => {
 
   const decorateHeader = (header) => ({
     ...header,
-    align: 'left', // 👈 force left alignment
+    align: 'left',
     style,
     headerStyle: style,
   })

@@ -33,10 +33,10 @@
 
 <script setup>
 import { ref, watch, onMounted, markRaw } from 'vue'
-import config from '../assets/config.json'
-import SearchPage from '../components/SearchPage.vue'
+import config from '@/assets/config.json'
+import SearchPage from '@/components/SearchPage.vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useFieldStore } from '../stores/FieldStore'
+import { useFieldStore } from '@/stores/FieldStore'
 
 const props = defineProps({
   dataset: {
@@ -64,12 +64,12 @@ const iconComponent = ref(null)
 const aboutComponent = ref(null)
 
 const loadIcon = async () => {
-  const icon = await import(`../components/icons/${oneWordTitle}Icon.vue`)
+  const icon = await import(`@/components/icons/${oneWordTitle}Icon.vue`)
   iconComponent.value = markRaw(icon.default)
 }
 
 const loadAbout = async () => {
-  const about = await import(`../pages/about/About${oneWordTitle}.vue`)
+  const about = await import(`@/pages/about/About${oneWordTitle}.vue`)
   aboutComponent.value = markRaw(about.default)
 }
 loadIcon()
@@ -84,21 +84,12 @@ function initializeTabFromURL() {
     tab.value = queryTab
   } else {
     tab.value = defaultTab
-    if (route.query) {
-      router.replace({
-        query: {
-          ...route.query,
-          tab: defaultTab,
-        },
-      })
-    } else {
-      router.replace({
-        query: {
-          tab: defaultTab,
-          ...route.query,
-        },
-      })
-    }
+    router.replace({
+      query: {
+        ...route.query,
+        tab: defaultTab,
+      },
+    })
   }
 }
 
@@ -118,7 +109,10 @@ watch(
 watch(tab, (newTab) => {
   if (route.query.tab === newTab) return
 
-  const queryString = store.querystrings?.[props.dataset]?.[newTab] || ''
+  console.log('fields: ', store.fields)
+  console.log('querystrings: ', store.querystrings)
+
+  const queryString = store.querystrings?.[props.dataset]?.[newTab]
   console.log('queryString: ', queryString)
 
   // Convert query string back into an object

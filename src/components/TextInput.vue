@@ -12,7 +12,7 @@
 
 <script setup>
 import { computed } from 'vue'
-import { useFieldStore } from '../stores/FieldStore'
+import { useFieldStore } from '@/stores/FieldStore'
 
 const props = defineProps({
   dataset: String,
