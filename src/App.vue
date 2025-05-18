@@ -14,6 +14,7 @@
         menu-anchor="bottom start"
         menu-self="top start"
         class="text-accent"
+        style="letter-spacing: 0.0892857143em; font-weight: 400"
       >
         <q-list>
           <q-item

@@ -67,10 +67,10 @@ const props = defineProps({
 const store = useFieldStore()
 const page = ref(store.pagination[props.dataset]?.[props.collection] || 1)
 
-console.log('store.pagination: ', store.pagination)
+const emit = defineEmits(['fetchMore'])
+
 watch(page, (value) => {
   updateServerPagination(value)
-  console.log('updating setPagination with:', props.dataset, props.collection, value)
   store.setPagination({ dataset: props.dataset, collection: props.collection, value })
 })
 
@@ -120,16 +120,9 @@ function updateServerPagination(value) {
     params.set('offset', newOffset)
     const newQuery = params.toString()
 
-    store.setQueryString(props.dataset, props.collection, newQuery)
+    emit('fetchMore', newQuery)
 
-    store.search({
-      dataset: props.dataset,
-      collection: props.collection,
-      queryString: newQuery,
-      resetPagination: false,
-    })
-
-    store.setOffset(props.dataset, props.collection, newOffset)
+    store.setOffset({ dataset: props.dataset, collection: props.collection, value: newOffset })
   }
 }
 </script>

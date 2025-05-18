@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Easy-to-use advanced search interface for Nazi forum datasets, including Fascist Forge and Iron March.",
   "productName": "Decoherence Archive",
-  "author": "Tristan <tristan@decoherencemedia.com>",
+  "author": "Tristan Lee>",
   "type": "module",
   "private": true,
   "scripts": {

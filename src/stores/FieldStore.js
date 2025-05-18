@@ -136,6 +136,12 @@ export const useFieldStore = defineStore('fields', {
 
         if (resetPagination) {
           this.setPagination({ dataset, collection, value: 1 })
+        } else {
+          this.setResult({
+            dataset,
+            collection,
+            value: data.data,
+          })
         }
       } catch (error) {
         const message =

@@ -38,6 +38,7 @@
       :use-markdown="useMarkdown"
       @clickedRow="sendData()"
       @clearedData="clearData()"
+      @fetchMore="handleFetchMore"
     />
   </div>
 </template>
@@ -115,6 +116,15 @@ function processRoute() {
       resetPagination: true,
     })
   }
+}
+
+function handleFetchMore(newQuery) {
+  store.search({
+    dataset: props.dataset,
+    collection: props.collection,
+    queryString: newQuery,
+    resetPagination: false,
+  })
 }
 
 onMounted(processRoute)
