@@ -40,12 +40,10 @@
 </template>
 
 <script setup>
-// import { ref, computed, watch } from 'vue'
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useFieldStore } from '@/stores/FieldStore'
 import ContentBox from './ContentBox.vue'
 import config from '@/assets/config.json'
-// import queryString from 'query-string'
 
 const props = defineProps({
   data: {
@@ -54,7 +52,7 @@ const props = defineProps({
   },
   dataset: {
     type: String,
-    default: '',
+    required: true,
   },
   collection: {
     type: String,
@@ -69,10 +67,12 @@ const props = defineProps({
 const store = useFieldStore()
 const page = ref(store.pagination[props.dataset]?.[props.collection] || 1)
 
-// watch(page, (value) => {
-//   updateServerPagination(value)
-//   store.setPagination(props.dataset, props.collection, value)
-// })
+console.log('store.pagination: ', store.pagination)
+watch(page, (value) => {
+  updateServerPagination(value)
+  console.log('updating setPagination with:', props.dataset, props.collection, value)
+  store.setPagination({ dataset: props.dataset, collection: props.collection, value })
+})
 
 const length = computed(() => {
   const count = store.counts[props.dataset]?.[props.collection] || 0
@@ -90,48 +90,48 @@ const pagedData = computed(() => {
   return props.data.slice(clientOffset.value, clientOffset.value + config.pagination.resultsPerPage)
 })
 
-// function updateServerPagination(value) {
-//   const currentValue = store.pagination[props.dataset]?.[props.collection] || 1
-//   const offset = store.offsets[props.dataset]?.[props.collection] || 0
+function updateServerPagination(value) {
+  const currentValue = store.pagination[props.dataset]?.[props.collection] || 1
+  const offset = store.offsets[props.dataset]?.[props.collection] || 0
 
-//   let newOffset = 0
-//   let needToFetch = false
+  let newOffset = 0
+  let needToFetch = false
 
-//   if (
-//     value > currentValue &&
-//     value >= (offset + config.pagination.batchSize) / config.pagination.resultsPerPage + 1
-//   ) {
-//     newOffset =
-//       value - currentValue === 1
-//         ? offset + config.pagination.batchSize
-//         : (value - 1) * config.pagination.resultsPerPage
-//     needToFetch = true
-//   } else if (value < currentValue && value <= offset / config.pagination.resultsPerPage) {
-//     newOffset =
-//       currentValue - value === 1
-//         ? offset - config.pagination.batchSize
-//         : (value - 1) * config.pagination.resultsPerPage
-//     needToFetch = true
-//   }
+  if (
+    value > currentValue &&
+    value >= (offset + config.pagination.batchSize) / config.pagination.resultsPerPage + 1
+  ) {
+    newOffset =
+      value - currentValue === 1
+        ? offset + config.pagination.batchSize
+        : (value - 1) * config.pagination.resultsPerPage
+    needToFetch = true
+  } else if (value < currentValue && value <= offset / config.pagination.resultsPerPage) {
+    newOffset =
+      currentValue - value === 1
+        ? offset - config.pagination.batchSize
+        : (value - 1) * config.pagination.resultsPerPage
+    needToFetch = true
+  }
 
-//   if (needToFetch) {
-//     const oldQuery = store.querystrings[props.dataset]?.[props.collection] || ''
-//     const parsed = queryString.parse(oldQuery)
-//     parsed.offset = newOffset
+  if (needToFetch) {
+    const oldQuery = store.querystrings[props.dataset]?.[props.collection] || ''
+    const params = new URLSearchParams(oldQuery)
+    params.set('offset', newOffset)
+    const newQuery = params.toString()
 
-//     const newQuery = queryString.stringify(parsed)
-//     store.setQueryString(props.dataset, props.collection, newQuery)
+    store.setQueryString(props.dataset, props.collection, newQuery)
 
-//     store.search({
-//       dataset: props.dataset,
-//       collection: props.collection,
-//       queryString: newQuery,
-//       resetPagination: false,
-//     })
+    store.search({
+      dataset: props.dataset,
+      collection: props.collection,
+      queryString: newQuery,
+      resetPagination: false,
+    })
 
-//     store.setOffset(props.dataset, props.collection, newOffset)
-//   }
-// }
+    store.setOffset(props.dataset, props.collection, newOffset)
+  }
+}
 </script>
 
 <style scoped>

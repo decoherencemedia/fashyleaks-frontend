@@ -38,6 +38,8 @@ export default defineConfig((/* ctx */) => {
         node: 'node20',
       },
 
+      //   analyze: true,
+
       vueRouterMode: 'history', // available values: 'hash', 'history'
       // vueRouterBase,
       // vueDevtools,
