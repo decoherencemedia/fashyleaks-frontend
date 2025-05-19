@@ -30,7 +30,6 @@
             >): treasurer for Traditionalist Worker Party
           </li>
         </ul>
-        <br />
         For more information about Rope Culture, see these links:
         <ul class="margin-left">
           <li>
@@ -46,7 +45,6 @@
             </a>
           </li>
         </ul>
-        <br />
         <!-- To get the raw data of the Rope Server scrape, open <a href="magnet:?xt=urn:btih:1d0554862068bfaba9bd2fc6f75cb69fa420c834">this magnet link</a> in a torrent client, and download and extract the file <code>The Archives/Iron March - NOOSE Backups/Iron March - Rope Culture Website Backups/Iron March - Rope Culture Backups/backup-11.24.2017_05-21-11_ropecult.tar.gz</code>. -->
       </template>
     </TextBox>

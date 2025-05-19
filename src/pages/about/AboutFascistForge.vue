@@ -32,10 +32,9 @@
               >Jacob Kaderli</a
             >
             (<router-link to="/fascist-forge?tab=users&id=232"><i>Pestilence</i></router-link
-            >): member of The Base, charged with conspiracy murder
+            >): member of The Base, charged with conspiracy to commit murder
           </li>
         </ul>
-        <br />
         For more information about Fascist Forge, see these links:
         <ul class="margin-left">
           <li>
@@ -53,7 +52,6 @@
             <a href="https://www.gaiusgracch.us/fascist-forge/">Fascist Forge Scraping</a>
           </li>
         </ul>
-        <br />
         To get the raw data of the Fascist Forge scrape, clone or download
         <a href="https://github.com/gaius-gracchus/FascistForge">this GitHub repo</a>.
       </template>

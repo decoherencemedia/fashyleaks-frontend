@@ -13,9 +13,6 @@ Functionality
 Style
 
 - figure out warning loading icon for user-table
-- make spacing in TextBox pages look better
-- make icons in Datasets tab responsive to which dataset is selected
-- make box in datasets tab align left
 - try svg in toolbar title
 
 Performance

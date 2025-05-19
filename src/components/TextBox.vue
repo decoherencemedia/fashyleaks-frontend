@@ -9,7 +9,7 @@
       <div class="text-h6 text-center text-weight-bold q-mb-md">
         <slot name="title" />
       </div>
-      <div class="text-body1 text-justify">
+      <div class="text-body1 text-justify" style="font-weight: 300">
         <slot name="body" />
       </div>
     </q-card>

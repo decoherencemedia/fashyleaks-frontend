@@ -18,7 +18,7 @@
         <a
           href="https://www.abc.net.au/religion/antipodean-resistance-the-rise-and-goals-of-australias-new-nazis/10094794"
           >Antipodean Resistance</a
-        >) to network, and as a petri dish that created and promoted a modern syncretistic National
+        >) to network, and as a petri dish that created and promoted a modern syncretic National
         Socialist ideology that combines esoteric Hitlerism and accelerationism. American neo-Nazi
         terrorist organization
         <a href="https://www.splcenter.org/fighting-hate/extremist-files/group/atomwaffen-division"
@@ -74,7 +74,6 @@
             >): co-founder of UK's <i>National Action</i>
           </li>
         </ul>
-        <br />
         For more information about Iron March and its leak, see these links:
         <ul class="margin-left">
           <li>
@@ -96,7 +95,6 @@
             >
           </li>
         </ul>
-        <br />
         To get the raw data of the Iron March leak, download it from the
         <a href="https://archive.org/details/iron_march_201911_backup">Internet Archive</a>
         or <a href="https://ddosecrets.com/wiki/Iron_March">DDoSecrets</a>.
