@@ -2,10 +2,10 @@
   <div>
     <div v-if="config.fields[collection].length > 0">
       <q-form @submit.prevent="sendData">
-        <q-card flat class="q-pa-none q-mx-xl">
+        <q-card flat :class="$q.platform.is.mobile ? 'q-mx-sm' : 'q-mx-md'">
           <div row class="text-h6">Searching {{ title }} {{ collection }}</div>
-          <q-card-section>
-            <div class="q-gutter-lg row">
+          <q-card-section class="q-px-none">
+            <div :class="$q.platform.is.mobile ? 'q-gutter-y-md row' : 'q-gutter-lg row'">
               <component
                 :is="determineComponent(item)"
                 v-for="item in config.fields[collection]"
@@ -25,7 +25,7 @@
                 label="Search"
                 @click="sendData"
                 :title="`Search for ${collection} matching query`"
-                style="border-radius: 6px"
+                unelevated
               >
               </q-btn>
             </div>

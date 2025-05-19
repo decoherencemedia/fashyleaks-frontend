@@ -1,6 +1,8 @@
 <template>
-  <div :class="$q.platform.is.mobile ? '' : 'q-mx-xl'">
-    <div row class="text-h6 q-pb-sm">Searching {{ title }} {{ collection }}</div>
+  <div :class="$q.platform.is.mobile ? 'q-mx-sm' : 'q-mx-md'">
+    <div row :class="$q.platform.is.mobile ? 'text-h6 q-pb-md q-pl-xs' : 'text-h6 q-pb-sm'">
+      Searching {{ title }} {{ collection }}
+    </div>
     <q-table
       :grid="$q.platform.is.mobile"
       :columns="headers"
@@ -29,9 +31,7 @@
               color="secondary"
               class="q-mx-none q-px-none"
               :style="
-                $q.platform.is.mobile
-                  ? 'max-width: 100%; width: calc(100vw - 40px)'
-                  : 'width: 400px'
+                $q.platform.is.mobile ? 'max-width: 100%; width: calc(100vw - 8px)' : 'width: 400px'
               "
             />
           </div>
