@@ -1,42 +1,12 @@
 <template>
   <div class="post-wrapper" :style="{ backgroundColor }">
     <div>
-      <PostContentInfo
-        v-if="collection == 'posts'"
-        :item="item"
-        :dataset="dataset"
-        :info-fields="infoFields"
-      />
-      <MessageContentInfo
-        v-else-if="collection == 'messages'"
-        :item="item"
-        :dataset="dataset"
-        :info-fields="infoFields"
-      />
-      <ThreadContentInfo
-        v-else-if="collection == 'threads'"
-        :item="item"
-        :dataset="dataset"
-        :info-fields="infoFields"
-      />
-      <ArticleContentInfo
-        v-else-if="collection == 'articles'"
-        :item="item"
-        :dataset="dataset"
-        :info-fields="infoFields"
-      />
-      <CommentContentInfo
-        v-else-if="collection == 'comments'"
-        :item="item"
-        :dataset="dataset"
-        :info-fields="infoFields"
-      />
-      <EmailContentInfo
-        v-else-if="collection == 'emails'"
-        :item="item"
-        :dataset="dataset"
-        :info-fields="infoFields"
-      />
+      <PostContentInfo v-if="collection == 'posts'" :item="item" :dataset="dataset" />
+      <MessageContentInfo v-else-if="collection == 'messages'" :item="item" :dataset="dataset" />
+      <ThreadContentInfo v-else-if="collection == 'threads'" :item="item" :dataset="dataset" />
+      <ArticleContentInfo v-else-if="collection == 'articles'" :item="item" :dataset="dataset" />
+      <CommentContentInfo v-else-if="collection == 'comments'" :item="item" :dataset="dataset" />
+      <EmailContentInfo v-else-if="collection == 'emails'" :item="item" :dataset="dataset" />
 
       <q-btn
         class="mb-1"
@@ -45,6 +15,7 @@
         @click="copyPermalink"
         label="Permalink"
         icon="link"
+        unelevated
         style="border-radius: 6px"
         :title="`Copy permanent link to this ${collection.slice(0, -1)}`"
       >
@@ -104,24 +75,6 @@ const expanded = ref(false)
 const permalink = computed(() => {
   const path = `/${props.dataset}?tab=${props.collection}&id=${props.item.id}`
   return window.location.origin + path
-})
-
-const infoFields = computed(() => {
-  const dateAndTime = new Date(props.item.date).toLocaleString().split(',')
-  return [
-    { text: null, value: dateAndTime[0] },
-    { text: null, value: dateAndTime[1] },
-    {
-      text: 'Post ID',
-      value: props.item.id,
-      link: `/${props.dataset}?tab=posts&id=${props.item.id}`,
-    },
-    {
-      text: 'Thread ID',
-      value: props.item.thread_id,
-      link: `/${props.dataset}?tab=threads&id=${props.item.thread_id}`,
-    },
-  ]
 })
 
 const isOverflowing = computed(() => {

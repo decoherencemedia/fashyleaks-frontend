@@ -9,10 +9,10 @@
       {{ item.author_name ? item.author_name : 'Unknown User' }}
     </span>
 
-    <span>{{ dateAndTime[0] }}</span>
+    <span class="q-mt-sm">{{ dateAndTime[0] }}</span>
     <span>{{ dateAndTime[1] }}</span>
 
-    <span>
+    <span class="q-mt-sm">
       Comment ID:
       <router-link :to="`/${dataset}?tab=comments&id=${item.id}`">
         {{ item.id }}
@@ -31,10 +31,6 @@
       <router-link :to="`/${dataset}?tab=comments&id=${item.parent_id}`">
         {{ item.parent_id }}
       </router-link>
-    </span>
-
-    <span>
-      <a :href="`mailto:${item.author_email}`">{{ item.author_email }}</a>
     </span>
   </div>
 </template>

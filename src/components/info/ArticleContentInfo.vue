@@ -13,9 +13,9 @@
     <span v-else class="channel-name">
       {{ item.author_name ? item.author_name : 'Unknown User' }}
     </span>
-    <span>{{ dateAndTime[0] }}</span>
+    <span class="q-mt-sm">{{ dateAndTime[0] }}</span>
     <span>{{ dateAndTime[1] }}</span>
-    <span>
+    <span class="q-mt-sm">
       Article ID:
       <router-link :to="`/${dataset}?tab=articles&id=${item.id}`">
         {{ item.id }}

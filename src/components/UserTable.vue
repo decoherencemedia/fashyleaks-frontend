@@ -28,6 +28,7 @@
               label="Search Table"
               outlined
               dense
+              clearable
               color="secondary"
               class="q-mx-none q-px-none"
               :style="

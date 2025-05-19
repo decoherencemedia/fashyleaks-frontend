@@ -9,12 +9,21 @@
       {{ item.author_name || 'Unknown User' }}
     </span>
 
-    <span v-for="infoField in infoFields" :key="infoField.value">
-      {{ infoField.text ? infoField.text + ': ' : '' }}
-      <RouterLink v-if="infoField.link" :to="infoField.link">
-        {{ infoField.value }}
-      </RouterLink>
-      <div v-else>{{ infoField.value }}</div>
+    <span class="q-mt-sm">{{ dateAndTime[0] }}</span>
+    <span>{{ dateAndTime[1] }}</span>
+
+    <span class="q-mt-sm">
+      Post ID:
+      <router-link :to="`/${dataset}?tab=posts&id=${item.id}`">
+        {{ item.id }}
+      </router-link>
+    </span>
+
+    <span>
+      Thread ID:
+      <router-link :to="`/${dataset}?tab=posts&thread_id=${item.thread_id}`">
+        {{ item.thread_id }}
+      </router-link>
     </span>
   </div>
 </template>
@@ -31,10 +40,6 @@ const props = defineProps({
     type: String,
     default: '',
   },
-  infoFields: {
-    type: Array,
-    required: true,
-  },
 })
 
 const authorLink = computed(() => {
@@ -44,6 +49,12 @@ const authorLink = computed(() => {
     return `/${props.dataset}?tab=users&name=${props.item.author_name}`
   }
   return null
+})
+
+const dateAndTime = computed(() => {
+  if (!props.item.date) return ['', '']
+  const parsedDate = new Date(props.item.date)
+  return parsedDate.toLocaleString().split(',')
 })
 </script>
 

@@ -14,10 +14,10 @@
       </router-link>
     </span>
 
-    <span>{{ dateAndTime[0] }}</span>
+    <span class="q-mt-sm">{{ dateAndTime[0] }}</span>
     <span>{{ dateAndTime[1] }}</span>
 
-    <span>
+    <span class="q-mt-sm">
       Email ID:
       <router-link :to="`/${dataset}?tab=emails&id=${item.id}`">
         {{ item.id }}

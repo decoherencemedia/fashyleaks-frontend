@@ -20,10 +20,10 @@
       {{ props.item.msg_received_name || 'Unknown User' }}
     </span>
 
-    <span>{{ dateAndTime[0] }}</span>
+    <span class="q-pt-sm">{{ dateAndTime[0] }}</span>
     <span>{{ dateAndTime[1] }}</span>
 
-    <span>
+    <span class="q-pt-sm">
       Message ID:
       <router-link :to="`/${props.dataset}?tab=messages&id=${props.item.id}`">
         {{ props.item.id }}

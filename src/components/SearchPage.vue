@@ -26,6 +26,7 @@
                 @click="sendData"
                 :title="`Search for ${collection} matching query`"
                 unelevated
+                style="border-radius: 6px"
               >
               </q-btn>
             </div>
@@ -46,17 +47,24 @@
 
       <q-linear-progress v-if="isLoading" indeterminate color="cyan-7" class="q-mt-md" />
     </div>
-
-    <component
-      :is="resultComponent"
+    <ContentResult
+      v-if="isSingle"
       :data="results"
       :dataset="dataset"
       :collection="collection"
       :use-markdown="useMarkdown"
       @clickedRow="sendData()"
       @clearedData="clearData()"
-      @fetchMore="handleFetchMore"
     />
+    <ContentResults
+      v-else
+      :data="results"
+      :dataset="dataset"
+      :collection="collection"
+      :use-markdown="useMarkdown"
+      @fetchMore="handleFetchMore"
+    >
+    </ContentResults>
   </div>
 </template>
 
@@ -92,8 +100,6 @@ const isSingle = computed(() => config.singleCollections.includes(props.collecti
 const useMarkdown = computed(() => {
   return config.useMarkdown?.[props.dataset]?.includes(props.collection) ?? false
 })
-
-const resultComponent = computed(() => (isSingle.value ? ContentResult : ContentResults))
 
 function determineComponent(item) {
   return 'component' in item ? AutocompleteInput : TextInput

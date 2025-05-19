@@ -6,7 +6,6 @@ A Quasar Project
 
 Functionality
 
-- fix warning about clickedRow
 - change pagination such that
   - old batch isn't displayed going from 10th to 11th page
     loading bar displays when loading a new batch
@@ -14,10 +13,8 @@ Functionality
 Style
 
 - figure out warning loading icon for user-table
-- make sure ContentInfo are consistent across collections
 - make spacing in TextBox pages look better
 - make icons in Datasets tab responsive to which dataset is selected
-- make text in Datasets tab bigger
 - make box in datasets tab align left
 - try svg in toolbar title
 

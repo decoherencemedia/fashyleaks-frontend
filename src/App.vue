@@ -144,6 +144,7 @@ const menuItems = [
 tbody tr:nth-of-type(odd) {
   background-color: rgba(0, 0, 0, 0.1);
 }
+
 /* .q-btn {
   font-weight: 400;
   letter-spacing: 0.0892857143em;
