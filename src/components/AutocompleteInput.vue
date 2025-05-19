@@ -17,6 +17,7 @@
     dense
     class="q-mx-md full-width"
     color="secondary"
+    @keyup.enter="emitSendData"
   >
     <template v-slot:option="scope">
       <q-item v-bind="scope.itemProps" clickable>
@@ -45,6 +46,8 @@ const props = defineProps({
   label: String,
   additional: Object,
 })
+
+const emit = defineEmits(['onEnter'])
 
 const store = useFieldStore()
 
@@ -107,5 +110,9 @@ function onFilter(val, update) {
       return label.includes(filterVal) || value.includes(filterVal)
     })
   })
+}
+
+function emitSendData() {
+  emit('onEnter')
 }
 </script>

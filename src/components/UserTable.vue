@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div :class="$q.platform.is.mobile ? '' : 'q-mx-xl'">
+    <div row class="text-h6">Searching {{ title }} {{ collection }}</div>
     <q-table
       :grid="$q.platform.is.mobile"
       :columns="headers"
@@ -18,13 +19,17 @@
       @row-click="clickRow"
     >
       <template v-slot:top>
-        <q-input
-          v-model="search"
-          label="Filter User Table"
-          outlined
-          dense
-          class="q-mb-md q-mx-md"
-        />
+        <div class="q-pa-sm row items-center">
+          <q-input
+            v-model="search"
+            label="Search Table"
+            outlined
+            dense
+            color="secondary"
+            class="q-mx-none"
+            :style="$q.platform.is.mobile ? 'width: 300px' : 'width: 400px'"
+          />
+        </div>
       </template>
 
       <template v-slot:body-cell-joined_date="props">
@@ -139,6 +144,12 @@ function formatDate(dateStr) {
   const date = new Date(dateStr)
   return date.toLocaleString()
 }
+
+const title = props.dataset
+  .toLowerCase()
+  .split('-')
+  .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+  .join(' ')
 </script>
 
 <style scoped>

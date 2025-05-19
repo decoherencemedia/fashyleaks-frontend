@@ -1,45 +1,51 @@
 <template>
   <div>
-    <q-form @submit.prevent="sendData">
-      <q-card flat class="q-pa-none q-mx-xl">
-        <div row class="text-h6">Searching {{ title }} {{ collection }}</div>
-        <q-card-section>
-          <div class="q-gutter-lg row">
-            <component
-              :is="determineComponent(item)"
-              v-for="item in config.fields[collection]"
-              :key="item.variable"
-              :field="item.variable"
-              :label="item.label"
-              :dataset="dataset"
-              :collection="collection"
-              :additional="item.additional ?? {}"
-              @onEnter="sendData"
-              :class="$q.platform.is.mobile ? 'row' : 'col q-px-lg'"
-            />
+    <div v-if="config.fields[collection].length > 0">
+      <q-form @submit.prevent="sendData">
+        <q-card flat class="q-pa-none q-mx-xl">
+          <div row class="text-h6">Searching {{ title }} {{ collection }}</div>
+          <q-card-section>
+            <div class="q-gutter-lg row">
+              <component
+                :is="determineComponent(item)"
+                v-for="item in config.fields[collection]"
+                :key="item.variable"
+                :field="item.variable"
+                :label="item.label"
+                :dataset="dataset"
+                :collection="collection"
+                :additional="item.additional ?? {}"
+                @onEnter="sendData"
+                :class="$q.platform.is.mobile ? 'row' : 'col q-px-lg'"
+              />
 
-            <q-btn
-              class="col-auto q-ml-md"
-              color="secondary"
-              label="Search"
-              @click="sendData"
-              :title="`Search for ${collection} matching query`"
-              style="border-radius: 6px"
-            >
-            </q-btn>
-          </div>
-        </q-card-section>
-      </q-card>
-    </q-form>
+              <q-btn
+                class="col-auto q-ml-md"
+                color="secondary"
+                label="Search"
+                @click="sendData"
+                :title="`Search for ${collection} matching query`"
+                style="border-radius: 6px"
+              >
+              </q-btn>
+            </div>
+          </q-card-section>
+        </q-card>
+      </q-form>
 
-    <q-banner v-if="errorMessage" class="q-mt-md text-white bg-negative" style="text-align: center">
-      <template v-slot:avatar>
-        <q-icon name="warning" color="white" size="lg" />
-      </template>
-      {{ errorMessage }}
-    </q-banner>
+      <q-banner
+        v-if="errorMessage"
+        class="q-mt-md text-white bg-negative"
+        style="text-align: center"
+      >
+        <template v-slot:avatar>
+          <q-icon name="warning" color="white" size="lg" />
+        </template>
+        {{ errorMessage }}
+      </q-banner>
 
-    <q-linear-progress v-if="isLoading" indeterminate color="cyan-7" class="q-mt-md" />
+      <q-linear-progress v-if="isLoading" indeterminate color="cyan-7" class="q-mt-md" />
+    </div>
 
     <component
       :is="resultComponent"
