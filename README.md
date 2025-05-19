@@ -6,7 +6,6 @@ A Quasar Project
 
 Functionality
 
-- implement mobile
 - change pagination such that
   - old batch isn't displayed going from 10th to 11th page
     loading bar displays when loading a new batch

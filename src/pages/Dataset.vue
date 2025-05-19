@@ -84,10 +84,15 @@ const route = useRoute()
 const router = useRouter()
 
 function initializeTabFromURL() {
+  const queryTab = route.query.tab
   if (!route.query || Object.keys(route.query).length === 0) {
+    router.replace({
+      query: {
+        tab: defaultTab,
+      },
+    })
     return
   }
-  const queryTab = route.query.tab
   const targetTab = validTabs.includes(queryTab) ? queryTab : defaultTab
   tab.value = targetTab
   const queryString = store.querystrings?.[props.dataset]?.[targetTab]
@@ -125,14 +130,22 @@ watch(
 watch(tab, (newTab) => {
   if (route.query.tab === newTab) return
   const queryString = store.querystrings?.[props.dataset]?.[newTab]
-  if (!queryString) return
-  const queryParams = Object.fromEntries(new URLSearchParams(queryString))
-  router.replace({
-    query: {
-      tab: newTab,
-      ...queryParams,
-    },
-  })
+  if (!queryString) {
+    router.replace({
+      query: {
+        tab: newTab,
+      },
+    })
+    return
+  } else {
+    const queryParams = Object.fromEntries(new URLSearchParams(queryString))
+    router.replace({
+      query: {
+        tab: newTab,
+        ...queryParams,
+      },
+    })
+  }
 })
 </script>
 
