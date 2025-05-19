@@ -5,8 +5,8 @@
       <q-toolbar-title class="text-accent"> Decoherence Archive </q-toolbar-title>
     </q-btn>
     <q-space> </q-space>
-    <q-btn flat round dense icon="menu" stretch tab>
-      <q-menu>
+    <q-btn flat round dense icon="menu" stretch tab aria-label="Menu">
+      <q-menu style="min-width: auto; white-space: nowrap">
         <q-list>
           <q-item
             v-for="item in menuItems"
@@ -15,24 +15,33 @@
             v-close-popup
             :to="item.path"
             :title="`Search ${item.title} dataset`"
+            class="q-px-xl"
           >
-            <q-item-section side>
-              <component :is="item.icon" color="secondary" size="2rem" />
+            <q-item-section side class="q-mr-lg">
+              <component :is="item.icon" color="primary" size="2rem" />
             </q-item-section>
             <q-item-section>
-              <q-item-label class="text-h6">{{ item.title }}</q-item-label>
+              <q-item-label
+                class="text-primary"
+                style="text-transform: uppercase; font-weight: 400"
+                >{{ item.title }}</q-item-label
+              >
             </q-item-section>
           </q-item>
           <q-separator color="grey-6" />
-          <q-item to="/about" class="justify-center">
-            <q-item-section class="text-h6 text-center">About</q-item-section>
+          <q-item
+            to="/about"
+            class="text-primary justify-center"
+            style="text-transform: uppercase; font-weight: 400; white-space: nowrap"
+          >
+            <q-item-section class="text-center">About</q-item-section>
           </q-item>
           <q-item
             href="https://github.com/decoherencemedia/fashdata-frontend"
             class="justify-center items-center"
           >
             <q-item-section class="flex justify-center items-center">
-              <git-hub-icon color="black" size="2em" />
+              <git-hub-icon color="black" size="1.5em" />
             </q-item-section>
           </q-item>
         </q-list>
@@ -64,12 +73,17 @@
           tabindex="0"
           :to="item.path"
           :title="`Search ${item.title} dataset`"
+          class="q-px-xl"
         >
-          <q-item-section side>
-            <component :is="item.icon" color="secondary" size="2rem" />
+          <q-item-section side class="q-mr-lg">
+            <component :is="item.icon" color="primary" size="1.5rem" />
           </q-item-section>
           <q-item-section>
-            <q-item-label>{{ item.title }}</q-item-label>
+            <q-item-label
+              class="text-primary"
+              style="text-transform: uppercase; font-weight: 400"
+              >{{ item.title }}</q-item-label
+            >
           </q-item-section>
         </q-item>
       </q-list>

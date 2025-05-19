@@ -45,7 +45,7 @@
         @click="copyPermalink"
         label="Permalink"
         icon="link"
-        unelevated
+        style="border-radius: 6px"
         :title="`Copy permanent link to this ${collection.slice(0, -1)}`"
       >
       </q-btn>

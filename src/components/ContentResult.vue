@@ -7,7 +7,7 @@
       <div class="row justify-center q-my-md">
         <q-card class="q-pa-0" style="max-width: 750px; width: 100%" bordered flat>
           <div class="row items-start">
-            <div v-if="datum.images" class="q-pr-md">
+            <div v-if="datum.images" class="q-pr-none">
               <a :href="datum.images[0]" target="_blank">
                 <q-tooltip>{{ imageTooltip(datum.images[0]) }}</q-tooltip>
                 <img
@@ -18,7 +18,9 @@
               </a>
             </div>
             <div class="col">
-              <div class="text-h6">{{ datum[config.resultTitleField[props.collection]] }}</div>
+              <div class="text-h5 q-ml-lg q-my-lg" style="">
+                {{ datum[config.resultTitleField[props.collection]] }}
+              </div>
             </div>
             <div class="col-auto self-start">
               <q-btn
@@ -72,13 +74,14 @@
       <div class="row justify-center q-ml-sm q-mt-sm">
         <q-btn
           class="mb-1"
-          size="sm"
+          size="md"
           color="secondary"
           @click="copyPermalink"
           label="Permalink"
           icon="link"
           unelevated
           :title="`Copy permanent link to this ${collection.slice(0, -1)}`"
+          style="border-radius: 6px"
         >
         </q-btn>
       </div>

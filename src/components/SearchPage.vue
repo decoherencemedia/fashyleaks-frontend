@@ -24,6 +24,7 @@
               label="Search"
               @click="sendData"
               :title="`Search for ${collection} matching query`"
+              style="border-radius: 6px"
             >
             </q-btn>
           </div>
