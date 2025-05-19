@@ -20,7 +20,7 @@
               />
 
               <q-btn
-                class="col-auto q-ml-md"
+                :class="$q.platform.is.mobile ? 'col-auto q-ml-none' : 'col-auto q-ml-md'"
                 color="secondary"
                 label="Search"
                 @click="sendData"

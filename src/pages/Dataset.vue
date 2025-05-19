@@ -3,6 +3,7 @@
     <q-toolbar class="text-accent bg-primary">
       <component :is="iconComponent" color="secondary" size="2rem" :title="title"> </component>
       <q-tabs
+        class="scroll"
         v-model="tab"
         inline-label
         indicator-color="secondary"
@@ -26,6 +27,7 @@
         :name="collection"
         :key="collection"
         :value="collection"
+        :class="$q.platform.is.mobile ? 'q-px-none' : ''"
       >
         <search-page :dataset="dataset" :collection="tab" />
       </q-tab-panel>
