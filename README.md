@@ -12,7 +12,6 @@ Functionality
 
 Style
 
-- remove scrolling on landing and about pages
 - figure out warning loading icon for user-table
 - make sure ContentInfo are consistent across collections
 - make spacing in TextBox pages look better

@@ -1,37 +1,9 @@
 <template>
-  <q-page class="q-pa-none">
-    <div class="row justify-center">
-      <q-pagination
-        v-if="data.length > config.pagination.resultsPerPage"
-        v-model="page"
-        class="top-pagination"
-        :max="length"
-        :max-pages="config.pagination.totalVisible"
-        color="secondary"
-        boundary-numbers
-        unelevated
-        input
-      />
-
-      <div v-else-if="data.length > 0" class="top-pagination" />
-      <div v-else />
-    </div>
-    <hr v-if="data.length > 0" />
-
-    <div v-for="(item, index) in pagedData" :key="item.id">
-      <ContentBox
-        :item="item"
-        :dataset="dataset"
-        :collection="collection"
-        :use-markdown="useMarkdown"
-        :background-color="index % 2 === 0 ? '#ffffff' : 'rgba(0, 0, 0, .1)'"
-      />
-    </div>
-
+  <div class="row justify-center">
     <q-pagination
-      v-if="data.length > 0"
+      v-if="data.length > config.pagination.resultsPerPage"
       v-model="page"
-      class="bottom-pagination"
+      class="top-pagination"
       :max="length"
       :max-pages="config.pagination.totalVisible"
       color="secondary"
@@ -39,7 +11,33 @@
       unelevated
       input
     />
-  </q-page>
+
+    <div v-else-if="data.length > 0" class="top-pagination" />
+    <div v-else />
+  </div>
+  <hr v-if="data.length > 0" />
+
+  <div v-for="(item, index) in pagedData" :key="item.id">
+    <ContentBox
+      :item="item"
+      :dataset="dataset"
+      :collection="collection"
+      :use-markdown="useMarkdown"
+      :background-color="index % 2 === 0 ? '#ffffff' : 'rgba(0, 0, 0, .1)'"
+    />
+  </div>
+
+  <q-pagination
+    v-if="data.length > 0"
+    v-model="page"
+    class="bottom-pagination"
+    :max="length"
+    :max-pages="config.pagination.totalVisible"
+    color="secondary"
+    boundary-numbers
+    unelevated
+    input
+  />
 </template>
 
 <script setup>
