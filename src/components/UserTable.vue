@@ -1,6 +1,6 @@
 <template>
   <div :class="$q.platform.is.mobile ? '' : 'q-mx-xl'">
-    <div row class="text-h6">Searching {{ title }} {{ collection }}</div>
+    <div row class="text-h6 q-pb-sm">Searching {{ title }} {{ collection }}</div>
     <q-table
       :grid="$q.platform.is.mobile"
       :columns="headers"
@@ -19,16 +19,22 @@
       @row-click="clickRow"
     >
       <template v-slot:top>
-        <div class="q-pa-sm row items-center">
-          <q-input
-            v-model="search"
-            label="Search Table"
-            outlined
-            dense
-            color="secondary"
-            class="q-mx-none"
-            :style="$q.platform.is.mobile ? 'width: 300px' : 'width: 400px'"
-          />
+        <div :class="$q.platform.is.mobile ? 'q-pa-xs row justify-center' : 'q-pa-sm row'">
+          <div style="width: 100%" class="q-pa-none">
+            <q-input
+              v-model="search"
+              label="Search Table"
+              outlined
+              dense
+              color="secondary"
+              class="q-mx-none q-px-none"
+              :style="
+                $q.platform.is.mobile
+                  ? 'max-width: 100%; width: calc(100vw - 40px)'
+                  : 'width: 400px'
+              "
+            />
+          </div>
         </div>
       </template>
 
@@ -155,5 +161,12 @@ const title = props.dataset
 <style scoped>
 .td {
   max-width: 200px;
+}
+
+::v-deep(.q-table--dense .q-table__top) {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
 }
 </style>
