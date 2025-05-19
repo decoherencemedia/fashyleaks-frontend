@@ -135,3 +135,12 @@ watch(tab, (newTab) => {
   })
 })
 </script>
+
+<style>
+/* .q-tab {
+  font-weight: 400;
+  letter-spacing: 0.0892857143em;
+  text-indent: 0.0892857143em;
+  text-transform: uppercase;
+} */
+</style>

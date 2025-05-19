@@ -1,6 +1,7 @@
 <template>
   <div>
     <q-table
+      :grid="$q.platform.is.mobile"
       :columns="headers"
       :rows="items"
       :rows-per-page="20"
@@ -30,6 +31,25 @@
         <q-td :props="props">
           {{ formatDate(props.row.joined_date) }}
         </q-td>
+      </template>
+      <template v-slot:item="props">
+        <q-card
+          flat
+          bordered
+          :class="props.rowIndex % 2 === 0 ? 'bg-grey-5' : 'bg-white'"
+          class="q-ma-xs"
+          style="width: 100%"
+          @click="clickRow(null, props.row)"
+        >
+          <q-item class="q-ma-xs q-pa-xs">
+            <q-item-section>
+              <div v-for="col in props.cols" :key="col.name" class="q-ma-xs">
+                <div style="opacity: 0.54; font-weight: 500; font-size: 12px">{{ col.label }}</div>
+                <div style="font-size: 13px">{{ col.value }}</div>
+              </div>
+            </q-item-section>
+          </q-item>
+        </q-card>
       </template>
     </q-table>
   </div>
@@ -124,8 +144,5 @@ function formatDate(dateStr) {
 <style scoped>
 .td {
   max-width: 200px;
-  white-space: normal !important;
-  word-wrap: break-word;
-  word-break: break-word;
 }
 </style>
