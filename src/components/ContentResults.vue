@@ -1,9 +1,50 @@
 <template>
+  <!-- Top Pagination + Divider Area -->
+  <div class="pagination-and-divider">
+    <!-- Top Pagination -->
+    <div class="row justify-center">
+      <q-pagination
+        v-if="props.data.length > config.pagination.resultsPerPage"
+        v-model="page"
+        class="top-pagination"
+        :max="length"
+        :max-pages="config.pagination.totalVisible"
+        color="secondary"
+        boundary-numbers
+        unelevated
+        input
+      />
+      <div v-else-if="props.data.length > 0" class="top-pagination" />
+      <div
+        v-if="props.data.length < config.pagination.resultsPerPage"
+        class="top-pagination-placeholder"
+      />
+    </div>
+
+    <div class="top-divider">
+      <q-linear-progress v-if="isLoading" indeterminate color="cyan-7" class="progress-bar" />
+      <hr v-else-if="props.data.length > 0" class="custom-hr" />
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div v-if="!isLoading">
+    <div v-for="(item, index) in pagedData" :key="item.id">
+      <ContentBox
+        :item="item"
+        :dataset="dataset"
+        :collection="collection"
+        :use-markdown="useMarkdown"
+        :background-color="index % 2 === 0 ? '#ffffff' : 'rgba(0, 0, 0, .1)'"
+      />
+    </div>
+  </div>
   <div class="row justify-center">
+    <!-- Bottom Pagination -->
     <q-pagination
-      v-if="data.length > config.pagination.resultsPerPage"
+      v-if="props.data.length > 0"
       v-model="page"
-      class="top-pagination"
+      class="bottom-pagination"
       :max="length"
       :max-pages="config.pagination.totalVisible"
       color="secondary"
@@ -11,33 +52,7 @@
       unelevated
       input
     />
-
-    <div v-else-if="data.length > 0" class="top-pagination" />
-    <div v-else />
   </div>
-  <hr v-if="data.length > 0" />
-
-  <div v-for="(item, index) in pagedData" :key="item.id">
-    <ContentBox
-      :item="item"
-      :dataset="dataset"
-      :collection="collection"
-      :use-markdown="useMarkdown"
-      :background-color="index % 2 === 0 ? '#ffffff' : 'rgba(0, 0, 0, .1)'"
-    />
-  </div>
-
-  <q-pagination
-    v-if="data.length > 0"
-    v-model="page"
-    class="bottom-pagination"
-    :max="length"
-    :max-pages="config.pagination.totalVisible"
-    color="secondary"
-    boundary-numbers
-    unelevated
-    input
-  />
 </template>
 
 <script setup>
@@ -69,6 +84,10 @@ const store = useFieldStore()
 const page = ref(store.pagination[props.dataset]?.[props.collection] || 1)
 
 const emit = defineEmits(['fetchMore'])
+
+const isLoading = computed(() => {
+  return store.loading?.[props.dataset]?.[props.collection]
+})
 
 watch(page, (value) => {
   updateServerPagination(value)
@@ -130,11 +149,25 @@ function updateServerPagination(value) {
 
 <style scoped>
 .top-pagination {
-  /* border-bottom: 1px solid #999; */
   padding-bottom: 1em;
 }
 
 .bottom-pagination {
   padding-top: 1em;
+}
+
+.top-pagination-placeholder {
+  height: 51px;
+}
+
+.progress-bar {
+  margin-top: 16px 0;
+  width: 100%;
+}
+
+.custom-hr {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 </style>

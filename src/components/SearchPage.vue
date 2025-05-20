@@ -44,8 +44,6 @@
         </template>
         {{ errorMessage }}
       </q-banner>
-
-      <q-linear-progress v-if="isLoading" indeterminate color="cyan-7" class="q-mt-md" />
     </div>
     <ContentResult
       v-if="isSingle"
@@ -92,7 +90,6 @@ const route = useRoute()
 const router = useRouter()
 
 const errorMessage = computed(() => store.error?.[props.dataset]?.[props.collection])
-const isLoading = computed(() => store.loading?.[props.dataset]?.[props.collection])
 const results = computed(() => store.results?.[props.dataset]?.[props.collection])
 
 const isSingle = computed(() => config.singleCollections.includes(props.collection))
