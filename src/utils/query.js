@@ -22,3 +22,11 @@ export function queryStringToObject(queryString) {
 
   return result
 }
+
+export function datasetToTitle(dataset) {
+  return dataset
+    .toLowerCase()
+    .split('-')
+    .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+    .join(' ')
+}

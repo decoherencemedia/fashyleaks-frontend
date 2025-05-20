@@ -92,9 +92,11 @@
 <script setup>
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useQuasar } from 'quasar'
+import { useQuasar, useMeta } from 'quasar'
 import config from '@/assets/config.json'
 import UserTable from './UserTable.vue'
+import { datasetToTitle } from '@/utils/query.js'
+import { useFieldStore } from '@/stores/FieldStore'
 
 const props = defineProps({
   data: {
@@ -115,6 +117,7 @@ const props = defineProps({
   },
 })
 
+const store = useFieldStore()
 const $q = useQuasar()
 
 const emit = defineEmits(['clickedRow', 'clearedData'])
@@ -171,13 +174,24 @@ function clearData() {
 
 function imageTooltip(url) {
   if (url.includes('email')) return 'Image from email address'
-  const datasetTitle = props.dataset
-    .toLowerCase()
-    .split('-')
-    .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
-    .join(' ')
+  const datasetTitle = datasetToTitle(props.dataset)
   return `Image from ${datasetTitle} profile picture`
 }
+
+function metaTitle() {
+  const datasetTitle = datasetToTitle(props.dataset)
+  const fields = store.fields[props.dataset]?.[props.collection]
+  const name = datum.value?.[config.resultTitleField[props.collection]]
+  if (!!fields.id && Object.keys(fields).every((key) => key === 'id' || fields[key] === '')) {
+    return `${datasetTitle} ${props.collection.slice(0, -1)} #${fields.id}: ${name}`
+  } else {
+    return `Searching ${datasetTitle} ${props.collection}`
+  }
+}
+
+useMeta(() => ({
+  title: metaTitle(),
+}))
 </script>
 
 <style scoped>

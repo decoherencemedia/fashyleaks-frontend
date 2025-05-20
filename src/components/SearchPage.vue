@@ -78,6 +78,7 @@ import config from '@/assets/config.json'
 import { objectToQueryString } from '@/utils/query'
 
 import { useFieldStore } from '@/stores/FieldStore'
+import { datasetToTitle } from '@/utils/query.js'
 
 const props = defineProps({
   dataset: String,
@@ -123,12 +124,18 @@ function clearData() {
 }
 
 function processRoute() {
-  if (route.path.slice(1) !== props.dataset) return
+  if (route.path.slice(1) !== props.dataset) {
+    return
+  }
   const params = { ...route.query }
-  if (params.tab !== props.collection) return
+  if (params.tab !== props.collection) {
+    return
+  }
   delete params.tab
   const query = objectToQueryString(params)
-  if (!query) return
+  if (!query) {
+    return
+  }
   if (query !== store.querystrings?.[props.dataset]?.[props.collection]) {
     store.search({
       dataset: props.dataset,
@@ -136,6 +143,15 @@ function processRoute() {
       queryString: query,
       resetPagination: true,
     })
+  } else {
+    for (const [key, value] of Object.entries(params)) {
+      store.setField({
+        dataset: props.dataset,
+        collection: props.collection,
+        field: key,
+        value,
+      })
+    }
   }
 }
 
@@ -148,11 +164,7 @@ function handleFetchMore(newQuery) {
   })
 }
 
-const title = props.dataset
-  .toLowerCase()
-  .split('-')
-  .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-  .join(' ')
+const title = datasetToTitle(props.dataset)
 
 onMounted(processRoute)
 watch(route, processRoute, { immediate: true })

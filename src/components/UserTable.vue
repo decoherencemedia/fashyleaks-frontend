@@ -73,6 +73,7 @@
 import { computed, ref, onMounted } from 'vue'
 import { useFieldStore } from '@/stores/FieldStore'
 import config from '@/assets/config.json'
+import { datasetToTitle } from '@/utils/query.js'
 
 const props = defineProps({
   dataset: String,
@@ -154,11 +155,7 @@ function formatDate(dateStr) {
   return date.toLocaleString()
 }
 
-const title = props.dataset
-  .toLowerCase()
-  .split('-')
-  .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-  .join(' ')
+const title = datasetToTitle(props.dataset)
 </script>
 
 <style scoped>

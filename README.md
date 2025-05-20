@@ -4,16 +4,24 @@ A Quasar Project
 
 ## TODO
 
-Functionality
+Functionality bugs
 
 Style
 
+- links look bad in mobile dataset About pages (justified)
 - try svg in toolbar title
+- style warning message with code style instead of ``
+- make dataset icons the same size (viewbox)
 
 Performance
 
 - consolidate config.json data
 - improve Lighthouse score
+
+Enhancements
+
+- implement HTML previews
+- implement way to view a post in context
 
 ## Install the dependencies
 

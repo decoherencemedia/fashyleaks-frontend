@@ -39,11 +39,15 @@
 </template>
 
 <script setup>
+// import { ref, watch, onMounted, markRaw, computed } from 'vue'
 import { ref, watch, onMounted, markRaw } from 'vue'
+
 import config from '@/assets/config.json'
 import SearchPage from '@/components/SearchPage.vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useFieldStore } from '@/stores/FieldStore'
+import { useMeta } from 'quasar'
+import { datasetToTitle } from '@/utils/query.js'
 
 const props = defineProps({
   dataset: {
@@ -58,11 +62,7 @@ const collections = config.collections[props.dataset] || []
 const validTabs = [...collections, 'about']
 const defaultTab = collections[0] || 'about'
 
-const title = props.dataset
-  .toLowerCase()
-  .split('-')
-  .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-  .join(' ')
+const title = datasetToTitle(props.dataset)
 
 const oneWordTitle = title.replace(' ', '')
 
@@ -147,6 +147,20 @@ watch(tab, (newTab) => {
         ...queryParams,
       },
     })
+  }
+})
+
+function metaTitle() {
+  if (tab.value === 'about') {
+    return `Decoherence Archive | About ${title}`
+  } else {
+    return `Decoherence Archive | Search ${title} ${tab.value}`
+  }
+}
+
+useMeta(() => {
+  return {
+    title: metaTitle(),
   }
 })
 </script>

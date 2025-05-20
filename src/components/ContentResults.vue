@@ -60,6 +60,8 @@ import { ref, computed, watch } from 'vue'
 import { useFieldStore } from '@/stores/FieldStore'
 import ContentBox from './ContentBox.vue'
 import config from '@/assets/config.json'
+import { useMeta } from 'quasar'
+import { datasetToTitle } from '@/utils/query.js'
 
 const props = defineProps({
   data: {
@@ -145,6 +147,20 @@ function updateServerPagination(value) {
     store.setOffset({ dataset: props.dataset, collection: props.collection, value: newOffset })
   }
 }
+
+function metaTitle() {
+  const datasetTitle = datasetToTitle(props.dataset)
+  const fields = store.fields[props.dataset]?.[props.collection]
+  if (!!fields.id && Object.keys(fields).every((key) => key === 'id' || fields[key] === '')) {
+    return `${datasetTitle} ${props.collection.slice(0, -1)} #${fields.id}`
+  } else {
+    return `Searching ${datasetTitle} ${props.collection}`
+  }
+}
+
+useMeta(() => ({
+  title: metaTitle(),
+}))
 </script>
 
 <style scoped>

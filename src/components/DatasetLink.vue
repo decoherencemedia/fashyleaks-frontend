@@ -13,6 +13,7 @@
 
 <script setup>
 import { ref, markRaw } from 'vue'
+import { datasetToTitle } from '@/utils/query.js'
 
 const props = defineProps({
   dataset: {
@@ -21,11 +22,7 @@ const props = defineProps({
   },
 })
 
-const title = props.dataset
-  .toLowerCase()
-  .split('-')
-  .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-  .join(' ')
+const title = datasetToTitle(props.dataset)
 
 const iconComponent = ref(null)
 
