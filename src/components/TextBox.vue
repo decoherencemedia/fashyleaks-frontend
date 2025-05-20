@@ -17,3 +17,11 @@
 </template>
 
 <script setup></script>
+
+<style>
+ul {
+  display: inline-block;
+  text-align: left;
+  text-justify: none;
+}
+</style>

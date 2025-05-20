@@ -172,4 +172,9 @@ useMeta(() => {
   text-indent: 0.0892857143em;
   text-transform: uppercase;
 } */
+
+.q-toolbar {
+  margin-top: -1px; /* to fix aliasing artifact on certain display resolutions */
+  z-index: 1;
+}
 </style>

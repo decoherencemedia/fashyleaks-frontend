@@ -8,7 +8,6 @@ Functionality bugs
 
 Style
 
-- links look bad in mobile dataset About pages (justified)
 - try svg in toolbar title
 - style warning message with code style instead of ``
 
