@@ -10,8 +10,6 @@
       :rows-per-page="20"
       :loading="loading"
       loading-label="Fetching data..."
-      loading-icon="hourglass_empty"
-      loading-icon-size="0em"
       row-key="id"
       dense
       flat
@@ -19,6 +17,7 @@
       :filter="search"
       :pagination="{ rowsPerPage: 20 }"
       @row-click="clickRow"
+      color="secondary"
     >
       <template v-slot:top>
         <div :class="$q.platform.is.mobile ? 'q-pa-xs row justify-center' : 'q-pa-sm row'">
@@ -62,6 +61,9 @@
             </q-item-section>
           </q-item>
         </q-card>
+      </template>
+      <template #no-data>
+        <div>Loading data...</div>
       </template>
     </q-table>
   </div>

@@ -8,7 +8,6 @@ Functionality
 
 Style
 
-- figure out warning loading icon for user-table
 - try svg in toolbar title
 
 Performance
