@@ -116,6 +116,8 @@ function initializeTabFromURL() {
   }
 }
 
+initializeTabFromURL()
+
 onMounted(() => {
   initializeTabFromURL()
 })
@@ -151,10 +153,16 @@ watch(tab, (newTab) => {
 })
 
 function metaTitle() {
+  console.log('route.query.tab: ', route.query)
+  const fields = route.query
   if (tab.value === 'about') {
     return `Decoherence Archive | About ${title}`
   } else {
-    return `Decoherence Archive | Search ${title} ${tab.value}`
+    if (!!fields.id && Object.keys(fields).every((key) => key === 'id' || fields[key] === '')) {
+      return `${title} ${tab.value.slice(0, -1)} #${fields.id}`
+    } else {
+      return `Searching ${title} ${tab.value}`
+    }
   }
 }
 
@@ -163,6 +171,25 @@ useMeta(() => {
     title: metaTitle(),
   }
 })
+</script>
+
+<script>
+// Outside <script setup>, in normal script block
+export default {
+  async preFetch({ currentRoute, ssrContext }) {
+    console.log('currentRoute: ', currentRoute)
+    const tab = currentRoute.query.tab || 'about'
+    const dataset = 'Yolo'
+    const title =
+      tab === 'about'
+        ? `FETCH Decoherence Archive | About ${datasetToTitle(dataset)}`
+        : `FETCH Searching ${datasetToTitle(dataset)} ${tab}`
+
+    ssrContext.meta = {
+      title,
+    }
+  },
+}
 </script>
 
 <style>
