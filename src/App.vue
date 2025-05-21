@@ -1,8 +1,8 @@
 <template>
   <!-- Mobile toolbar -->
   <q-toolbar v-if="$q.platform.is.mobile" class="bg-primary text-accent">
-    <q-btn no-caps flat stretch to="/" title="Decoherence Archive Home">
-      <q-toolbar-title class="text-accent"> Decoherence Archive </q-toolbar-title>
+    <q-btn no-caps flat stretch to="/" title="Decoherence Archive Home" class="q-px-none">
+      <img src="@/assets/logo.svg" alt="icon" style="height: 50px" />
     </q-btn>
     <q-space> </q-space>
     <q-btn flat round dense icon="menu" stretch tab aria-label="Menu">
@@ -50,8 +50,8 @@
   </q-toolbar>
   <!-- Non-mobile toolbar -->
   <q-toolbar v-else class="bg-primary">
-    <q-btn no-caps flat stretch to="/" title="Decoherence Archive Home">
-      <q-toolbar-title class="text-accent"> Decoherence Archive </q-toolbar-title>
+    <q-btn flat to="/">
+      <img src="@/assets/logo.svg" alt="icon" style="height: 50px" />
     </q-btn>
 
     <q-space />

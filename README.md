@@ -8,7 +8,6 @@ Functionality bugs
 
 Style
 
-- try svg in toolbar title
 - style warning message with code style instead of ``
 
 Performance
