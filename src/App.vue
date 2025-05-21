@@ -126,16 +126,16 @@ const menuItems = [
     icon: IronMarchIcon,
   },
   {
-    title: 'Fascist Forge',
-    path: '/fascist-forge',
-    tooltip: 'Search Fascist Forge data',
-    icon: FascistForgeIcon,
-  },
-  {
     title: 'Rope Culture',
     path: '/rope-culture',
     tooltip: 'Search Rope Culture data',
     icon: RopeCultureIcon,
+  },
+  {
+    title: 'Fascist Forge',
+    path: '/fascist-forge',
+    tooltip: 'Search Fascist Forge data',
+    icon: FascistForgeIcon,
   },
 ]
 </script>

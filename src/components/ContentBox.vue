@@ -1,6 +1,6 @@
 <template>
   <div class="post-wrapper" :style="{ backgroundColor }">
-    <div>
+    <div style="font-weight: 300">
       <PostContentInfo v-if="collection == 'posts'" :item="item" :dataset="dataset" />
       <MessageContentInfo v-else-if="collection == 'messages'" :item="item" :dataset="dataset" />
       <ThreadContentInfo v-else-if="collection == 'threads'" :item="item" :dataset="dataset" />
