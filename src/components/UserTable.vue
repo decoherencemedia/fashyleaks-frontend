@@ -10,7 +10,7 @@
       :rows-per-page="20"
       :loading="loading"
       loading-label="Fetching data..."
-      row-key="id"
+      row-key="name"
       dense
       flat
       bordered
@@ -125,6 +125,8 @@ const headers = computed(() => {
 
   const decorateHeader = (header) => ({
     ...header,
+    name: header.field,
+    sortable: true,
     align: 'left',
     style,
     headerStyle: style,
