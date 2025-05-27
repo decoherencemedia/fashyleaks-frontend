@@ -38,11 +38,6 @@
         </div>
       </template>
 
-      <template v-slot:body-cell-joined_date="props">
-        <q-td :props="props">
-          {{ formatDate(props.row.joined_date) }}
-        </q-td>
-      </template>
       <template v-slot:item="props">
         <q-card
           flat
@@ -121,16 +116,38 @@ const items = computed(() => {
 
 const headers = computed(() => {
   const allHeaders = config.headers[props.dataset][props.collection]
-  const style = 'max-width: 200px; white-space: normal; word-break: break-word;'
 
-  const decorateHeader = (header) => ({
-    ...header,
-    name: header.field,
-    sortable: true,
-    align: 'left',
-    style,
-    headerStyle: style,
-  })
+  const decorateHeader = (header) => {
+    const style = 'max-width: 200px; white-space: normal; word-break: break-word;'
+
+    const base = {
+      ...header,
+      name: header.field,
+      sortable: true,
+      align: 'left',
+      style,
+      headerStyle: style,
+    }
+
+    if (header.field === 'joined_date') {
+      return {
+        ...base,
+        // eslint-disable-next-line no-unused-vars
+        sort: (a, b, _rowA, _rowB) => {
+          const timeA = new Date(a).getTime()
+          const timeB = new Date(b).getTime()
+
+          if (isNaN(timeA) && isNaN(timeB)) return 0
+          if (isNaN(timeA)) return 1
+          if (isNaN(timeB)) return -1
+
+          return timeA - timeB
+        },
+      }
+    }
+
+    return base
+  }
 
   if (items.value.length === 0) {
     return allHeaders.map(decorateHeader)
@@ -152,10 +169,10 @@ function clickRow(_, row) {
 
 const emit = defineEmits(['clickedRow'])
 
-function formatDate(dateStr) {
-  const date = new Date(dateStr)
-  return date.toLocaleString()
-}
+// function formatDate(dateStr) {
+//   const date = new Date(dateStr)
+//   return date.toLocaleString()
+// }
 
 const title = datasetToTitle(props.dataset)
 </script>
