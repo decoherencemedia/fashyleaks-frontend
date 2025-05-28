@@ -56,14 +56,24 @@
           </q-markup-table>
 
           <div class="row q-col-gutter-sm">
-            <div v-for="n in numberImages" :key="n" class="col-3">
-              <a :href="datum.images[n]" target="_blank">
+            <div
+              v-for="n in numberImages"
+              :key="n"
+              class="col-auto"
+              style="width: 100px; height: 100px"
+            >
+              <a
+                :href="datum.images[n]"
+                target="_blank"
+                style="display: block; width: 100px; height: 100px"
+              >
                 <q-tooltip>{{ imageTooltip(datum.images[n]) }}</q-tooltip>
                 <q-img
                   :src="datum.images[n]"
-                  ratio="1"
-                  class="bg-grey-2"
-                  style="max-height: 100px; max-width: 100px"
+                  style="width: 100%; height: 100%; object-fit: cover"
+                  class="bg-grey-2 q-pa-none q-ma-none"
+                  :ratio="1"
+                  no-spinner
                 />
               </a>
             </div>
@@ -173,6 +183,7 @@ function clearData() {
 function imageTooltip(url) {
   if (url.includes('email')) return 'Image from email address'
   const datasetTitle = datasetToTitle(props.dataset)
+  if (url.includes('cover')) return `Image from ${datasetTitle} cover picture`
   return `Image from ${datasetTitle} profile picture`
 }
 </script>
@@ -181,8 +192,8 @@ function imageTooltip(url) {
 img {
   max-height: 100px;
   max-width: 100px;
-  margin: 0;
-  padding: 0;
+  margin: 0 !important;
+  padding: 0 !important;
   display: block;
 }
 
