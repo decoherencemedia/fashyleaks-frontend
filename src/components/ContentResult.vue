@@ -135,7 +135,21 @@ const route = useRoute()
 
 const showCard = computed(() => props.data && props.data.length > 0)
 const datum = computed(() => {
-  return props.data && props.data.length > 0 ? props.data[0] : {}
+  if (props.data && props.data.length > 0) {
+    const value = props.data[0]
+    if ('country' in value && value.country != null) {
+      value['ip_address'] =
+        [...value.country.toUpperCase()]
+          .map((char) => String.fromCodePoint(0x1f1e6 + char.charCodeAt(0) - 65))
+          .join('') +
+        ' ' +
+        value['ip_address']
+    }
+    delete value.country
+    return value
+  } else {
+    return {}
+  }
 })
 const permalink = computed(() => {
   const path = `/${props.dataset}?tab=${props.collection}&id=${datum.value.id}`

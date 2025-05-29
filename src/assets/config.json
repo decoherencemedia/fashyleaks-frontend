@@ -394,6 +394,10 @@
           "field": "ip_address"
         },
         {
+          "label": "Country",
+          "field": "country"
+        },
+        {
           "label": "Posts",
           "field": "posts"
         },
