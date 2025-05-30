@@ -16,21 +16,28 @@
           </div>
           <div class="foreground-content q-pa-md">
             <div class="row items-start">
-              <div v-if="datum.images" class="q-pr-none">
-                <a :href="datum.images[0]" target="_blank">
-                  <q-tooltip>{{ imageTooltip(datum.images[0]) }}</q-tooltip>
-                  <img
-                    :src="datum.images[0]"
-                    :alt="imageTooltip(datum.images[0])"
-                    style="
-                      max-height: 100px;
-                      max-width: 100px;
-                      border: solid 1px rgba(255, 255, 255, 0.8);
-                    "
-                    class="profile-picture"
-                  />
-                </a>
-              </div>
+              <q-avatar
+                rounded
+                size="100px"
+                style="
+                  border: 1px solid rgba(255, 255, 255, 0.8);
+                  border-radius: 6px;
+                  overflow: hidden;
+                "
+              >
+                <div v-if="datum.images" class="q-pr-none">
+                  <a :href="datum.images[0]" target="_blank">
+                    <q-tooltip>{{ imageTooltip(datum.images[0]) }}</q-tooltip>
+
+                    <img
+                      :src="datum.images[0]"
+                      :alt="imageTooltip(datum.images[0])"
+                      style="height: 100%; width: 100%; object-fit: cover"
+                      class="profile-picture"
+                    />
+                  </a>
+                </div>
+              </q-avatar>
               <div class="col">
                 <div
                   class="text-h5 q-ml-lg q-my-lg"
@@ -233,6 +240,8 @@ function imageTooltip(url) {
   if (url.includes('email')) return 'Image from email address'
   const datasetTitle = datasetToTitle(props.dataset)
   if (url.includes('cover')) return `Image from ${datasetTitle} cover picture`
+  if (url.includes('wayback'))
+    return `Image from ${datasetTitle} profile picture (via Wayback Machine)`
   return `Image from ${datasetTitle} profile picture`
 }
 </script>
