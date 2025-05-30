@@ -32,7 +32,12 @@
                     <img
                       :src="datum.images[0]"
                       :alt="imageTooltip(datum.images[0])"
-                      style="height: 100%; width: 100%; object-fit: cover"
+                      style="
+                        height: 100%;
+                        width: 100%;
+                        object-fit: cover;
+                        background-color: rgba(255, 255, 255, 0.8);
+                      "
                       class="profile-picture"
                     />
                   </a>
