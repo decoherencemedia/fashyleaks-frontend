@@ -5,32 +5,56 @@
     </div>
     <div v-show="showCard">
       <div class="row justify-center q-my-md">
-        <q-card class="q-pa-0" style="max-width: 750px; width: 100%" bordered flat>
-          <div class="row items-start">
-            <div v-if="datum.images" class="q-pr-none">
-              <a :href="datum.images[0]" target="_blank">
-                <q-tooltip>{{ imageTooltip(datum.images[0]) }}</q-tooltip>
-                <img
-                  :src="datum.images[0]"
-                  :alt="imageTooltip(datum.images[0])"
-                  style="max-height: 100px; max-width: 100px"
-                />
-              </a>
-            </div>
-            <div class="col">
-              <div class="text-h5 q-ml-lg q-my-lg" style="">
-                {{ datum[config.resultTitleField[props.collection]] }}
+        <q-card
+          class="q-pa-0 position-relative"
+          style="max-width: 750px; width: 100%"
+          bordered
+          flat
+        >
+          <div v-if="coverImage != ''" ref="container" class="image-crop-window">
+            <img :src="coverImage" alt="Cropped" />
+          </div>
+          <div class="foreground-content q-pa-md">
+            <div class="row items-start">
+              <div v-if="datum.images" class="q-pr-none">
+                <a :href="datum.images[0]" target="_blank">
+                  <q-tooltip>{{ imageTooltip(datum.images[0]) }}</q-tooltip>
+                  <img
+                    :src="datum.images[0]"
+                    :alt="imageTooltip(datum.images[0])"
+                    style="
+                      max-height: 100px;
+                      max-width: 100px;
+                      border: solid 1px rgba(255, 255, 255, 0.8);
+                    "
+                    class="profile-picture"
+                  />
+                </a>
               </div>
-            </div>
-            <div class="col-auto self-start">
-              <q-btn
-                icon="close"
-                flat
-                round
-                dense
-                @click="clearData"
-                aria-label="Close user information"
-              />
+              <div class="col">
+                <div
+                  class="text-h5 q-ml-lg q-my-lg"
+                  style="
+                    background-color: rgba(255, 255, 255, 0.8);
+                    display: inline-block;
+                    padding: 4px 8px;
+                    border-radius: 6px;
+                  "
+                >
+                  {{ datum[config.resultTitleField[props.collection]] }}
+                </div>
+              </div>
+              <div class="col-auto self-start">
+                <q-btn
+                  icon="close"
+                  flat
+                  round
+                  dense
+                  @click="clearData"
+                  style="background-color: rgba(255, 255, 255, 0.8)"
+                  aria-label="Close user information"
+                />
+              </div>
             </div>
           </div>
 
@@ -55,7 +79,13 @@
             </tbody>
           </q-markup-table>
 
-          <div class="row q-col-gutter-sm">
+          <div
+            class="row q-col-gutter-none q-ml-none q-pb-none"
+            :style="{
+              backgroundColor:
+                displayFields.length % 2 === 0 ? 'rgba(0, 0, 0, 0.2)' : 'rgba(255, 255, 255, 1)',
+            }"
+          >
             <div
               v-for="n in numberImages"
               :key="n"
@@ -151,6 +181,11 @@ const datum = computed(() => {
     return {}
   }
 })
+const coverImage = computed(() => {
+  const images = datum.value.images || []
+  return images.find((img) => img.toLowerCase().includes('cover')) || ''
+})
+
 const permalink = computed(() => {
   const path = `/${props.dataset}?tab=${props.collection}&id=${datum.value.id}`
   return window.location.origin + path
@@ -203,7 +238,7 @@ function imageTooltip(url) {
 </script>
 
 <style scoped>
-img {
+.profile-picture {
   max-height: 100px;
   max-width: 100px;
   margin: 0 !important;
@@ -222,5 +257,31 @@ a {
   white-space: normal;
   word-break: break-word;
   overflow-wrap: anywhere;
+}
+
+.image-crop-window {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 150px; /* adjust to control visible area */
+  overflow: hidden;
+  z-index: 0;
+}
+
+.image-crop-window img {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.foreground-content {
+  position: relative;
+  z-index: 1;
 }
 </style>
