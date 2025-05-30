@@ -5,9 +5,7 @@
     "totalVisible": 5
   },
   "collections": {
-    "iron-march": ["messages", "posts", "threads", "users"],
-    "fascist-forge": ["posts", "threads", "users"],
-    "rope-culture": ["articles", "comments", "users", "commenters", "emails"]
+    "iron-march": ["messages", "posts", "threads", "users"]
   },
   "fields": {
     "posts": [
@@ -118,139 +116,25 @@
         "label": "Article ID",
         "variable": "id"
       }
-    ],
-    "comments": [
-      {
-        "label": "Search Term",
-        "variable": "term"
-      },
-      {
-        "label": "Commenter Name or Email",
-        "variable": "user_email",
-        "component": "AutocompleteField",
-        "additional": {
-          "type": "commenters"
-        }
-      },
-      {
-        "label": "Article ID",
-        "variable": "article_id"
-      },
-      {
-        "label": "Parent ID",
-        "variable": "parent_id"
-      },
-      {
-        "label": "Comment ID",
-        "variable": "id"
-      }
-    ],
-    "commenters": [
-      {
-        "label": "Commenter Name or Email",
-        "variable": "id",
-        "component": "AutocompleteField",
-        "additional": {
-          "type": "commenters"
-        }
-      }
-    ],
-    "emails": [
-      {
-        "label": "Search Term",
-        "variable": "term"
-      },
-      {
-        "label": "Email Address 1",
-        "variable": "address_1",
-        "component": "AutocompleteField",
-        "additional": {
-          "type": "addresses"
-        }
-      },
-      {
-        "label": "Email Address 2",
-        "variable": "address_2",
-        "component": "AutocompleteField",
-        "additional": {
-          "type": "addresses"
-        }
-      },
-      {
-        "label": "Conversation ID",
-        "variable": "conversation_id"
-      },
-      {
-        "label": "Email ID",
-        "variable": "id"
-      }
     ]
   },
   "lists": {
-    "iron-march": ["users", "thread_categories", "user_table"],
-    "fascist-forge": ["users", "thread_categories", "user_table"],
-    "rope-culture": ["users", "commenters", "addresses", "user_table", "commenter_table"]
+    "iron-march": ["users", "thread_categories", "user_table"]
   },
-  "singleCollections": ["users", "commenters"],
+  "singleCollections": ["users"],
   "autocompletes": {
     "users": {
       "label": "User Name or ID",
       "itemText": "user_name",
       "itemValue": "id"
     },
-    "commenters": {
-      "label": "Commenter Name or Email",
-      "itemText": "author_name",
-      "itemValue": "id"
-    },
     "thread_categories": {
       "label": "Thread Category",
       "itemText": "category",
       "itemValue": "category"
-    },
-    "addresses": {
-      "label": "Email Address",
-      "itemText": "address",
-      "itemValue": "address"
     }
   },
   "resultFields": {
-    "fascist-forge": {
-      "users": [
-        {
-          "text": "User ID",
-          "property": "id"
-        },
-        {
-          "text": "Age",
-          "property": "age"
-        },
-        {
-          "text": "Ideology",
-          "property": "ideology"
-        },
-        {
-          "text": "Religion",
-          "property": "religion"
-        },
-        {
-          "text": "Posts",
-          "property": "posts",
-          "link": {
-            "path": "/fascist-forge?tab=posts&user_id=",
-            "field": "id"
-          }
-        },
-        {
-          "text": "Threads",
-          "property": "threads",
-          "link": {
-            "path": "/fascist-forge?tab=threads&user_id=",
-            "field": "id"
-          }
-        }
-      ]
-    },
     "iron-march": {
       "users": [
         {
@@ -298,74 +182,12 @@
           }
         }
       ]
-    },
-    "rope-culture": {
-      "users": [
-        {
-          "text": "User ID",
-          "property": "id"
-        },
-        {
-          "text": "Other Names",
-          "property": "other_user_names"
-        },
-        {
-          "text": "Email",
-          "property": "email"
-        },
-        {
-          "text": "Password",
-          "property": "password"
-        },
-        {
-          "text": "Iron March User ID",
-          "property": "im_user_id",
-          "link": {
-            "path": "/iron-march?tab=users&id=",
-            "field": "im_user_id"
-          }
-        }
-      ],
-      "commenters": [
-        {
-          "text": "Email",
-          "property": "id"
-        },
-        {
-          "text": "Other Names",
-          "property": "other_author_names"
-        },
-        {
-          "text": "IP Address",
-          "property": "author_ip"
-        },
-        {
-          "text": "Comments",
-          "property": "comments",
-          "link": {
-            "path": "/rope-culture?tab=comments&user_email=",
-            "field": "id"
-          }
-        },
-        {
-          "text": "Iron March User ID",
-          "property": "im_user_id",
-          "link": {
-            "path": "/iron-march?tab=users&id=",
-            "field": "im_user_id"
-          }
-        }
-      ]
     }
   },
   "resultTitleField": {
-    "users": "user_name",
-    "commenters": "author_name"
+    "users": "user_name"
   },
-  "useMarkdown": {
-    "fascist-forge": ["posts"],
-    "rope-culture": ["comments", "emails"]
-  },
+  "useMarkdown": {},
   "headers": {
     "iron-march": {
       "users": [
@@ -408,92 +230,6 @@
         {
           "label": "Messages",
           "field": "messages"
-        }
-      ]
-    },
-    "fascist-forge": {
-      "users": [
-        {
-          "label": "User ID",
-          "field": "id"
-        },
-        {
-          "label": "Name",
-          "field": "user_name"
-        },
-        {
-          "label": "Other Names",
-          "field": "other_user_names"
-        },
-        {
-          "label": "Age",
-          "field": "age"
-        },
-        {
-          "label": "Ideology",
-          "field": "ideology"
-        },
-        {
-          "label": "Religion",
-          "field": "religion"
-        },
-        {
-          "label": "Posts",
-          "field": "posts"
-        },
-        {
-          "label": "Threads",
-          "field": "threads"
-        }
-      ]
-    },
-    "rope-culture": {
-      "users": [
-        {
-          "label": "User ID",
-          "field": "id"
-        },
-        {
-          "label": "User Name",
-          "field": "user_name"
-        },
-        {
-          "label": "Other Names",
-          "field": "other_user_names"
-        },
-        {
-          "label": "Email",
-          "field": "email"
-        },
-        {
-          "label": "Password",
-          "field": "password"
-        }
-      ],
-      "commenters": [
-        {
-          "label": "Name",
-          "field": "author_name"
-        },
-        {
-          "label": "Email Address",
-          "field": "id"
-        },
-        {
-          "label": "Other Names",
-          "field": "other_author_names"
-        },
-        {
-          "label": "IP Address",
-          "field": "author_ip"
-        },
-        {
-          "label": "Comments",
-          "field": "comments"
-        },
-        {
-          "label": "Iron March User ID",
-          "field": "im_user_id"
         }
       ]
     }
