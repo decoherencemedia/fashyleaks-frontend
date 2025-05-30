@@ -16,33 +16,30 @@
           </div>
           <div class="foreground-content q-pa-md">
             <div class="row items-start">
-              <q-avatar
-                rounded
-                size="100px"
+              <a
+                v-if="datum.images"
+                :href="datum.images[0]"
+                target="_blank"
                 style="
                   border: 1px solid rgba(255, 255, 255, 0.8);
                   border-radius: 6px;
                   overflow: hidden;
                 "
               >
-                <div v-if="datum.images" class="q-pr-none">
-                  <a :href="datum.images[0]" target="_blank">
-                    <q-tooltip>{{ imageTooltip(datum.images[0]) }}</q-tooltip>
+                <q-tooltip>{{ imageTooltip(datum.images[0]) }}</q-tooltip>
 
-                    <img
-                      :src="datum.images[0]"
-                      :alt="imageTooltip(datum.images[0])"
-                      style="
-                        height: 100%;
-                        width: 100%;
-                        object-fit: cover;
-                        background-color: rgba(255, 255, 255, 0.8);
-                      "
-                      class="profile-picture"
-                    />
-                  </a>
-                </div>
-              </q-avatar>
+                <img
+                  :src="datum.images[0]"
+                  :alt="imageTooltip(datum.images[0])"
+                  style="
+                    height: 100%;
+                    width: 100%;
+                    object-fit: cover;
+                    background-color: rgba(255, 255, 255, 0.8);
+                  "
+                  class="profile-picture"
+                />
+              </a>
               <div class="col">
                 <div
                   class="text-h5 q-ml-lg q-my-lg"

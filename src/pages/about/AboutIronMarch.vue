@@ -43,7 +43,7 @@
           >several active-duty military personnel</a
         >), and provided an unprecedented look into the mechanics and recruiting strategies of
         modern fascist organizations. <br /><br />
-        Prominent users of Fascist Forge:
+        Prominent users of Iron March:
         <ul class="margin-left">
           <li>
             <a href="https://www.bbc.com/russian/features-51301305">Alisher Mukhitdinov</a>
