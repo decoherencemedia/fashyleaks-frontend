@@ -34,15 +34,11 @@
         </q-card>
       </q-form>
 
-      <q-banner
-        v-if="errorMessage"
-        class="q-mt-md text-white bg-negative"
-        style="text-align: center"
-      >
+      <q-banner v-if="rawError" class="q-mt-md text-white bg-negative" style="text-align: center">
         <template v-slot:avatar>
           <q-icon name="warning" color="white" size="lg" />
         </template>
-        {{ errorMessage }}
+        <div v-html="errorMessageHtml" />
       </q-banner>
     </div>
     <ContentResult
@@ -90,7 +86,12 @@ const store = useFieldStore()
 const route = useRoute()
 const router = useRouter()
 
-const errorMessage = computed(() => store.error?.[props.dataset]?.[props.collection])
+const rawError = computed(() => store.error?.[props.dataset]?.[props.collection] ?? '')
+
+const errorMessageHtml = computed(() => {
+  return rawError.value.replace(/`([^`]+)`/g, '<i>$1</i>')
+})
+
 const results = computed(() => store.results?.[props.dataset]?.[props.collection])
 
 const isSingle = computed(() => config.singleCollections.includes(props.collection))
