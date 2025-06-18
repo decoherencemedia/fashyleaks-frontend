@@ -9,6 +9,7 @@
       :rows="items"
       :rows-per-page="20"
       :loading="loading"
+      no-results-label="No results found"
       loading-label="Fetching data..."
       row-key="name"
       dense
@@ -56,9 +57,6 @@
             </q-item-section>
           </q-item>
         </q-card>
-      </template>
-      <template #no-data>
-        <div>Loading data...</div>
       </template>
     </q-table>
   </div>
@@ -169,11 +167,6 @@ function clickRow(_, row) {
 
 const emit = defineEmits(['clickedRow'])
 
-// function formatDate(dateStr) {
-//   const date = new Date(dateStr)
-//   return date.toLocaleString()
-// }
-
 const title = datasetToTitle(props.dataset)
 </script>
 
@@ -187,5 +180,9 @@ const title = datasetToTitle(props.dataset)
   padding-right: 0px !important;
   padding-top: 0px !important;
   padding-bottom: 0px !important;
+}
+
+::v-deep(.q-table__bottom-nodata-icon) {
+  display: none !important;
 }
 </style>

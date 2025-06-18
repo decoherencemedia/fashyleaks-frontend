@@ -1,5 +1,5 @@
 <template>
-  <div class="row wrapper">
+  <div class="row" :class="wrapperClass">
     <div class="post-info-right">
       <span class="channel-name">
         <RouterLink v-if="authorLink" :to="authorLink">
@@ -26,13 +26,14 @@
           {{ item.posts }}
         </RouterLink>
       </span>
-      <span>Views: {{ item.views }}</span>
+      <span v-if="item.views != null">Views: {{ item.views }}</span>
     </div>
   </div>
 </template>
 
 <script setup>
 import { computed } from 'vue'
+import { useQuasar } from 'quasar'
 
 const props = defineProps({
   item: {
@@ -44,6 +45,8 @@ const props = defineProps({
     default: '',
   },
 })
+
+const $q = useQuasar()
 
 const dateAndTime = computed(() => {
   const parsedDate = new Date(props.item.date)
@@ -58,36 +61,54 @@ const authorLink = computed(() => {
   }
   return null
 })
+
+const wrapperClass = computed(() => {
+  return $q.platform.is.mobile ? 'wrapper-mobile' : 'wrapper-desktop'
+})
 </script>
 
 <style scoped>
-.wrapper {
+.wrapper-desktop {
   display: flex;
-  flex-direction: row; /* Ensures side-by-side layout */
-  gap: 1em; /* Optional spacing between columns */
-  padding-left: 0.5em;
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
-  flex-grow: 0;
-  flex-shrink: 1;
-  overflow: hidden;
+  flex-direction: row;
+  gap: 1em;
+  padding: 0.5em;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+}
+
+.wrapper-mobile {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  padding: 0.5em;
+  min-width: 140px;
 }
 
 .post-info,
 .post-info-right {
   display: flex;
   flex-direction: column;
-  color: #000;
   font-size: 12px;
-  width: 140px;
-  flex-grow: 0;
-  flex-shrink: 0;
-  overflow: hidden;
+  word-break: break-word;
   margin-bottom: 0.5em;
 }
 
-.post-info-right {
-  height: 100%;
+/* Desktop only: fixed width */
+.wrapper-desktop .post-info,
+.wrapper-desktop .post-info-right {
+  min-width: 140px;
+  max-width: 140px;
+  flex: 0 0 auto;
+  overflow: hidden;
+}
+
+/* Mobile: full width */
+.wrapper-mobile .post-info,
+.wrapper-mobile .post-info-right {
+  min-width: 100%;
+  max-width: 100%;
+  flex: 1 1 auto;
 }
 
 .channel-name {
