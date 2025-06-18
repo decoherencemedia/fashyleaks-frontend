@@ -9,7 +9,7 @@
       <div class="text-h6 text-center text-weight-bold q-mb-md">
         <slot name="title" />
       </div>
-      <div class="text-body1 text-justify" style="font-weight: 300">
+      <div class="text-body1 about" style="font-weight: 300">
         <slot name="body" />
       </div>
     </q-card>
@@ -18,10 +18,14 @@
 
 <script setup></script>
 
-<style>
-ul {
-  display: inline-block;
-  text-align: left;
-  text-justify: none;
+<style scoped>
+.about {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+::v-deep(.about ul) {
+  text-align: left !important;
+  text-justify: none !important;
 }
 </style>

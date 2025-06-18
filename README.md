@@ -6,6 +6,9 @@ A Quasar Project
 
 Functionality bugs
 
+- empty fields in FascistForge thread search (https://lobster-app-44fqg.ondigitalocean.app/fascist-forge?tab=threads&term=cult)
+  - format for thread 835 is off
+
 Style
 
 - style warning message with code style instead of ``
