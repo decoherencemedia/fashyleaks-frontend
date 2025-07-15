@@ -157,7 +157,13 @@ function metaTitle() {
   if (tab.value === 'about') {
     return `About ${title}`
   } else {
-    if (!!fields.id && Object.keys(fields).every((key) => key === 'id' || fields[key] === '')) {
+    console.log({ fields })
+    if (
+      !!fields.id &&
+      Object.keys(fields)
+        .filter((key) => key !== 'tab')
+        .every((key) => key === 'id' || fields[key] === '')
+    ) {
       return `${title} ${tab.value.slice(0, -1)} #${fields.id}`
     } else {
       return `Searching ${title} ${tab.value}`
