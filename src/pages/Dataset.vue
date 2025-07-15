@@ -155,7 +155,7 @@ watch(tab, (newTab) => {
 function metaTitle() {
   const fields = route.query
   if (tab.value === 'about') {
-    return `Decoherence Archive | About ${title}`
+    return `About ${title}`
   } else {
     if (!!fields.id && Object.keys(fields).every((key) => key === 'id' || fields[key] === '')) {
       return `${title} ${tab.value.slice(0, -1)} #${fields.id}`
@@ -168,6 +168,8 @@ function metaTitle() {
 useMeta(() => {
   return {
     title: metaTitle(),
+    ogTitle: { name: 'og:title', content: metaTitle() },
+    description: 'This is the description of a dataset',
   }
 })
 </script>
