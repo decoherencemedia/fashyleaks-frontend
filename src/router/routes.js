@@ -26,17 +26,8 @@ const routerOptions = [
   },
   {
     path: '/about',
-    component: 'About.vue',
-  },
-  {
-    path: '/about',
     component: 'About',
     meta: { title: 'Decoherence Archive | About' },
-  },
-  {
-    path: '/:catchAll(.*)*',
-    component: 'ErrorNotFound',
-    meta: { title: 'Decoherence Archive | Page Not Found' },
   },
 ]
 

@@ -74,7 +74,11 @@ const expanded = ref(false)
 
 const permalink = computed(() => {
   const path = `/${props.dataset}?tab=${props.collection}&id=${props.item.id}`
-  return window.location.origin + path
+  if (typeof window !== 'undefined') {
+    return window.location.origin + path
+  }
+
+  return path
 })
 
 const isOverflowing = computed(() => {

@@ -197,7 +197,11 @@ const coverImage = computed(() => {
 
 const permalink = computed(() => {
   const path = `/${props.dataset}?tab=${props.collection}&id=${datum.value.id}`
-  return window.location.origin + path
+  if (typeof window !== 'undefined') {
+    return window.location.origin + path
+  }
+
+  return path
 })
 const displayImages = computed(() => datum.value.images && datum.value.images.length > 1)
 const numberImages = computed(() => (datum.value.images?.length || 1) - 1)

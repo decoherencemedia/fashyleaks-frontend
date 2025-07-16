@@ -96,7 +96,9 @@ const length = computed(() => {
 })
 
 const clientOffset = computed(() => {
-  setTimeout(() => window.scrollTo({ top: 0, behavior: 'auto' }), 10)
+  if (typeof window !== 'undefined') {
+    setTimeout(() => window.scrollTo({ top: 0, behavior: 'auto' }), 10)
+  }
   const serverPage = store.pagination[props.dataset]?.[props.collection] || 1
   const offset = store.offsets[props.dataset]?.[props.collection] || 0
   return (serverPage - 1) * config.pagination.resultsPerPage - offset
