@@ -11,7 +11,7 @@
       <q-btn
         class="mb-1"
         size="sm"
-        color="secondary"
+        color="info"
         @click="copyPermalink"
         label="Permalink"
         icon="link"

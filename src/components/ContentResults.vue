@@ -7,7 +7,7 @@
         class="top-pagination"
         :max="length"
         :max-pages="config.pagination.totalVisible"
-        color="secondary"
+        color="info"
         boundary-numbers
         unelevated
         input
@@ -32,7 +32,7 @@
         :dataset="dataset"
         :collection="collection"
         :use-markdown="useMarkdown"
-        :background-color="index % 2 === 0 ? '#ffffff' : 'rgba(0, 0, 0, .1)'"
+        :background-color="index % 2 === 0 ? '#d2d2d2' : 'rgba(0, 0, 0, .1)'"
       />
     </div>
   </div>
@@ -43,7 +43,7 @@
       class="bottom-pagination"
       :max="length"
       :max-pages="config.pagination.totalVisible"
-      color="secondary"
+      color="info"
       boundary-numbers
       unelevated
       input

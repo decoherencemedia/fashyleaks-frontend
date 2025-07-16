@@ -67,7 +67,7 @@
             </div>
           </div>
 
-          <q-markup-table flat>
+          <q-markup-table flat class="table-section">
             <tbody>
               <tr v-for="item in displayFields" :key="item.text">
                 <td class="wrap-cell text-bold">{{ item.text }}</td>
@@ -92,7 +92,7 @@
             class="row q-col-gutter-none q-ml-none q-pb-none"
             :style="{
               backgroundColor:
-                displayFields.length % 2 === 0 ? 'rgba(0, 0, 0, 0.2)' : 'rgba(255, 255, 255, 1)',
+                displayFields.length % 2 === 0 ? 'rgba(0, 0, 0, 0.2)' : 'rgba(0, 0, 0, 0)',
             }"
           >
             <div
@@ -124,7 +124,7 @@
         <q-btn
           class="mb-1"
           size="md"
-          color="secondary"
+          color="info"
           @click="copyPermalink"
           label="Permalink"
           icon="link"
@@ -279,7 +279,7 @@ a {
   top: 0;
   left: 0;
   width: 100%;
-  height: 150px; /* adjust to control visible area */
+  height: 150px;
   overflow: hidden;
   z-index: 0;
 }
@@ -289,6 +289,7 @@ a {
   height: 100%;
   max-width: none;
   object-fit: cover;
+  display: block;
 }
 
 .position-relative {
@@ -298,5 +299,30 @@ a {
 .foreground-content {
   position: relative;
   z-index: 1;
+  /* Ensure content doesn't overlap with table during SSR hydration */
+  min-height: 150px;
+}
+
+.table-section {
+  position: relative;
+  z-index: 1;
+  /* Prevent SSR hydration layout shift */
+  margin-top: 0;
+}
+
+.cover-image-container {
+  height: 150px;
+  overflow: hidden;
+  position: relative;
+}
+
+.cover-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.content-section {
+  position: relative;
 }
 </style>

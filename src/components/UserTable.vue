@@ -18,7 +18,7 @@
       :filter="search"
       :pagination="{ rowsPerPage: 20 }"
       @row-click="clickRow"
-      color="secondary"
+      color="info"
     >
       <template v-slot:top>
         <div :class="$q.platform.is.mobile ? 'q-pa-xs row justify-center' : 'q-pa-sm row'">
@@ -29,7 +29,7 @@
               outlined
               dense
               clearable
-              color="secondary"
+              color="info"
               class="q-mx-none q-px-none"
               :style="
                 $q.platform.is.mobile ? 'max-width: 100%; width: calc(100vw - 8px)' : 'width: 400px'

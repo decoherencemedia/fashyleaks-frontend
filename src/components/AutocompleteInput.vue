@@ -16,7 +16,7 @@
     clearable
     dense
     class="q-mx-md full-width"
-    color="secondary"
+    color="info"
     @keyup.enter="emitSendData"
   >
     <template v-slot:option="scope">

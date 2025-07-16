@@ -5,7 +5,7 @@
     @keyup.enter="emitSendData"
     dense
     clearable
-    color="secondary"
+    color="info"
     class="q-mx-md full-width"
     style="min-width: 0"
   />

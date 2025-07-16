@@ -2,7 +2,7 @@
   <!-- Mobile toolbar -->
   <q-toolbar v-if="$q.platform.is.mobile" class="bg-primary text-accent">
     <q-btn no-caps flat stretch to="/" title="Decoherence Archive Home" class="q-px-none">
-      <img src="@/assets/logo.svg" alt="icon" style="height: 50px" />
+      <img src="@/assets/logo_1.svg" alt="icon" style="height: 50px" />
     </q-btn>
     <q-space> </q-space>
     <q-btn flat round dense icon="menu" stretch tab aria-label="Menu">
@@ -51,7 +51,7 @@
   <!-- Non-mobile toolbar -->
   <q-toolbar v-else class="bg-primary">
     <q-btn flat to="/">
-      <img src="@/assets/logo.svg" alt="icon" style="height: 50px" />
+      <img src="@/assets/logo_1.svg" alt="icon" style="height: 50px" />
     </q-btn>
 
     <q-space />
@@ -144,7 +144,9 @@ const menuItems = [
 tbody tr:nth-of-type(odd) {
   background-color: rgba(0, 0, 0, 0.1);
 }
-
+/* body {
+  background-color: #ff0000;
+} */
 /* .q-btn {
   font-weight: 400;
   letter-spacing: 0.0892857143em;

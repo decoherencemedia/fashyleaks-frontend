@@ -21,7 +21,7 @@
 
               <q-btn
                 :class="$q.platform.is.mobile ? 'col-auto q-ml-none' : 'col-auto q-ml-md'"
-                color="secondary"
+                color="info"
                 label="Search"
                 @click="sendData"
                 :title="`Search for ${collection} matching query`"

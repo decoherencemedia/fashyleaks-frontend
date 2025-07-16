@@ -2,7 +2,7 @@
   <div class="row justify-center q-mt-xl q-px-md">
     <q-card
       class="q-pa-md"
-      style="width: 100%; max-width: 750px; border: 1px solid rgba(0, 0, 0, 0.24)"
+      style="width: 100%; max-width: 750px; border: 1px solid rgba(0, 0, 0, 0.36)"
       flat
       bordered
     >
