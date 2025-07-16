@@ -39,7 +39,6 @@
 </template>
 
 <script setup>
-// import { ref, watch, onMounted, markRaw, computed } from 'vue'
 import { ref, watch, onMounted, markRaw } from 'vue'
 
 import config from '@/assets/config.json'
@@ -152,12 +151,25 @@ watch(tab, (newTab) => {
   }
 })
 
+function metaDescription() {
+  if (tab.value === 'about') {
+    if (props.dataset === 'iron-march') {
+      return `IronMarch.org was a neo-Nazi forum founded by Uzbek Russian Alisher "Slavros" Mukhitdinov in 2011, which significantly influenced the international neo-Nazi community.`
+    } else if (props.dataset === 'rope-culture') {
+      return `Rope Culture was the neo-Nazi forum Iron March's in-house online magazine. Prominent users contributed to it, providing longer-form articles and podcast.`
+    } else if (props.dataset === 'fascist-forge') {
+      return `FascistForge.com was a neo-Nazi forum founded by American "The Base" member Matthew "Mathias" Baccari in May 2018 that was taken offline in February 2020.`
+    }
+  } else {
+    return `FashyLeaks is an easy-to-use advanced search interface for Nazi forum datasets, including Fascist Forge and Iron March.`
+  }
+}
+
 function metaTitle() {
   const fields = route.query
   if (tab.value === 'about') {
     return `About ${title}`
   } else {
-    console.log({ fields })
     if (
       !!fields.id &&
       Object.keys(fields)
@@ -174,8 +186,11 @@ function metaTitle() {
 useMeta(() => {
   return {
     title: metaTitle(),
-    ogTitle: { name: 'og:title', content: metaTitle() },
-    description: 'This is the description of a dataset',
+    meta: {
+      ogTitle: { property: 'og:title', content: metaTitle() },
+      description: { name: 'description', content: metaDescription() },
+      ogDescription: { property: 'og:description', content: metaDescription() },
+    },
   }
 })
 </script>
