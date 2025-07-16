@@ -43,7 +43,7 @@
         <q-card
           flat
           bordered
-          :class="props.rowIndex % 2 === 0 ? 'bg-grey-5' : 'bg-white'"
+          :class="props.rowIndex % 2 === 0 ? 'light-card' : 'dark-card'"
           class="q-ma-xs"
           style="width: 100%"
           @click="clickRow(null, props.row)"
@@ -184,5 +184,13 @@ const title = datasetToTitle(props.dataset)
 
 ::v-deep(.q-table__bottom-nodata-icon) {
   display: none !important;
+}
+
+.dark-card {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.light-card {
+  background-color: rgba(0, 0, 0, 0);
 }
 </style>
