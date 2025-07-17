@@ -2,11 +2,11 @@
   <div class="pagination-and-divider">
     <div class="row justify-center">
       <q-pagination
-        v-if="props.data.length > config.pagination.resultsPerPage"
+        v-if="props.data.length > resultsPerPage"
         v-model="page"
         class="top-pagination"
         :max="length"
-        :max-pages="config.pagination.totalVisible"
+        :max-pages="totalVisible"
         color="info"
         boundary-numbers
         unelevated
@@ -14,7 +14,7 @@
       />
       <div v-else-if="props.data.length > 0" class="top-pagination" />
       <div
-        v-if="props.data.length < config.pagination.resultsPerPage"
+        v-if="props.data.length < resultsPerPage"
         class="top-pagination-placeholder"
       />
     </div>
@@ -42,7 +42,7 @@
       v-model="page"
       class="bottom-pagination"
       :max="length"
-      :max-pages="config.pagination.totalVisible"
+      :max-pages="totalVisible"
       color="info"
       boundary-numbers
       unelevated
@@ -55,7 +55,7 @@
 import { ref, computed, watch } from 'vue'
 import { useFieldStore } from '@/stores/FieldStore'
 import ContentBox from './ContentBox.vue'
-import config from '@/assets/config.json'
+import { getPaginationConfig } from 'src/utils/configHelper'
 
 const props = defineProps({
   data: {
@@ -92,20 +92,26 @@ watch(page, (value) => {
 
 const length = computed(() => {
   const count = store.counts[props.dataset]?.[props.collection] || 0
-  return props.data.length > 0 ? Math.ceil(count / config.pagination.resultsPerPage) : 0
+  return props.data.length > 0 ? Math.ceil(count / resultsPerPage) : 0
 })
+
+const paginationConfig = getPaginationConfig();
+const resultsPerPage = paginationConfig.resultsPerPage;
+const batchSize = paginationConfig.batchSize;
+const totalVisible = paginationConfig.totalVisible;
 
 const clientOffset = computed(() => {
   if (typeof window !== 'undefined') {
     setTimeout(() => window.scrollTo({ top: 0, behavior: 'auto' }), 10)
   }
+
   const serverPage = store.pagination[props.dataset]?.[props.collection] || 1
   const offset = store.offsets[props.dataset]?.[props.collection] || 0
-  return (serverPage - 1) * config.pagination.resultsPerPage - offset
+  return (serverPage - 1) * resultsPerPage - offset
 })
 
 const pagedData = computed(() => {
-  return props.data.slice(clientOffset.value, clientOffset.value + config.pagination.resultsPerPage)
+  return props.data.slice(clientOffset.value, clientOffset.value + resultsPerPage)
 })
 
 function updateServerPagination(value) {
@@ -117,18 +123,18 @@ function updateServerPagination(value) {
 
   if (
     value > currentValue &&
-    value >= (offset + config.pagination.batchSize) / config.pagination.resultsPerPage + 1
+    value >= (offset + batchSize) / resultsPerPage + 1
   ) {
     newOffset =
       value - currentValue === 1
-        ? offset + config.pagination.batchSize
-        : (value - 1) * config.pagination.resultsPerPage
+        ? offset + batchSize
+        : (value - 1) * resultsPerPage
     needToFetch = true
-  } else if (value < currentValue && value <= offset / config.pagination.resultsPerPage) {
+  } else if (value < currentValue && value <= offset / resultsPerPage) {
     newOffset =
       currentValue - value === 1
-        ? offset - config.pagination.batchSize
-        : (value - 1) * config.pagination.resultsPerPage
+        ? offset - batchSize
+        : (value - 1) * resultsPerPage
     needToFetch = true
   }
 

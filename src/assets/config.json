@@ -1,501 +1,350 @@
 {
-  "pagination": {
-    "batchSize": 1000,
-    "resultsPerPage": 100,
-    "totalVisible": 5
-  },
-  "collections": {
-    "iron-march": ["messages", "posts", "threads", "users"],
-    "fascist-forge": ["posts", "threads", "users"],
-    "rope-culture": ["articles", "comments", "users", "commenters", "emails"]
-  },
-  "fields": {
-    "posts": [
-      {
-        "label": "Search Term",
-        "variable": "term"
-      },
-      {
-        "label": "User Name or ID",
-        "variable": "user_id",
-        "component": "AutocompleteField",
-        "additional": {
-          "type": "users"
+    "pagination": {
+        "batchSize": 1000,
+        "resultsPerPage": 100,
+        "totalVisible": 5
+    },
+    "datasets": {
+        "iron-march": {
+            "collections": [
+                "messages",
+                "posts",
+                "threads",
+                "users"
+            ],
+            "lists": [
+                "users",
+                "thread_categories",
+                "user_table"
+            ]
+        },
+        "fascist-forge": {
+            "collections": [
+                "posts",
+                "threads",
+                "users"
+            ],
+            "lists": [
+                "users",
+                "thread_categories",
+                "user_table"
+            ],
+            "useMarkdown": [
+                "posts"
+            ]
+        },
+        "rope-culture": {
+            "collections": [
+                "articles",
+                "comments",
+                "users",
+                "commenters",
+                "emails"
+            ],
+            "lists": [
+                "users",
+                "commenters",
+                "addresses",
+                "user_table",
+                "commenter_table"
+            ],
+            "useMarkdown": [
+                "comments",
+                "emails"
+            ]
         }
-      },
-      {
-        "label": "Thread ID",
-        "variable": "thread_id"
-      },
-      {
-        "label": "Thread Category",
-        "variable": "thread_category",
-        "component": "AutocompleteField",
-        "additional": {
-          "type": "thread_categories"
+    },
+    "fieldTypes": {
+        "term": {
+            "component": "TextInput",
+            "label": "Search Term"
+        },
+        "user_id": {
+            "component": "AutocompleteInput",
+            "label": "User Name or ID",
+            "autocomplete": "users"
+        },
+        "user_id_1": {
+            "component": "AutocompleteInput",
+            "label": "User Name or ID 1",
+            "autocomplete": "users"
+        },
+        "user_id_2": {
+            "component": "AutocompleteInput",
+            "label": "User Name or ID 2",
+            "autocomplete": "users"
+        },
+        "thread_id": {
+            "component": "TextInput",
+            "label": "Thread ID"
+        },
+        "thread_category": {
+            "component": "AutocompleteInput",
+            "label": "Thread Category",
+            "autocomplete": "thread_categories"
+        },
+        "category": {
+            "component": "AutocompleteInput",
+            "label": "Thread Category",
+            "autocomplete": "thread_categories"
+        },
+        "conversation_id": {
+            "component": "TextInput",
+            "label": "Conversation ID"
+        },
+        "user_email": {
+            "component": "AutocompleteInput",
+            "label": "Commenter Name or Email",
+            "autocomplete": "commenters"
+        },
+        "article_id": {
+            "component": "TextInput",
+            "label": "Article ID"
+        },
+        "parent_id": {
+            "component": "TextInput",
+            "label": "Parent ID"
+        },
+        "address_1": {
+            "component": "AutocompleteInput",
+            "label": "Email Address 1",
+            "autocomplete": "addresses"
+        },
+        "address_2": {
+            "component": "AutocompleteInput",
+            "label": "Email Address 2",
+            "autocomplete": "addresses"
+        },
+        "id": {
+            "component": "TextInput",
+            "label": "ID"
         }
-      },
-      {
-        "label": "Post ID",
-        "variable": "id"
-      }
-    ],
-    "threads": [
-      {
-        "label": "Title Search Term",
-        "variable": "term"
-      },
-      {
-        "label": "User Name or ID",
-        "variable": "user_id",
-        "component": "AutocompleteField",
-        "additional": {
-          "type": "users"
+    },
+    "collections": {
+        "posts": {
+            "fields": [
+                "term",
+                "user_id",
+                "thread_id",
+                "thread_category",
+                "id"
+            ]
+        },
+        "threads": {
+            "fields": [
+                "term",
+                "user_id",
+                "category",
+                "id"
+            ]
+        },
+        "messages": {
+            "fields": [
+                "term",
+                "user_id_1",
+                "user_id_2",
+                "conversation_id",
+                "id"
+            ]
+        },
+        "users": {
+            "fields": []
+        },
+        "articles": {
+            "fields": [
+                "term",
+                "user_id",
+                "id"
+            ]
+        },
+        "comments": {
+            "fields": [
+                "term",
+                "user_email",
+                "article_id",
+                "parent_id",
+                "id"
+            ]
+        },
+        "commenters": {
+            "fields": [
+                "user_email"
+            ]
+        },
+        "emails": {
+            "fields": [
+                "term",
+                "address_1",
+                "address_2",
+                "conversation_id",
+                "id"
+            ]
         }
-      },
-      {
-        "label": "Thread Category",
-        "variable": "category",
-        "component": "AutocompleteField",
-        "additional": {
-          "type": "thread_categories"
+    },
+    "autocompletes": {
+        "users": {
+            "label": "User Name or ID",
+            "itemText": "user_name",
+            "itemValue": "id"
+        },
+        "commenters": {
+            "label": "Commenter Name or Email",
+            "itemText": "author_name",
+            "itemValue": "id"
+        },
+        "thread_categories": {
+            "label": "Thread Category",
+            "itemText": "category",
+            "itemValue": "category"
+        },
+        "addresses": {
+            "label": "Email Address",
+            "itemText": "address",
+            "itemValue": "address"
         }
-      },
-      {
-        "label": "Thread ID",
-        "variable": "id"
-      }
-    ],
-    "messages": [
-      {
-        "label": "Search Term",
-        "variable": "term"
-      },
-      {
-        "label": "User Name or ID 1",
-        "variable": "user_id_1",
-        "component": "AutocompleteField",
-        "additional": {
-          "type": "users"
+    },
+    "fieldDefinitions": {
+        "common": {
+            "id": {
+                "text": "User ID",
+                "property": "id"
+            },
+            "user_name": {
+                "text": "Name",
+                "property": "user_name"
+            },
+            "other_user_names": {
+                "text": "Other Names",
+                "property": "other_user_names"
+            },
+            "email": {
+                "text": "Email",
+                "property": "email"
+            },
+            "joined_date": {
+                "text": "Joined",
+                "property": "joined_date"
+            },
+            "ip_address": {
+                "text": "IP Address",
+                "property": "ip_address"
+            },
+            "country": {
+                "text": "Country",
+                "property": "country"
+            },
+            "posts": {
+                "text": "Posts",
+                "property": "posts",
+                "link": {
+                    "template": "/{dataset}?tab=posts&user_id={value}"
+                }
+            },
+            "threads": {
+                "text": "Threads",
+                "property": "threads",
+                "link": {
+                    "template": "/{dataset}?tab=threads&user_id={value}"
+                }
+            },
+            "messages": {
+                "text": "Messages",
+                "property": "messages",
+                "link": {
+                    "template": "/{dataset}?tab=messages&user_id_1={value}"
+                }
+            }
+        },
+        "fascist-forge": {
+            "age": {
+                "text": "Age",
+                "property": "age"
+            },
+            "ideology": {
+                "text": "Ideology",
+                "property": "ideology"
+            },
+            "religion": {
+                "text": "Religion",
+                "property": "religion"
+            }
+        },
+        "rope-culture": {
+            "password": {
+                "text": "Password",
+                "property": "password"
+            },
+            "im_user_id": {
+                "text": "Iron March User ID",
+                "property": "im_user_id",
+                "link": {
+                    "template": "/iron-march?tab=users&id={value}"
+                }
+            },
+            "author_name": {
+                "text": "Name",
+                "property": "author_name"
+            },
+            "other_author_names": {
+                "text": "Other Names",
+                "property": "other_author_names"
+            },
+            "author_ip": {
+                "text": "IP Address",
+                "property": "author_ip"
+            },
+            "comments": {
+                "text": "Comments",
+                "property": "comments",
+                "link": {
+                    "template": "/rope-culture?tab=comments&user_email={value}"
+                }
+            }
         }
-      },
-      {
-        "label": "User Name or ID 2",
-        "variable": "user_id_2",
-        "component": "AutocompleteField",
-        "additional": {
-          "type": "users"
+    },
+    "tableHeaders": {
+        "users": {
+            "common": [
+                "id",
+                "user_name",
+                "other_user_names",
+                "email",
+                "joined_date",
+                "ip_address",
+                "country",
+                "posts",
+                "threads"
+            ],
+            "fascist-forge": [
+                "age",
+                "ideology",
+                "religion"
+            ],
+            "rope-culture": [
+                "password",
+                "im_user_id"
+            ],
+            "iron-march": [
+                "messages"
+            ]
+        },
+        "commenters": {
+            "rope-culture": [
+                "author_name",
+                "id",
+                "other_author_names",
+                "author_ip",
+                "comments",
+                "im_user_id"
+            ]
         }
-      },
-      {
-        "label": "Conversation ID",
-        "variable": "conversation_id"
-      },
-      {
-        "label": "Message ID",
-        "variable": "id"
-      }
-    ],
-    "users": [],
-    "articles": [
-      {
-        "label": "Search Term",
-        "variable": "term"
-      },
-      {
-        "label": "Title Search Term",
-        "variable": "title_term"
-      },
-      {
-        "label": "User Name or ID",
-        "variable": "user_id",
-        "component": "AutocompleteField",
-        "additional": {
-          "type": "users"
-        }
-      },
-      {
-        "label": "Article ID",
-        "variable": "id"
-      }
-    ],
-    "comments": [
-      {
-        "label": "Search Term",
-        "variable": "term"
-      },
-      {
-        "label": "Commenter Name or Email",
-        "variable": "user_email",
-        "component": "AutocompleteField",
-        "additional": {
-          "type": "commenters"
-        }
-      },
-      {
-        "label": "Article ID",
-        "variable": "article_id"
-      },
-      {
-        "label": "Parent ID",
-        "variable": "parent_id"
-      },
-      {
-        "label": "Comment ID",
-        "variable": "id"
-      }
-    ],
-    "commenters": [
-      {
-        "label": "Commenter Name or Email",
-        "variable": "id",
-        "component": "AutocompleteField",
-        "additional": {
-          "type": "commenters"
-        }
-      }
-    ],
-    "emails": [
-      {
-        "label": "Search Term",
-        "variable": "term"
-      },
-      {
-        "label": "Email Address 1",
-        "variable": "address_1",
-        "component": "AutocompleteField",
-        "additional": {
-          "type": "addresses"
-        }
-      },
-      {
-        "label": "Email Address 2",
-        "variable": "address_2",
-        "component": "AutocompleteField",
-        "additional": {
-          "type": "addresses"
-        }
-      },
-      {
-        "label": "Conversation ID",
-        "variable": "conversation_id"
-      },
-      {
-        "label": "Email ID",
-        "variable": "id"
-      }
+    },
+    "resultTitles": {
+        "users": "user_name",
+        "commenters": "author_name"
+    },
+    "singleCollections": [
+        "users",
+        "commenters"
     ]
-  },
-  "lists": {
-    "iron-march": ["users", "thread_categories", "user_table"],
-    "fascist-forge": ["users", "thread_categories", "user_table"],
-    "rope-culture": ["users", "commenters", "addresses", "user_table", "commenter_table"]
-  },
-  "singleCollections": ["users", "commenters"],
-  "autocompletes": {
-    "users": {
-      "label": "User Name or ID",
-      "itemText": "user_name",
-      "itemValue": "id"
-    },
-    "commenters": {
-      "label": "Commenter Name or Email",
-      "itemText": "author_name",
-      "itemValue": "id"
-    },
-    "thread_categories": {
-      "label": "Thread Category",
-      "itemText": "category",
-      "itemValue": "category"
-    },
-    "addresses": {
-      "label": "Email Address",
-      "itemText": "address",
-      "itemValue": "address"
-    }
-  },
-  "resultFields": {
-    "fascist-forge": {
-      "users": [
-        {
-          "text": "User ID",
-          "property": "id"
-        },
-        {
-          "text": "Age",
-          "property": "age"
-        },
-        {
-          "text": "Ideology",
-          "property": "ideology"
-        },
-        {
-          "text": "Religion",
-          "property": "religion"
-        },
-        {
-          "text": "Posts",
-          "property": "posts",
-          "link": {
-            "path": "/fascist-forge?tab=posts&user_id=",
-            "field": "id"
-          }
-        },
-        {
-          "text": "Threads",
-          "property": "threads",
-          "link": {
-            "path": "/fascist-forge?tab=threads&user_id=",
-            "field": "id"
-          }
-        }
-      ]
-    },
-    "iron-march": {
-      "users": [
-        {
-          "text": "User ID",
-          "property": "id"
-        },
-        {
-          "text": "Other Names",
-          "property": "other_user_names"
-        },
-        {
-          "text": "Email",
-          "property": "email"
-        },
-        {
-          "text": "IP Address",
-          "property": "ip_address"
-        },
-        {
-          "text": "Joined",
-          "property": "joined_date"
-        },
-        {
-          "text": "Posts",
-          "property": "posts",
-          "link": {
-            "path": "/iron-march?tab=posts&user_id=",
-            "field": "id"
-          }
-        },
-        {
-          "text": "Threads",
-          "property": "threads",
-          "link": {
-            "path": "/iron-march?tab=threads&user_id=",
-            "field": "id"
-          }
-        },
-        {
-          "text": "Messages",
-          "property": "messages",
-          "link": {
-            "path": "/iron-march?tab=messages&user_id_1=",
-            "field": "id"
-          }
-        }
-      ]
-    },
-    "rope-culture": {
-      "users": [
-        {
-          "text": "User ID",
-          "property": "id"
-        },
-        {
-          "text": "Other Names",
-          "property": "other_user_names"
-        },
-        {
-          "text": "Email",
-          "property": "email"
-        },
-        {
-          "text": "Password",
-          "property": "password"
-        },
-        {
-          "text": "Iron March User ID",
-          "property": "im_user_id",
-          "link": {
-            "path": "/iron-march?tab=users&id=",
-            "field": "im_user_id"
-          }
-        }
-      ],
-      "commenters": [
-        {
-          "text": "Email",
-          "property": "id"
-        },
-        {
-          "text": "Other Names",
-          "property": "other_author_names"
-        },
-        {
-          "text": "IP Address",
-          "property": "author_ip"
-        },
-        {
-          "text": "Comments",
-          "property": "comments",
-          "link": {
-            "path": "/rope-culture?tab=comments&user_email=",
-            "field": "id"
-          }
-        },
-        {
-          "text": "Iron March User ID",
-          "property": "im_user_id",
-          "link": {
-            "path": "/iron-march?tab=users&id=",
-            "field": "im_user_id"
-          }
-        }
-      ]
-    }
-  },
-  "resultTitleField": {
-    "users": "user_name",
-    "commenters": "author_name"
-  },
-  "useMarkdown": {
-    "fascist-forge": ["posts"],
-    "rope-culture": ["comments", "emails"]
-  },
-  "headers": {
-    "iron-march": {
-      "users": [
-        {
-          "label": "User ID",
-          "field": "id"
-        },
-        {
-          "label": "Name",
-          "field": "user_name"
-        },
-        {
-          "label": "Other Names",
-          "field": "other_user_names"
-        },
-        {
-          "label": "Email Address",
-          "field": "email"
-        },
-        {
-          "label": "Joined",
-          "field": "joined_date"
-        },
-        {
-          "label": "IP Address",
-          "field": "ip_address"
-        },
-        {
-          "label": "Country",
-          "field": "country"
-        },
-        {
-          "label": "Posts",
-          "field": "posts"
-        },
-        {
-          "label": "Threads",
-          "field": "threads"
-        },
-        {
-          "label": "Messages",
-          "field": "messages"
-        }
-      ]
-    },
-    "fascist-forge": {
-      "users": [
-        {
-          "label": "User ID",
-          "field": "id"
-        },
-        {
-          "label": "Name",
-          "field": "user_name"
-        },
-        {
-          "label": "Other Names",
-          "field": "other_user_names"
-        },
-        {
-          "label": "Age",
-          "field": "age"
-        },
-        {
-          "label": "Ideology",
-          "field": "ideology"
-        },
-        {
-          "label": "Religion",
-          "field": "religion"
-        },
-        {
-          "label": "Posts",
-          "field": "posts"
-        },
-        {
-          "label": "Threads",
-          "field": "threads"
-        }
-      ]
-    },
-    "rope-culture": {
-      "users": [
-        {
-          "label": "User ID",
-          "field": "id"
-        },
-        {
-          "label": "User Name",
-          "field": "user_name"
-        },
-        {
-          "label": "Other Names",
-          "field": "other_user_names"
-        },
-        {
-          "label": "Email",
-          "field": "email"
-        },
-        {
-          "label": "Password",
-          "field": "password"
-        }
-      ],
-      "commenters": [
-        {
-          "label": "Name",
-          "field": "author_name"
-        },
-        {
-          "label": "Email Address",
-          "field": "id"
-        },
-        {
-          "label": "Other Names",
-          "field": "other_author_names"
-        },
-        {
-          "label": "IP Address",
-          "field": "author_ip"
-        },
-        {
-          "label": "Comments",
-          "field": "comments"
-        },
-        {
-          "label": "Iron March User ID",
-          "field": "im_user_id"
-        }
-      ]
-    }
-  }
 }

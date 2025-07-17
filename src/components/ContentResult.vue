@@ -50,7 +50,7 @@
                     border-radius: 6px;
                   "
                 >
-                  {{ datum[config.resultTitleField[props.collection]] }}
+                  {{ datum[getResultTitleField(props.collection)] }}
                 </div>
               </div>
               <div class="col-auto self-start">
@@ -74,7 +74,7 @@
                 <td class="wrap-cell text-right">
                   <router-link
                     v-if="item.link"
-                    :to="item.link.path + encodeURIComponent(datum[item.link.field])"
+                    :to="item.link.path.replace('{value}', encodeURIComponent(datum.id))"
                   >
                     {{ datum[item.property] }}
                   </router-link>
@@ -142,9 +142,9 @@
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useQuasar } from 'quasar'
-import config from '@/assets/config.json'
 import UserTable from './UserTable.vue'
 import { datasetToTitle } from '@/utils/query.js'
+import { getResultFields, getResultTitleField } from '@/utils/configHelper.js'
 
 const props = defineProps({
   data: {
@@ -207,11 +207,15 @@ const displayImages = computed(() => datum.value.images && datum.value.images.le
 const numberImages = computed(() => (datum.value.images?.length || 1) - 1)
 
 const displayFields = computed(() => {
-  return (
-    config.resultFields[props.dataset]?.[props.collection]?.filter(
-      (f) => datum.value[f.property],
-    ) || []
-  )
+  const allFields = getResultFields(props.dataset, props.collection)
+  const titleField = getResultTitleField(props.collection)
+  // Remove the field used as the card title
+  const filtered = allFields.filter(f => f.property !== titleField)
+  // Partition into non-linked and linked fields
+  const nonLinked = filtered.filter(f => !f.link)
+  const linked = filtered.filter(f => f.link)
+  // Non-linked fields first, then linked fields, but only if datum has a value for the property
+  return [...nonLinked, ...linked].filter(f => datum.value[f.property])
 })
 
 async function copyPermalink() {

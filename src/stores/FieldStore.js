@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import config from '@/assets/config.json'
+import { getCollectionFields, getDatasetCollections, getDatasetLists } from '@/utils/configHelper.js'
 
 const api_url = 'https://api.decoherencemedia.com'
 // const api_url = 'http://localhost:5000/'
@@ -17,14 +17,19 @@ let apiFetch = function (path) {
   })
 }
 
-let createNestedObj = function (object, value, fields) {
+// Helper to get all datasets
+import config from '@/assets/config.json'
+const allDatasets = Object.keys(config.datasets)
+
+function createNestedObjCollections(value, fields) {
   const obj = {}
-  for (const [dataset, collections] of Object.entries(object)) {
+  for (const dataset of allDatasets) {
+    const collections = getDatasetCollections(dataset)
     obj[dataset] = {}
     collections.forEach((collection) => {
       if (fields) {
         obj[dataset][collection] = {}
-        config.fields[collection].forEach((field) => {
+        getCollectionFields(collection).forEach((field) => {
           obj[dataset][collection][field.variable] = value
         })
       } else {
@@ -35,21 +40,33 @@ let createNestedObj = function (object, value, fields) {
   return obj
 }
 
+function createNestedObjLists(value) {
+  const obj = {}
+  for (const dataset of allDatasets) {
+    const lists = getDatasetLists(dataset)
+    obj[dataset] = {}
+    lists.forEach((list) => {
+      obj[dataset][list] = value
+    })
+  }
+  return obj
+}
+
 export const useFieldStore = defineStore('fields', {
   state: () => ({
     activeDataset: null,
     activeTab: null,
-    results: createNestedObj(config.collections, [], false),
-    error: createNestedObj(config.collections, null, false),
-    pagination: createNestedObj(config.collections, 1, false),
-    loading: createNestedObj(config.collections, false, false),
-    fields: createNestedObj(config.collections, '', true),
-    lists: createNestedObj(config.lists, [], false),
-    listsLoading: createNestedObj(config.lists, false, false),
-    listsError: createNestedObj(config.lists, null, false),
-    querystrings: createNestedObj(config.collections, '', false),
-    offsets: createNestedObj(config.collections, 0, false),
-    counts: createNestedObj(config.collections, 0, false),
+    results: createNestedObjCollections([], false),
+    error: createNestedObjCollections(null, false),
+    pagination: createNestedObjCollections(1, false),
+    loading: createNestedObjCollections(false, false),
+    fields: createNestedObjCollections('', true),
+    lists: createNestedObjLists([]),
+    listsLoading: createNestedObjLists(false),
+    listsError: createNestedObjLists(null),
+    querystrings: createNestedObjCollections('', false),
+    offsets: createNestedObjCollections(0, false),
+    counts: createNestedObjCollections(0, false),
   }),
 
   actions: {

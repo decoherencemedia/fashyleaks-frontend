@@ -65,7 +65,7 @@
 <script setup>
 import { computed, ref, onMounted } from 'vue'
 import { useFieldStore } from '@/stores/FieldStore'
-import config from '@/assets/config.json'
+import { getTableHeaders } from '@/utils/configHelper.js'
 import { datasetToTitle } from '@/utils/query.js'
 
 const props = defineProps({
@@ -113,7 +113,7 @@ const items = computed(() => {
 })
 
 const headers = computed(() => {
-  const allHeaders = config.headers[props.dataset][props.collection]
+  const allHeaders = getTableHeaders(props.dataset, props.collection)
 
   const decorateHeader = (header) => {
     const style = 'max-width: 200px; white-space: normal; word-break: break-word;'

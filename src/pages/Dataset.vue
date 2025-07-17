@@ -11,7 +11,7 @@
         style="max-width: 100%"
       >
         <q-tab
-          v-for="collection in config.collections[props.dataset]"
+          v-for="collection in collections"
           :key="collection"
           :name="collection"
           :title="`Search ${title} ${collection}`"
@@ -23,7 +23,7 @@
     </q-toolbar>
     <q-tab-panels v-model="tab">
       <q-tab-panel
-        v-for="collection in config.collections[props.dataset]"
+        v-for="collection in collections"
         :name="collection"
         :key="collection"
         :value="collection"
@@ -41,7 +41,7 @@
 <script setup>
 import { ref, watch, onMounted, markRaw } from 'vue'
 
-import config from '@/assets/config.json'
+import { getDatasetCollections } from '@/utils/configHelper.js'
 import SearchPage from '@/components/SearchPage.vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useFieldStore } from '@/stores/FieldStore'
@@ -57,7 +57,7 @@ const props = defineProps({
 
 const store = useFieldStore()
 
-const collections = config.collections[props.dataset] || []
+const collections = getDatasetCollections(props.dataset)
 const validTabs = [...collections, 'about']
 const defaultTab = collections[0] || 'about'
 
