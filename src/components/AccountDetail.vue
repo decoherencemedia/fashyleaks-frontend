@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-show="!showCard">
-      <UserTable :dataset="dataset" :collection="collection" @clickedRow="clickRow" />
+      <AccountTable :dataset="dataset" :collection="collection" @clickedRow="clickRow" />
     </div>
     <div v-show="showCard">
       <div class="row justify-center q-my-md">
@@ -142,7 +142,7 @@
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { usePermalink } from '@/composables/usePermalink'
-import UserTable from './UserTable.vue'
+import AccountTable from './AccountTable.vue'
 import { datasetToTitle } from '@/utils/query.js'
 import { getResultFields, getResultTitleField } from '@/utils/configHelper.js'
 

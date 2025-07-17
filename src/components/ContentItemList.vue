@@ -27,7 +27,7 @@
 
   <div v-if="!isLoading">
     <div v-for="(item, index) in pagedData" :key="item.id">
-      <ContentBox
+      <ContentItem
         :item="item"
         :dataset="dataset"
         :collection="collection"
@@ -54,7 +54,7 @@
 <script setup>
 import { ref, computed, watch } from 'vue'
 import { useFieldStore } from '@/stores/FieldStore'
-import ContentBox from './ContentBox.vue'
+import ContentItem from './ContentItem.vue'
 import { getPaginationConfig } from 'src/utils/configHelper'
 
 const props = defineProps({

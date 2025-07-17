@@ -41,7 +41,7 @@
         <div v-html="errorMessageHtml" />
       </q-banner>
     </div>
-    <ContentResult
+    <AccountDetail
       v-if="isSingle"
       :data="results"
       :dataset="dataset"
@@ -50,7 +50,7 @@
       @clickedRow="sendData()"
       @clearedData="clearData()"
     />
-    <ContentResults
+    <ContentItemList
       v-else
       :data="results"
       :dataset="dataset"
@@ -58,7 +58,7 @@
       :use-markdown="useMarkdown"
       @fetchMore="handleFetchMore"
     >
-    </ContentResults>
+    </ContentItemList>
   </div>
 </template>
 
@@ -66,8 +66,8 @@
 import { computed, watch, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
-import ContentResult from './ContentResult.vue'
-import ContentResults from './ContentResults.vue'
+import AccountDetail from './AccountDetail.vue'
+import ContentItemList from './ContentItemList.vue'
 import TextInput from './TextInput.vue'
 import AutocompleteInput from './AutocompleteInput.vue'
 import { getCollectionFields, isSingleCollection, usesMarkdown } from '@/utils/configHelper.js'
