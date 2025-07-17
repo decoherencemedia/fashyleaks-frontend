@@ -34,6 +34,8 @@
 <script setup>
 import { computed } from 'vue'
 import { useQuasar } from 'quasar'
+import { useDateAndTime } from '@/composables/useDateAndTime'
+import { useAuthorLink } from '@/composables/useAuthorLink'
 
 const props = defineProps({
   item: {
@@ -47,20 +49,8 @@ const props = defineProps({
 })
 
 const $q = useQuasar()
-
-const dateAndTime = computed(() => {
-  const parsedDate = new Date(props.item.date)
-  return parsedDate.toLocaleString().split(',')
-})
-
-const authorLink = computed(() => {
-  if (props.item.author_id) {
-    return `/${props.dataset}?tab=users&id=${props.item.author_id}`
-  } else if (props.item.author_name) {
-    return `/${props.dataset}?tab=users&name=${props.item.author_name}`
-  }
-  return null
-})
+const dateAndTime = useDateAndTime(props.item)
+const authorLink = useAuthorLink(props.item, props.dataset)
 
 const wrapperClass = computed(() => {
   return $q.platform.is.mobile ? 'wrapper-mobile' : 'wrapper-desktop'

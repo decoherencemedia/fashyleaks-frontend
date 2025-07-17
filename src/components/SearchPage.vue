@@ -99,7 +99,6 @@ const isSingle = computed(() => isSingleCollection(props.collection))
 const useMarkdown = computed(() => usesMarkdown(props.dataset, props.collection))
 
 function determineComponent(item) {
-  // If the item has a 'component' property, use it; otherwise default to TextInput
   return item.component === 'AutocompleteInput' ? AutocompleteInput : TextInput
 }
 

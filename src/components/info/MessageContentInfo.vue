@@ -41,7 +41,8 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { useDateAndTime } from '@/composables/useDateAndTime'
+import { useAuthorLink } from '@/composables/useAuthorLink'
 
 const props = defineProps({
   item: {
@@ -54,28 +55,9 @@ const props = defineProps({
   },
 })
 
-const dateAndTime = computed(() => {
-  const parsedDate = new Date(props.item.date)
-  return parsedDate.toLocaleString().split(',')
-})
-
-const authorLink = computed(() => {
-  if (props.item.msg_author_id) {
-    return `/${props.dataset}?tab=users&id=${props.item.msg_author_id}`
-  } else if (props.item.msg_author_name) {
-    return `/${props.dataset}?tab=users&name=${props.item.msg_author_name}`
-  }
-  return null
-})
-
-const receivedLink = computed(() => {
-  if (props.item.msg_received_id) {
-    return `/${props.dataset}?tab=users&id=${props.item.msg_received_id}`
-  } else if (props.item.msg_received_name) {
-    return `/${props.dataset}?tab=users&name=${props.item.msg_received_name}`
-  }
-  return null
-})
+const dateAndTime = useDateAndTime(props.item)
+const authorLink = useAuthorLink(props.item, props.dataset, { idKey: 'msg_author_id', nameKey: 'msg_author_name' })
+const receivedLink = useAuthorLink(props.item, props.dataset, { idKey: 'msg_received_id', nameKey: 'msg_received_name' })
 </script>
 
 <style scoped>
