@@ -141,7 +141,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useQuasar } from 'quasar'
+import { usePermalink } from '@/composables/usePermalink'
 import UserTable from './UserTable.vue'
 import { datasetToTitle } from '@/utils/query.js'
 import { getResultFields, getResultTitleField } from '@/utils/configHelper.js'
@@ -164,8 +164,6 @@ const props = defineProps({
     default: false,
   },
 })
-
-const $q = useQuasar()
 
 const emit = defineEmits(['clickedRow', 'clearedData'])
 
@@ -195,46 +193,22 @@ const coverImage = computed(() => {
   return images.find((img) => img.toLowerCase().includes('cover')) || ''
 })
 
-const permalink = computed(() => {
-  const path = `/${props.dataset}?tab=${props.collection}&id=${datum.value.id}`
-  if (typeof window !== 'undefined') {
-    return window.location.origin + path
-  }
-
-  return path
-})
+const { copyPermalink } = usePermalink(
+  computed(() => props.dataset),
+  computed(() => props.collection),
+  computed(() => datum.value.id)
+)
 const displayImages = computed(() => datum.value.images && datum.value.images.length > 1)
 const numberImages = computed(() => (datum.value.images?.length || 1) - 1)
 
 const displayFields = computed(() => {
   const allFields = getResultFields(props.dataset, props.collection)
   const titleField = getResultTitleField(props.collection)
-  // Remove the field used as the card title
   const filtered = allFields.filter(f => f.property !== titleField)
-  // Partition into non-linked and linked fields
   const nonLinked = filtered.filter(f => !f.link)
   const linked = filtered.filter(f => f.link)
-  // Non-linked fields first, then linked fields, but only if datum has a value for the property
   return [...nonLinked, ...linked].filter(f => datum.value[f.property])
 })
-
-async function copyPermalink() {
-  try {
-    await navigator.clipboard.writeText(permalink.value)
-    $q.notify({
-      type: 'positive',
-      message: 'Copied to clipboard',
-      timeout: 2000,
-    })
-  } catch (e) {
-    console.log(`Copying permalink failed with error ${e}`)
-    $q.notify({
-      type: 'negative',
-      message: `Copying failed`,
-      timeout: 2000,
-    })
-  }
-}
 
 function clickRow() {
   emit('clickedRow')

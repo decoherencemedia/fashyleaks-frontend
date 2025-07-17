@@ -49,8 +49,8 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-import { useQuasar } from 'quasar'
 import { marked } from 'marked'
+import { usePermalink } from '@/composables/usePermalink'
 import PostContentInfo from './info/PostContentInfo.vue'
 import MessageContentInfo from './info/MessageContentInfo.vue'
 import ThreadContentInfo from './info/ThreadContentInfo.vue'
@@ -66,20 +66,15 @@ const props = defineProps({
   backgroundColor: String,
 })
 
-const $q = useQuasar()
-
 const postSpan = ref(null)
 const isMounted = ref(false)
 const expanded = ref(false)
 
-const permalink = computed(() => {
-  const path = `/${props.dataset}?tab=${props.collection}&id=${props.item.id}`
-  if (typeof window !== 'undefined') {
-    return window.location.origin + path
-  }
-
-  return path
-})
+const { copyPermalink } = usePermalink(
+  computed(() => props.dataset),
+  computed(() => props.collection),
+  computed(() => props.item.id)
+)
 
 const isOverflowing = computed(() => {
   if (!isMounted.value) return false
@@ -98,24 +93,6 @@ const postClass = computed(() => {
 
 function markdown(content) {
   return marked.parseInline(content)
-}
-
-async function copyPermalink() {
-  try {
-    await navigator.clipboard.writeText(permalink.value)
-    $q.notify({
-      type: 'positive',
-      message: 'Copied to clipboard',
-      timeout: 2000,
-    })
-  } catch (e) {
-    console.log(`Copying permalink failed with error ${e}`)
-    $q.notify({
-      type: 'negative',
-      message: `Copying failed`,
-      timeout: 2000,
-    })
-  }
 }
 
 function toggleButton() {
