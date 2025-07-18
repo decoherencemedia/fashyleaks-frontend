@@ -39,3 +39,11 @@ body {
 .q-input--bordered {
   border-color: $border-color;
 }
+
+.q-field__label {
+    color: $primary;
+  }
+
+.q-field__control::before {
+    border-bottom: 1px solid $primary !important;
+}
