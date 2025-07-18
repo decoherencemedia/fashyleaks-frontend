@@ -6,7 +6,7 @@
       <div v-show="showCard">
         <div class="row justify-center q-my-md">
           <q-card
-            class="q-pa-0 position-relative"
+            class="q-pa-none position-relative"
             bordered
             flat
           >
@@ -105,7 +105,7 @@
 
         <div class="row justify-center q-ml-sm q-mt-sm">
           <q-btn
-            class="mb-1"
+            class="q-mb-xs"
             size="md"
             color="info"
             @click="copyPermalink"
@@ -259,7 +259,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 150px;
+    height: 134px;
     overflow: hidden;
     z-index: 0;
   }
@@ -281,19 +281,17 @@
   .foreground-content {
     position: relative;
     z-index: 1;
-    /* Ensure content doesn't overlap with table during SSR hydration */
-    min-height: 150px;
+    min-height: 134px;
   }
 
   .table-section {
     position: relative;
     z-index: 1;
-    /* Prevent SSR hydration layout shift */
     margin-top: 0;
   }
 
   .cover-image-container {
-    height: 150px;
+    height: 134px;
     overflow: hidden;
     position: relative;
   }
@@ -312,10 +310,10 @@
     background-color: $white-semiopaque;
   }
 
-.more-images-odd {
+.more-images-even {
   background-color: $dark-table-row;
 }
-.more-images-even {
+.more-images-odd {
   background-color: transparent;
 }
   </style>

@@ -9,7 +9,7 @@
       <EmailContentInfo v-else-if="collection == 'emails'" :item="item" :dataset="dataset" />
 
       <q-btn
-        class="mb-1"
+        class="q-mb-xs"
         size="sm"
         color="info"
         @click="copyPermalink"
@@ -22,7 +22,7 @@
       </q-btn>
     </div>
 
-    <div class="post-content ml-2">
+    <div class="post-content q-ml-sm">
       <div v-if="item.content && item.content.trim() !== ''" class="post-text">
         <div
           v-if="useMarkdown"
@@ -35,9 +35,9 @@
 
         <q-btn
           v-if="isOverflowing || expanded"
-          class="mb-1"
+          class="q-mb-xs"
           size="sm"
-          color="grey-6"
+          color="info"
           @click="toggleButton"
           :label="buttonText"
           :icon-right="buttonIcon"

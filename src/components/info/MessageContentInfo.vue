@@ -10,7 +10,7 @@
       {{ props.item.msg_author_name || 'Unknown User' }}
     </span>
 
-    <span class="tofrom mt-2">To</span>
+    <span class="tofrom q-mt-xs">To</span>
     <span v-if="receivedLink" class="channel-name">
       <router-link :to="receivedLink">
         {{ props.item.msg_received_name || 'Unknown User' }}
@@ -59,10 +59,3 @@ const dateAndTime = useDateAndTime(props.item)
 const authorLink = useAuthorLink(props.item, props.dataset, { idKey: 'msg_author_id', nameKey: 'msg_author_name' })
 const receivedLink = useAuthorLink(props.item, props.dataset, { idKey: 'msg_received_id', nameKey: 'msg_received_name' })
 </script>
-
-<style scoped>
-.tofrom {
-  font-size: 10px !important;
-  line-height: 1em;
-}
-</style>

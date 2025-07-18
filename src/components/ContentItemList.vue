@@ -180,10 +180,10 @@ function updateServerPagination(value) {
   background-color: $border-color;
 }
 
-.content-item-odd {
+.content-item-even {
   background-color: $dark-table-row;
 }
-.content-item-even {
+.content-item-odd {
   background-color: transparent
 }
 
