@@ -105,7 +105,7 @@
 
         <div class="row justify-center q-ml-sm q-mt-sm">
           <q-btn
-            class="q-mb-xs"
+            class="q-mb-xs rounded-button"
             size="md"
             color="info"
             @click="copyPermalink"
@@ -113,7 +113,6 @@
             icon="link"
             unelevated
             :title="`Copy permanent link to this ${collection.slice(0, -1)}`"
-            style="border-radius: 6px"
           >
           </q-btn>
         </div>
