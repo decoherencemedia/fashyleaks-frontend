@@ -74,8 +74,8 @@
             <div
               class="row q-col-gutter-none q-ml-none q-pb-none"
               :class="{
-                    'more-images-even': displayFields.length % 2 === 0,
-                    'more-images-odd': displayFields.length % 2 !== 0
+                    'dark-table-row': displayFields.length % 2 === 0,
+                    'light-table-row': displayFields.length % 2 !== 0
                 }"
             >
               <div
@@ -309,11 +309,4 @@
   .close-btn {
     background-color: $white-semiopaque;
   }
-
-.more-images-even {
-  background-color: $dark-table-row;
-}
-.more-images-odd {
-  background-color: transparent;
-}
   </style>

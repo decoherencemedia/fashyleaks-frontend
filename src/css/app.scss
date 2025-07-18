@@ -52,8 +52,18 @@ body {
   border-bottom: 1px solid $primary !important;
 }
 
+// Table rows
+
 tbody tr:nth-of-type(odd) {
   background-color: $dark-table-row;
+}
+
+.dark-table-row {
+  background-color: $dark-table-row;
+}
+
+.light-table-row {
+  background-color: transparent;
 }
 
 // Info components

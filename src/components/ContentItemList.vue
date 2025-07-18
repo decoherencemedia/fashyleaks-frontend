@@ -32,7 +32,7 @@
         :dataset="dataset"
         :collection="collection"
         :use-markdown="useMarkdown"
-        :class="index % 2 === 0 ? 'content-item-even' : 'content-item-odd'"
+        :class="index % 2 === 0 ? 'dark-table-row' : 'light-table-row'"
       />
     </div>
   </div>
@@ -179,12 +179,4 @@ function updateServerPagination(value) {
   height: 1px;
   background-color: $border-color;
 }
-
-.content-item-even {
-  background-color: $dark-table-row;
-}
-.content-item-odd {
-  background-color: transparent
-}
-
 </style>
