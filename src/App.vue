@@ -146,4 +146,20 @@ const menuItems = [
 tbody tr:nth-of-type(even) {
   background-color: $dark-table-row;
 }
+
+.channel-name {
+  font-weight: 600;
+}
+
+.post-info {
+  display: flex;
+  flex-direction: column;
+  color: #000;
+  font-size: 12px;
+  width: 140px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  overflow: hidden;
+  margin-bottom: 0.5em;
+}
 </style>

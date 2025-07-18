@@ -53,21 +53,3 @@ const props = defineProps({
 const dateAndTime = useDateAndTime(props.item)
 const authorLink = useAuthorLink(props.item, props.dataset, { idKey: 'author_email', nameKey: 'author_name', tab: 'commenters' })
 </script>
-
-<style scoped>
-.post-info {
-  display: flex;
-  flex-direction: column;
-  color: #000;
-  font-size: 12px;
-  width: 140px;
-  flex-grow: 0;
-  flex-shrink: 0;
-  overflow: hidden;
-  margin-bottom: 0.5em;
-}
-
-.channel-name {
-  font-weight: bold;
-}
-</style>

@@ -195,4 +195,8 @@ const title = datasetToTitle(props.dataset)
 .light-card {
   background-color: transparent;
 }
+
+::v-deep(.q-field__control::before) {
+    border: 1px solid $border-color !important;
+}
 </style>

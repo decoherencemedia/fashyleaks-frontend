@@ -65,20 +65,4 @@ const receivedLink = useAuthorLink(props.item, props.dataset, { idKey: 'msg_rece
   font-size: 10px !important;
   line-height: 1em;
 }
-
-.post-info {
-  display: flex;
-  flex-direction: column;
-  color: #000;
-  font-size: 12px;
-  width: 140px;
-  flex-grow: 0;
-  flex-shrink: 0;
-  overflow: hidden;
-  margin-bottom: 0.5em;
-}
-
-.channel-name {
-  font-weight: bold;
-}
 </style>

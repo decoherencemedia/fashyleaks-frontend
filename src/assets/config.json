@@ -167,9 +167,7 @@
             ]
         },
         "commenters": {
-            "fields": [
-                "user_email"
-            ]
+            "fields": []
         },
         "emails": {
             "fields": [
