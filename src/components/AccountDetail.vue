@@ -217,8 +217,8 @@
   @import  '../css/quasar.variables.scss';
 
   .profile-picture {
-    max-height: 100px;
-    max-width: 100px;
+    max-height: 100px !important;
+    max-width: 100px !important;
     margin: 0 !important;
     padding: 0 !important;
     display: block;
@@ -282,6 +282,7 @@
     position: relative;
     z-index: 1;
     min-height: 134px;
+    max-height: 134px;
   }
 
   .table-section {

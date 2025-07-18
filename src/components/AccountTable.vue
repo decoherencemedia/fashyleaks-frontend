@@ -43,11 +43,21 @@
         <q-card
           flat
           bordered
-          :class="props.rowIndex % 2 === 0 ? 'light-table-row' : 'dark-table-row'"
-          class="q-ma-xs"
+          :class="props.rowIndex % 2 === 0 ? 'dark-table-row' : 'light-table-row'"
+          class="q-ma-xs position-relative"
           style="width: 100%"
           @click="clickRow(null, props.row)"
         >
+          <q-btn
+            v-if="$q.platform.is.mobile"
+            label="More Details"
+            color="info"
+            size="sm"
+            class="more-details-btn"
+            @click.stop="clickRow(null, props.row)"
+            style="position: absolute; top: 8px; right: 8px; z-index: 2"
+            unelevated
+          />
           <q-item class="q-ma-xs q-pa-xs">
             <q-item-section>
               <div v-for="col in props.cols" :key="col.name" class="q-ma-xs">
@@ -189,6 +199,6 @@ const title = datasetToTitle(props.dataset)
 }
 
 ::v-deep(.q-field__control::before) {
-    border: 1px solid $border-color !important;
+  border: 1px solid $border-color !important;
 }
 </style>
