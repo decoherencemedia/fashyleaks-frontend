@@ -1,8 +1,7 @@
 <template>
   <div class="row justify-center q-mt-xl q-px-md">
     <q-card
-      class="q-pa-md"
-      style="width: 100%; max-width: 750px; border: 1px solid rgba(0, 0, 0, 0.36)"
+      class="q-pa-md about-card"
       flat
       bordered
     >
@@ -18,10 +17,17 @@
 
 <script setup></script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '../css/quasar.variables.scss';
+
 .about {
   text-align: justify;
   text-justify: inter-word;
+}
+
+.about-card {
+    max-width: 750px;
+    border: 1px solid $border-color;
 }
 
 ::v-deep(.about ul) {

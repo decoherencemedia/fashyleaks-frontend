@@ -154,11 +154,11 @@ watch(tab, (newTab) => {
 function metaDescription() {
   if (tab.value === 'about') {
     if (props.dataset === 'iron-march') {
-      return `IronMarch.org was a neo-Nazi forum founded by Uzbek Russian Alisher "Slavros" Mukhitdinov in 2011, which significantly influenced the international neo-Nazi community.`
+      return `IronMarch.org was a neo-Nazi forum founded by Uzbek Russian Alisher &quot;Slavros&quot; Mukhitdinov in 2011, which significantly influenced the international neo-Nazi community.`
     } else if (props.dataset === 'rope-culture') {
-      return `Rope Culture was the neo-Nazi forum Iron March's in-house online magazine. Prominent users contributed to it, providing longer-form articles and podcast.`
+      return `Rope Culture was the neo-Nazi forum Iron March&apos;s in-house online magazine. Prominent users contributed to it, providing longer-form articles and podcast.`
     } else if (props.dataset === 'fascist-forge') {
-      return `FascistForge.com was a neo-Nazi forum founded by American "The Base" member Matthew "Mathias" Baccari in May 2018 that was taken offline in February 2020.`
+      return `FascistForge.com was a neo-Nazi forum founded by American &quot;The Base&quot; member Matthew &quot;Mathias&quot; Baccari in May 2018 that was taken offline in February 2020.`
     }
   } else {
     return `FashyLeaks is an easy-to-use advanced search interface for Nazi forum datasets, including Fascist Forge and Iron March.`
@@ -196,12 +196,6 @@ useMeta(() => {
 </script>
 
 <style>
-/* .q-tab {
-  font-weight: 400;
-  letter-spacing: 0.0892857143em;
-  text-indent: 0.0892857143em;
-  text-transform: uppercase;
-} */
 
 .q-toolbar {
   margin-top: -1px; /* to fix aliasing artifact on certain display resolutions */

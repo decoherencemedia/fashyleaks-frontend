@@ -32,7 +32,7 @@
         :dataset="dataset"
         :collection="collection"
         :use-markdown="useMarkdown"
-        :background-color="index % 2 === 0 ? '#d2d2d2' : 'rgba(0, 0, 0, .1)'"
+        :class="index % 2 === 0 ? 'content-item-even' : 'content-item-odd'"
       />
     </div>
   </div>
@@ -151,7 +151,9 @@ function updateServerPagination(value) {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import  '../css/quasar.variables.scss';
+
 .top-pagination {
   padding-bottom: 1em;
 }
@@ -173,5 +175,16 @@ function updateServerPagination(value) {
   margin-top: 0;
   margin-bottom: 0;
   padding-bottom: 0;
+  border: none;
+  height: 1px;
+  background-color: $border-color;
 }
+
+.content-item-odd {
+  background-color: $dark-table-row;
+}
+.content-item-even {
+  background-color: transparent
+}
+
 </style>

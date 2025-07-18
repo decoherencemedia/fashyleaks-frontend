@@ -106,7 +106,9 @@ onMounted(() => {
 })
 </script>
 
-<style>
+<style lang="scss">
+@import '../css/quasar.variables.scss';
+
 img {
   max-height: 500px;
   max-width: 500px;
@@ -126,7 +128,7 @@ img {
 blockquote {
   padding: 5px 10px;
   margin: 10px;
-  outline: thin solid #888;
+  outline: thin solid $border-color;
 }
 
 .iframe {
@@ -134,7 +136,7 @@ blockquote {
 }
 
 .post-wrapper {
-  border-bottom: 1px solid #999;
+  border-bottom: 1px solid $border-color;
   padding: 0.5em;
   text-align: left;
   display: flex;
@@ -161,11 +163,13 @@ blockquote {
 .expanded {
   --max-lines: none;
   -webkit-line-clamp: var(--max-lines);
+  line-clamp: var(--max-lines);
 }
 
 .contracted {
   --max-lines: 20;
   -webkit-line-clamp: var(--max-lines);
+  line-clamp: var(--max-lines);
 }
 
 .markdown {

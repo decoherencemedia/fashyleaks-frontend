@@ -140,17 +140,10 @@ const menuItems = [
 ]
 </script>
 
-<style>
-tbody tr:nth-of-type(odd) {
-  background-color: rgba(0, 0, 0, 0.1);
+<style lang="scss">
+@import './css/quasar.variables.scss';
+
+tbody tr:nth-of-type(even) {
+  background-color: $dark-table-row;
 }
-/* body {
-  background-color: #ff0000;
-} */
-/* .q-btn {
-  font-weight: 400;
-  letter-spacing: 0.0892857143em;
-  text-indent: 0.0892857143em;
-  text-transform: uppercase;
-} */
 </style>

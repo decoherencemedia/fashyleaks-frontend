@@ -170,7 +170,9 @@ const emit = defineEmits(['clickedRow'])
 const title = datasetToTitle(props.dataset)
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '../css/quasar.variables.scss';
+
 .td {
   max-width: 200px;
 }
@@ -187,10 +189,10 @@ const title = datasetToTitle(props.dataset)
 }
 
 .dark-card {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: $dark-table-row;
 }
 
 .light-card {
-  background-color: rgba(0, 0, 0, 0);
+  background-color: transparent;
 }
 </style>
