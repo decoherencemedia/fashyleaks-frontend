@@ -5,7 +5,7 @@
       flat
       bordered
     >
-      <div class="text-h6 text-center text-weight-bold q-mb-md">
+      <div class="text-h6 text-center q-mb-md title">
         <slot name="title" />
       </div>
       <div class="text-body1 about" style="font-weight: 300">
@@ -33,5 +33,9 @@
 ::v-deep(.about ul) {
   text-align: left !important;
   text-justify: none !important;
+}
+
+.title {
+  font-weight: 600 !important;
 }
 </style>

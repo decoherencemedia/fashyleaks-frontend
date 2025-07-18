@@ -29,6 +29,11 @@ const routerOptions = [
     component: 'About',
     meta: { title: 'Decoherence Archive | About' },
   },
+  {
+    path: '/:catchAll(.*)*',
+    component: 'ErrorNotFound',
+    meta: { title: 'Decoherence Archive | Page Not Found' },
+  },
 ]
 
 const routes = routerOptions.map((route) => {

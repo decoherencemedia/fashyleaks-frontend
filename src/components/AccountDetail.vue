@@ -53,7 +53,7 @@
             <q-markup-table flat class="table-section">
               <tbody>
                 <tr v-for="item in displayFields" :key="item.text">
-                  <td class="wrap-cell text-bold">{{ item.text }}</td>
+                  <td class="wrap-cell font-bold">{{ item.text }}</td>
                   <td class="wrap-cell text-right">
                     <router-link
                       v-if="item.link"
@@ -65,7 +65,7 @@
                   </td>
                 </tr>
                 <tr v-if="displayImages">
-                  <td class="text-bold">More Images</td>
+                  <td class="font-bold">More Images</td>
                   <td></td>
                 </tr>
               </tbody>
@@ -308,5 +308,9 @@
 
   .close-btn {
     background-color: $white-semiopaque;
+  }
+
+  .font-bold {
+    font-weight: 600 !important;
   }
   </style>
