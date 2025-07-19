@@ -123,6 +123,7 @@
   <script setup>
   import { computed } from 'vue'
   import { useRoute, useRouter } from 'vue-router'
+  import { useMeta } from 'quasar'
   import { usePermalink } from '@/composables/usePermalink'
   import AccountTable from './AccountTable.vue'
   import { datasetToTitle } from '@/utils/query.js'
@@ -173,6 +174,28 @@
   const coverImage = computed(() => {
     const images = datum.value.images || []
     return images.find((img) => img.toLowerCase().includes('cover')) || ''
+  })
+
+  const accountUsername = computed(() => {
+    if (!showCard.value || !datum.value) return null
+    const titleField = getResultTitleField(props.collection)
+    return datum.value[titleField] || null
+  })
+
+  const datasetTitle = computed(() => datasetToTitle(props.dataset))
+
+  const metaDescription = computed(() => {
+    if (!accountUsername.value) return 'Account details from the archive.'
+    return `View details for ${accountUsername.value} from ${datasetTitle.value} dataset.`
+  })
+
+  useMeta(() => {
+    return {
+      meta: {
+        description: {name: 'description', content: metaDescription.value},
+        ogDescription: {property: 'og:description', content: metaDescription.value}
+      }
+    }
   })
 
   const { copyPermalink } = usePermalink(
