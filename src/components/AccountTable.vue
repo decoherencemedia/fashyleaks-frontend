@@ -53,7 +53,7 @@
             label="More Details"
             color="info"
             size="sm"
-            class="rounded-button"
+            class="more-details-btn"
             @click.stop="clickRow(null, props.row)"
             style="position: absolute; top: 8px; right: 8px; z-index: 2"
             unelevated

@@ -9,13 +9,14 @@
       <EmailContentInfo v-else-if="collection == 'emails'" :item="item" :dataset="dataset" />
 
       <q-btn
-        class="q-mb-xs rounded-button"
+        class="q-mb-xs"
         size="sm"
         color="info"
         @click="copyPermalink"
         label="Permalink"
         icon="link"
         unelevated
+        style="border-radius: 6px"
         :title="`Copy permanent link to this ${collection.slice(0, -1)}`"
       >
       </q-btn>
@@ -34,7 +35,7 @@
 
         <q-btn
           v-if="isOverflowing || expanded"
-          class="q-mb-xs rounded-button"
+          class="q-mb-xs"
           size="sm"
           color="info"
           @click="toggleButton"
