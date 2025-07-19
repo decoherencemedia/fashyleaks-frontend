@@ -91,7 +91,6 @@
                 >
                   <q-tooltip>{{ imageTooltip(datum.images[n]) }}</q-tooltip>
                   <q-img
-                    :key="`image-${n}-${datum.images[n]}`"
                     :src="datum.images[n]"
                     style="width: 100%; height: 100%; object-fit: cover"
                     class="bg-grey-2 q-pa-none q-ma-none"
@@ -123,8 +122,8 @@
 
   <script setup>
   import { computed } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import { usePermalink } from '@/composables/usePermalink'
+  import { useRoute, useRouter } from 'vue-router'
+  import { usePermalink } from '@/composables/usePermalink'
   import AccountTable from './AccountTable.vue'
   import { datasetToTitle } from '@/utils/query.js'
   import { getResultFields, getResultTitleField } from '@/utils/configHelper.js'

@@ -39,7 +39,7 @@
 </template>
 
 <script setup>
-import { ref, watch, onMounted, markRaw, computed } from 'vue'
+import { ref, watch, onMounted, markRaw } from 'vue'
 
 import { getDatasetCollections } from '@/utils/configHelper.js'
 import SearchPage from '@/components/SearchPage.vue'
@@ -47,7 +47,6 @@ import { useRoute, useRouter } from 'vue-router'
 import { useFieldStore } from '@/stores/FieldStore'
 import { useMeta } from 'quasar'
 import { datasetToTitle } from '@/utils/query.js'
-import { useAccountMeta } from '@/composables/useAccountMeta.js'
 
 const props = defineProps({
   dataset: {
@@ -85,9 +84,6 @@ loadAbout()
 const route = useRoute()
 const router = useRouter()
 
-// Initialize account meta data fetching
-const { isSingleAccountView, metaDescription: accountMetaDescription, metaTitle: accountMetaTitle, fetchAccountData } = useAccountMeta()
-
 function initializeTabFromURL() {
   const queryTab = route.query.tab
   if (!route.query || Object.keys(route.query).length === 0) {
@@ -123,8 +119,6 @@ initializeTabFromURL()
 
 onMounted(() => {
   initializeTabFromURL()
-  // Fetch account data for meta tags if needed
-  fetchAccountData()
 })
 
 watch(
@@ -134,15 +128,6 @@ watch(
       tab.value = newTab
     }
   },
-)
-
-// Watch for route changes to fetch account data for meta tags
-watch(
-  () => route.query,
-  () => {
-    fetchAccountData()
-  },
-  { deep: true }
 )
 
 watch(tab, (newTab) => {
@@ -166,83 +151,45 @@ watch(tab, (newTab) => {
   }
 })
 
-// function metaDescription() {
-//   if (tab.value === 'about') {
-//     if (props.dataset === 'iron-march') {
-//       return `IronMarch.org was a neo-Nazi forum founded by Uzbek Russian Alisher &quot;Slavros&quot; Mukhitdinov in 2011, which significantly influenced the international neo-Nazi community.`
-//     } else if (props.dataset === 'rope-culture') {
-//       return `Rope Culture was the neo-Nazi forum Iron March&apos;s in-house online magazine. Prominent users contributed to it, providing longer-form articles and podcast.`
-//     } else if (props.dataset === 'fascist-forge') {
-//       return `FascistForge.com was a neo-Nazi forum founded by American &quot;The Base&quot; member Matthew &quot;Mathias&quot; Baccari in May 2018 that was taken offline in February 2020.`
-//     }
-//   } else {
-//     return `FashyLeaks is an easy-to-use advanced search interface for Nazi forum datasets, including Fascist Forge and Iron March.`
-//   }
-// }
-
-function metaTitle() {
+function metaDescription() {
   if (tab.value === 'about') {
-    return `About ${title}`
-  }
-
-  // Use account-specific meta title if available
-  if (isSingleAccountView.value && accountMetaTitle.value) {
-    return accountMetaTitle.value
-  }
-
-  const fields = route.query
-  if (
-    !!fields.id &&
-    Object.keys(fields)
-      .filter((key) => key !== 'tab')
-      .every((key) => key === 'id' || fields[key] === '')
-  ) {
-    return `${title} ${tab.value.slice(0, -1)} #${fields.id}`
+    if (props.dataset === 'iron-march') {
+      return `IronMarch.org was a neo-Nazi forum founded by Uzbek Russian Alisher &quot;Slavros&quot; Mukhitdinov in 2011, which significantly influenced the international neo-Nazi community.`
+    } else if (props.dataset === 'rope-culture') {
+      return `Rope Culture was the neo-Nazi forum Iron March&apos;s in-house online magazine. Prominent users contributed to it, providing longer-form articles and podcast.`
+    } else if (props.dataset === 'fascist-forge') {
+      return `FascistForge.com was a neo-Nazi forum founded by American &quot;The Base&quot; member Matthew &quot;Mathias&quot; Baccari in May 2018 that was taken offline in February 2020.`
+    }
   } else {
-    return `Searching ${title} ${tab.value}`
+    return `FashyLeaks is an easy-to-use advanced search interface for Nazi forum datasets, including Fascist Forge and Iron March.`
   }
 }
 
-// function accountMetaDescription() {
-//   if (tab.value === 'about') {
-//     return metaDescription()
-//   }
-
-//   // Use account-specific meta description if available
-//   if (isSingleAccountView.value && accountMetaDescription.value) {
-//     return accountMetaDescription.value
-//   }
-
-//   return metaDescription()
-// }
+function metaTitle() {
+  const fields = route.query
+  if (tab.value === 'about') {
+    return `About ${title}`
+  } else {
+    if (
+      !!fields.id &&
+      Object.keys(fields)
+        .filter((key) => key !== 'tab')
+        .every((key) => key === 'id' || fields[key] === '')
+    ) {
+      return `${title} ${tab.value.slice(0, -1)} #${fields.id}`
+    } else {
+      return `Searching ${title} ${tab.value}`
+    }
+  }
+}
 
 useMeta(() => {
-  // Create a computed description that handles both account and regular cases
-  const description = computed(() => {
-    if (tab.value === 'about') {
-      if (props.dataset === 'iron-march') {
-        return `IronMarch.org was a neo-Nazi forum founded by Uzbek Russian Alisher "Slavros" Mukhitdinov in 2011, which significantly influenced the international neo-Nazi community.`
-      } else if (props.dataset === 'rope-culture') {
-        return `Rope Culture was the neo-Nazi forum Iron March's in-house online magazine. Prominent users contributed to it, providing longer-form articles and podcast.`
-      } else if (props.dataset === 'fascist-forge') {
-        return `FascistForge.com was a neo-Nazi forum founded by American "The Base" member Matthew "Mathias" Baccari in May 2018 that was taken offline in February 2020.`
-      }
-    }
-
-    // Use account-specific meta description if available
-    if (isSingleAccountView.value && accountMetaDescription.value) {
-      return accountMetaDescription.value
-    }
-
-    return `FashyLeaks is an easy-to-use advanced search interface for Nazi forum datasets, including Fascist Forge and Iron March.`
-  })
-
   return {
     title: metaTitle(),
     meta: {
       ogTitle: { property: 'og:title', content: metaTitle() },
-      description: { name: 'description', content: description.value },
-      ogDescription: { property: 'og:description', content: description.value },
+      description: { name: 'description', content: metaDescription() },
+      ogDescription: { property: 'og:description', content: metaDescription() },
     },
   }
 })
