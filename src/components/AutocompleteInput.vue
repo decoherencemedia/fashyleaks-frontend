@@ -16,7 +16,7 @@
     clearable
     dense
     class="q-mx-md full-width"
-    color="secondary"
+    color="info"
     @keyup.enter="emitSendData"
   >
     <template v-slot:option="scope">
@@ -37,7 +37,7 @@
 <script setup>
 import { ref, computed, watch, onMounted } from 'vue'
 import { useFieldStore } from '@/stores/FieldStore'
-import config from '@/assets/config.json'
+import { getAutocompleteConfig} from '@/utils/configHelper.js'
 
 const props = defineProps({
   dataset: String,
@@ -53,8 +53,8 @@ const store = useFieldStore()
 
 const endpoint = computed(() => props.additional.type)
 
-const itemText = computed(() => config.autocompletes[endpoint.value].itemText)
-const itemValue = computed(() => config.autocompletes[endpoint.value].itemValue)
+const itemText = computed(() => getAutocompleteConfig(endpoint.value).itemText)
+const itemValue = computed(() => getAutocompleteConfig(endpoint.value).itemValue)
 
 const itemTextKey = itemText.value
 const itemValueKey = itemValue.value

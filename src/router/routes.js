@@ -14,10 +14,6 @@ const routerOptions = [
   },
   {
     path: '/about',
-    component: 'About.vue',
-  },
-  {
-    path: '/about',
     component: 'About',
     meta: { title: 'Decoherence Archive | About' },
   },

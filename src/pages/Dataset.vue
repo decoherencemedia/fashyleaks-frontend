@@ -11,7 +11,7 @@
         style="max-width: 100%"
       >
         <q-tab
-          v-for="collection in config.collections[props.dataset]"
+          v-for="collection in collections"
           :key="collection"
           :name="collection"
           :title="`Search ${title} ${collection}`"
@@ -23,7 +23,7 @@
     </q-toolbar>
     <q-tab-panels v-model="tab">
       <q-tab-panel
-        v-for="collection in config.collections[props.dataset]"
+        v-for="collection in collections"
         :name="collection"
         :key="collection"
         :value="collection"
@@ -39,10 +39,9 @@
 </template>
 
 <script setup>
-// import { ref, watch, onMounted, markRaw, computed } from 'vue'
 import { ref, watch, onMounted, markRaw } from 'vue'
 
-import config from '@/assets/config.json'
+import { getDatasetCollections } from '@/utils/configHelper.js'
 import SearchPage from '@/components/SearchPage.vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useFieldStore } from '@/stores/FieldStore'
@@ -58,7 +57,7 @@ const props = defineProps({
 
 const store = useFieldStore()
 
-const collections = config.collections[props.dataset] || []
+const collections = getDatasetCollections(props.dataset)
 const validTabs = [...collections, 'about']
 const defaultTab = collections[0] || 'about'
 
@@ -152,12 +151,31 @@ watch(tab, (newTab) => {
   }
 })
 
+function metaDescription() {
+  if (tab.value === 'about') {
+    if (props.dataset === 'iron-march') {
+      return `IronMarch.org was a neo-Nazi forum founded by Uzbek Russian Alisher &quot;Slavros&quot; Mukhitdinov in 2011, which significantly influenced the international neo-Nazi community.`
+    } else if (props.dataset === 'rope-culture') {
+      return `Rope Culture was the neo-Nazi forum Iron March&apos;s in-house online magazine. Prominent users contributed to it, providing longer-form articles and podcast.`
+    } else if (props.dataset === 'fascist-forge') {
+      return `FascistForge.com was a neo-Nazi forum founded by American &quot;The Base&quot; member Matthew &quot;Mathias&quot; Baccari in May 2018 that was taken offline in February 2020.`
+    }
+  } else {
+    return `FashyLeaks is an easy-to-use advanced search interface for Nazi forum datasets, including Fascist Forge and Iron March.`
+  }
+}
+
 function metaTitle() {
   const fields = route.query
   if (tab.value === 'about') {
-    return `Decoherence Archive | About ${title}`
+    return `About ${title}`
   } else {
-    if (!!fields.id && Object.keys(fields).every((key) => key === 'id' || fields[key] === '')) {
+    if (
+      !!fields.id &&
+      Object.keys(fields)
+        .filter((key) => key !== 'tab')
+        .every((key) => key === 'id' || fields[key] === '')
+    ) {
       return `${title} ${tab.value.slice(0, -1)} #${fields.id}`
     } else {
       return `Searching ${title} ${tab.value}`
@@ -168,17 +186,16 @@ function metaTitle() {
 useMeta(() => {
   return {
     title: metaTitle(),
+    meta: {
+      ogTitle: { property: 'og:title', content: metaTitle() },
+      description: { name: 'description', content: metaDescription() },
+      ogDescription: { property: 'og:description', content: metaDescription() },
+    },
   }
 })
 </script>
 
 <style>
-/* .q-tab {
-  font-weight: 400;
-  letter-spacing: 0.0892857143em;
-  text-indent: 0.0892857143em;
-  text-transform: uppercase;
-} */
 
 .q-toolbar {
   margin-top: -1px; /* to fix aliasing artifact on certain display resolutions */

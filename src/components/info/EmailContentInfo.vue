@@ -7,7 +7,7 @@
       </router-link>
     </span>
 
-    <span class="tofrom mt-2">To</span>
+    <span class="tofrom q-mt-xs">To</span>
     <span class="channel-name">
       <router-link :to="receivedLink">
         {{ item.to_name ? item.to_name : item.to_address }}
@@ -61,26 +61,3 @@ const receivedLink = computed(() => {
   return `/${props.dataset}?tab=emails&address_1=${encodeURIComponent(props.item.to_address)}`
 })
 </script>
-
-<style scoped>
-.tofrom {
-  font-size: 10px !important;
-  line-height: 1em;
-}
-
-.post-info {
-  display: flex;
-  flex-direction: column;
-  color: #000;
-  font-size: 12px;
-  width: 140px;
-  flex-grow: 0;
-  flex-shrink: 0;
-  overflow: hidden;
-  margin-bottom: 0.5em;
-}
-
-.channel-name {
-  font-weight: bold;
-}
-</style>

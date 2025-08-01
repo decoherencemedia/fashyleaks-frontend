@@ -9,20 +9,19 @@
       <EmailContentInfo v-else-if="collection == 'emails'" :item="item" :dataset="dataset" />
 
       <q-btn
-        class="mb-1"
+        class="q-mb-xs rounded-button"
         size="sm"
-        color="secondary"
+        color="info"
         @click="copyPermalink"
         label="Permalink"
         icon="link"
         unelevated
-        style="border-radius: 6px"
         :title="`Copy permanent link to this ${collection.slice(0, -1)}`"
       >
       </q-btn>
     </div>
 
-    <div class="post-content ml-2">
+    <div class="post-content q-ml-sm">
       <div v-if="item.content && item.content.trim() !== ''" class="post-text">
         <div
           v-if="useMarkdown"
@@ -35,9 +34,9 @@
 
         <q-btn
           v-if="isOverflowing || expanded"
-          class="mb-1"
+          class="q-mb-xs rounded-button"
           size="sm"
-          color="grey-6"
+          color="info"
           @click="toggleButton"
           :label="buttonText"
           :icon-right="buttonIcon"
@@ -49,8 +48,8 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-import { useQuasar } from 'quasar'
 import { marked } from 'marked'
+import { usePermalink } from '@/composables/usePermalink'
 import PostContentInfo from './info/PostContentInfo.vue'
 import MessageContentInfo from './info/MessageContentInfo.vue'
 import ThreadContentInfo from './info/ThreadContentInfo.vue'
@@ -66,16 +65,15 @@ const props = defineProps({
   backgroundColor: String,
 })
 
-const $q = useQuasar()
-
 const postSpan = ref(null)
 const isMounted = ref(false)
 const expanded = ref(false)
 
-const permalink = computed(() => {
-  const path = `/${props.dataset}?tab=${props.collection}&id=${props.item.id}`
-  return window.location.origin + path
-})
+const { copyPermalink } = usePermalink(
+  computed(() => props.dataset),
+  computed(() => props.collection),
+  computed(() => props.item.id)
+)
 
 const isOverflowing = computed(() => {
   if (!isMounted.value) return false
@@ -96,24 +94,6 @@ function markdown(content) {
   return marked.parseInline(content)
 }
 
-async function copyPermalink() {
-  try {
-    await navigator.clipboard.writeText(permalink.value)
-    $q.notify({
-      type: 'positive',
-      message: 'Copied to clipboard',
-      timeout: 2000,
-    })
-  } catch (e) {
-    console.log(`Copying permalink failed with error ${e}`)
-    $q.notify({
-      type: 'negative',
-      message: `Copying failed`,
-      timeout: 2000,
-    })
-  }
-}
-
 function toggleButton() {
   if (isOverflowing.value) {
     expanded.value = !expanded.value
@@ -125,7 +105,9 @@ onMounted(() => {
 })
 </script>
 
-<style>
+<style lang="scss">
+@import '../css/quasar.variables.scss';
+
 img {
   max-height: 500px;
   max-width: 500px;
@@ -145,7 +127,7 @@ img {
 blockquote {
   padding: 5px 10px;
   margin: 10px;
-  outline: thin solid #888;
+  outline: thin solid $border-color;
 }
 
 .iframe {
@@ -153,7 +135,7 @@ blockquote {
 }
 
 .post-wrapper {
-  border-bottom: 1px solid #999;
+  border-bottom: 1px solid $border-color;
   padding: 0.5em;
   text-align: left;
   display: flex;
@@ -180,11 +162,13 @@ blockquote {
 .expanded {
   --max-lines: none;
   -webkit-line-clamp: var(--max-lines);
+  line-clamp: var(--max-lines);
 }
 
 .contracted {
   --max-lines: 20;
   -webkit-line-clamp: var(--max-lines);
+  line-clamp: var(--max-lines);
 }
 
 .markdown {

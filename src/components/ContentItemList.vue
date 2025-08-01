@@ -2,19 +2,19 @@
   <div class="pagination-and-divider">
     <div class="row justify-center">
       <q-pagination
-        v-if="props.data.length > config.pagination.resultsPerPage"
+        v-if="props.data.length > resultsPerPage"
         v-model="page"
         class="top-pagination"
         :max="length"
-        :max-pages="config.pagination.totalVisible"
-        color="secondary"
+        :max-pages="totalVisible"
+        color="info"
         boundary-numbers
         unelevated
         input
       />
       <div v-else-if="props.data.length > 0" class="top-pagination" />
       <div
-        v-if="props.data.length < config.pagination.resultsPerPage"
+        v-if="props.data.length < resultsPerPage"
         class="top-pagination-placeholder"
       />
     </div>
@@ -27,12 +27,12 @@
 
   <div v-if="!isLoading">
     <div v-for="(item, index) in pagedData" :key="item.id">
-      <ContentBox
+      <ContentItem
         :item="item"
         :dataset="dataset"
         :collection="collection"
         :use-markdown="useMarkdown"
-        :background-color="index % 2 === 0 ? '#ffffff' : 'rgba(0, 0, 0, .1)'"
+        :class="index % 2 === 0 ? 'dark-table-row' : 'light-table-row'"
       />
     </div>
   </div>
@@ -42,8 +42,8 @@
       v-model="page"
       class="bottom-pagination"
       :max="length"
-      :max-pages="config.pagination.totalVisible"
-      color="secondary"
+      :max-pages="totalVisible"
+      color="info"
       boundary-numbers
       unelevated
       input
@@ -54,8 +54,8 @@
 <script setup>
 import { ref, computed, watch } from 'vue'
 import { useFieldStore } from '@/stores/FieldStore'
-import ContentBox from './ContentBox.vue'
-import config from '@/assets/config.json'
+import ContentItem from './ContentItem.vue'
+import { getPaginationConfig } from 'src/utils/configHelper'
 
 const props = defineProps({
   data: {
@@ -92,18 +92,26 @@ watch(page, (value) => {
 
 const length = computed(() => {
   const count = store.counts[props.dataset]?.[props.collection] || 0
-  return props.data.length > 0 ? Math.ceil(count / config.pagination.resultsPerPage) : 0
+  return props.data.length > 0 ? Math.ceil(count / resultsPerPage) : 0
 })
 
+const paginationConfig = getPaginationConfig();
+const resultsPerPage = paginationConfig.resultsPerPage;
+const batchSize = paginationConfig.batchSize;
+const totalVisible = paginationConfig.totalVisible;
+
 const clientOffset = computed(() => {
-  setTimeout(() => window.scrollTo({ top: 0, behavior: 'auto' }), 10)
+  if (typeof window !== 'undefined') {
+    setTimeout(() => window.scrollTo({ top: 0, behavior: 'auto' }), 10)
+  }
+
   const serverPage = store.pagination[props.dataset]?.[props.collection] || 1
   const offset = store.offsets[props.dataset]?.[props.collection] || 0
-  return (serverPage - 1) * config.pagination.resultsPerPage - offset
+  return (serverPage - 1) * resultsPerPage - offset
 })
 
 const pagedData = computed(() => {
-  return props.data.slice(clientOffset.value, clientOffset.value + config.pagination.resultsPerPage)
+  return props.data.slice(clientOffset.value, clientOffset.value + resultsPerPage)
 })
 
 function updateServerPagination(value) {
@@ -115,18 +123,18 @@ function updateServerPagination(value) {
 
   if (
     value > currentValue &&
-    value >= (offset + config.pagination.batchSize) / config.pagination.resultsPerPage + 1
+    value >= (offset + batchSize) / resultsPerPage + 1
   ) {
     newOffset =
       value - currentValue === 1
-        ? offset + config.pagination.batchSize
-        : (value - 1) * config.pagination.resultsPerPage
+        ? offset + batchSize
+        : (value - 1) * resultsPerPage
     needToFetch = true
-  } else if (value < currentValue && value <= offset / config.pagination.resultsPerPage) {
+  } else if (value < currentValue && value <= offset / resultsPerPage) {
     newOffset =
       currentValue - value === 1
-        ? offset - config.pagination.batchSize
-        : (value - 1) * config.pagination.resultsPerPage
+        ? offset - batchSize
+        : (value - 1) * resultsPerPage
     needToFetch = true
   }
 
@@ -143,7 +151,9 @@ function updateServerPagination(value) {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import  '../css/quasar.variables.scss';
+
 .top-pagination {
   padding-bottom: 1em;
 }
@@ -165,5 +175,8 @@ function updateServerPagination(value) {
   margin-top: 0;
   margin-bottom: 0;
   padding-bottom: 0;
+  border: none;
+  height: 1px;
+  background-color: $border-color;
 }
 </style>

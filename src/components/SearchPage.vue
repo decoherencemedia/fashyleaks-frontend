@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="config.fields[collection].length > 0">
+    <div v-if="getCollectionFields(collection).length > 0">
       <q-form @submit.prevent="sendData">
         <q-card flat :class="$q.platform.is.mobile ? 'q-mx-sm' : 'q-mx-md'">
           <div row class="text-h6">Searching {{ title }} {{ collection }}</div>
@@ -8,7 +8,7 @@
             <div :class="$q.platform.is.mobile ? 'q-gutter-y-md row' : 'q-gutter-lg row'">
               <component
                 :is="determineComponent(item)"
-                v-for="item in config.fields[collection]"
+                v-for="item in getCollectionFields(collection)"
                 :key="item.variable"
                 :field="item.variable"
                 :label="item.label"
@@ -20,13 +20,13 @@
               />
 
               <q-btn
+                class="rounded-button"
                 :class="$q.platform.is.mobile ? 'col-auto q-ml-none' : 'col-auto q-ml-md'"
-                color="secondary"
+                color="info"
                 label="Search"
                 @click="sendData"
                 :title="`Search for ${collection} matching query`"
                 unelevated
-                style="border-radius: 6px"
               >
               </q-btn>
             </div>
@@ -41,7 +41,7 @@
         <div v-html="errorMessageHtml" />
       </q-banner>
     </div>
-    <ContentResult
+    <AccountDetail
       v-if="isSingle"
       :data="results"
       :dataset="dataset"
@@ -50,7 +50,7 @@
       @clickedRow="sendData()"
       @clearedData="clearData()"
     />
-    <ContentResults
+    <ContentItemList
       v-else
       :data="results"
       :dataset="dataset"
@@ -58,7 +58,7 @@
       :use-markdown="useMarkdown"
       @fetchMore="handleFetchMore"
     >
-    </ContentResults>
+    </ContentItemList>
   </div>
 </template>
 
@@ -66,11 +66,11 @@
 import { computed, watch, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
-import ContentResult from './ContentResult.vue'
-import ContentResults from './ContentResults.vue'
+import AccountDetail from './AccountDetail.vue'
+import ContentItemList from './ContentItemList.vue'
 import TextInput from './TextInput.vue'
 import AutocompleteInput from './AutocompleteInput.vue'
-import config from '@/assets/config.json'
+import { getCollectionFields, isSingleCollection, usesMarkdown } from '@/utils/configHelper.js'
 import { objectToQueryString } from '@/utils/query'
 
 import { useFieldStore } from '@/stores/FieldStore'
@@ -94,14 +94,12 @@ const errorMessageHtml = computed(() => {
 
 const results = computed(() => store.results?.[props.dataset]?.[props.collection])
 
-const isSingle = computed(() => config.singleCollections.includes(props.collection))
+const isSingle = computed(() => isSingleCollection(props.collection))
 
-const useMarkdown = computed(() => {
-  return config.useMarkdown?.[props.dataset]?.includes(props.collection) ?? false
-})
+const useMarkdown = computed(() => usesMarkdown(props.dataset, props.collection))
 
 function determineComponent(item) {
-  return 'component' in item ? AutocompleteInput : TextInput
+  return item.component === 'AutocompleteInput' ? AutocompleteInput : TextInput
 }
 
 function sendData() {

@@ -8,16 +8,12 @@ Functionality bugs
 
 Style
 
-- style warning message with code style instead of ``
-
 Performance
 
-- consolidate config.json data
 - improve Lighthouse score
 
 Enhancements
 
-- implement HTML previews
 - implement way to view a post in context
 
 ## Install the dependencies

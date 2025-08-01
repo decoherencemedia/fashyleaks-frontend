@@ -11,11 +11,11 @@
     </TextBox>
   </div>
   <div class="row justify-center q-gutter-md q-mx-xl q-mt-lg">
-    <DatasetLink dataset="iron-march" />
+    <DatasetButton dataset="iron-march" />
   </div>
 </template>
 
 <script setup>
 import TextBox from '@/components/TextBox.vue'
-import DatasetLink from '@/components/DatasetLink.vue'
+import DatasetButton from '@/components/DatasetButton.vue'
 </script>

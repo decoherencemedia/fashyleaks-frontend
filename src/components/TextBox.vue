@@ -1,12 +1,11 @@
 <template>
   <div class="row justify-center q-mt-xl q-px-md">
     <q-card
-      class="q-pa-md"
-      style="width: 100%; max-width: 750px; border: 1px solid rgba(0, 0, 0, 0.24)"
+      class="q-pa-md about-card"
       flat
       bordered
     >
-      <div class="text-h6 text-center text-weight-bold q-mb-md">
+      <div class="text-h6 text-center q-mb-md title">
         <slot name="title" />
       </div>
       <div class="text-body1 about" style="font-weight: 300">
@@ -18,14 +17,25 @@
 
 <script setup></script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '../css/quasar.variables.scss';
+
 .about {
   text-align: justify;
   text-justify: inter-word;
 }
 
+.about-card {
+    max-width: 750px;
+    border: 1px solid $border-color;
+}
+
 ::v-deep(.about ul) {
   text-align: left !important;
   text-justify: none !important;
+}
+
+.title {
+  font-weight: 600 !important;
 }
 </style>

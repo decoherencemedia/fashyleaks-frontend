@@ -18,7 +18,7 @@
       :filter="search"
       :pagination="{ rowsPerPage: 20 }"
       @row-click="clickRow"
-      color="secondary"
+      color="info"
     >
       <template v-slot:top>
         <div :class="$q.platform.is.mobile ? 'q-pa-xs row justify-center' : 'q-pa-sm row'">
@@ -29,7 +29,7 @@
               outlined
               dense
               clearable
-              color="secondary"
+              color="info"
               class="q-mx-none q-px-none"
               :style="
                 $q.platform.is.mobile ? 'max-width: 100%; width: calc(100vw - 8px)' : 'width: 400px'
@@ -43,11 +43,21 @@
         <q-card
           flat
           bordered
-          :class="props.rowIndex % 2 === 0 ? 'bg-grey-5' : 'bg-white'"
-          class="q-ma-xs"
+          :class="props.rowIndex % 2 === 0 ? 'dark-table-row' : 'light-table-row'"
+          class="q-ma-xs position-relative"
           style="width: 100%"
           @click="clickRow(null, props.row)"
         >
+          <q-btn
+            v-if="$q.platform.is.mobile"
+            label="More Details"
+            color="info"
+            size="sm"
+            class="rounded-button"
+            @click.stop="clickRow(null, props.row)"
+            style="position: absolute; top: 8px; right: 8px; z-index: 2"
+            unelevated
+          />
           <q-item class="q-ma-xs q-pa-xs">
             <q-item-section>
               <div v-for="col in props.cols" :key="col.name" class="q-ma-xs">
@@ -65,7 +75,7 @@
 <script setup>
 import { computed, ref, onMounted } from 'vue'
 import { useFieldStore } from '@/stores/FieldStore'
-import config from '@/assets/config.json'
+import { getTableHeaders } from '@/utils/configHelper.js'
 import { datasetToTitle } from '@/utils/query.js'
 
 const props = defineProps({
@@ -113,7 +123,7 @@ const items = computed(() => {
 })
 
 const headers = computed(() => {
-  const allHeaders = config.headers[props.dataset][props.collection]
+  const allHeaders = getTableHeaders(props.dataset, props.collection)
 
   const decorateHeader = (header) => {
     const style = 'max-width: 200px; white-space: normal; word-break: break-word;'
@@ -170,7 +180,9 @@ const emit = defineEmits(['clickedRow'])
 const title = datasetToTitle(props.dataset)
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '../css/quasar.variables.scss';
+
 .td {
   max-width: 200px;
 }
@@ -184,5 +196,9 @@ const title = datasetToTitle(props.dataset)
 
 ::v-deep(.q-table__bottom-nodata-icon) {
   display: none !important;
+}
+
+::v-deep(.q-field__control::before) {
+  border: 1px solid $border-color !important;
 }
 </style>
