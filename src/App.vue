@@ -2,7 +2,7 @@
   <!-- Mobile toolbar -->
   <q-toolbar v-if="$q.platform.is.mobile" class="bg-primary text-accent">
     <q-btn no-caps flat stretch to="/" title="Decoherence Archive Home" class="q-px-none">
-      <img src="@/assets/logo_1.svg" alt="icon" style="height: 50px" />
+      <img src="@/assets/logo_2.svg" alt="icon" style="height: 50px" />
     </q-btn>
     <q-space> </q-space>
     <q-btn flat round dense icon="menu" stretch tab aria-label="Menu">
@@ -51,7 +51,7 @@
   <!-- Non-mobile toolbar -->
   <q-toolbar v-else class="bg-primary">
     <q-btn flat to="/">
-      <img src="@/assets/logo_1.svg" alt="icon" style="height: 50px" />
+      <img src="@/assets/logo_2.svg" alt="icon" style="height: 50px" />
     </q-btn>
 
     <q-space />

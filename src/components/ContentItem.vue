@@ -30,6 +30,11 @@
           v-html="markdown(item.content)"
           @click="toggleButton"
         />
+        <div v-else-if="props.collection === 'threads'" :class="postClass" ref="postSpan">
+          <RouterLink :to="`/${dataset}?tab=posts&thread_id=${item.id}`">
+            {{ item.content }}
+          </RouterLink>
+        </div>
         <div v-else :class="postClass" ref="postSpan" v-html="item.content" @click="toggleButton" />
 
         <q-btn
@@ -72,7 +77,7 @@ const expanded = ref(false)
 const { copyPermalink } = usePermalink(
   computed(() => props.dataset),
   computed(() => props.collection),
-  computed(() => props.item.id)
+  computed(() => props.item.id),
 )
 
 const isOverflowing = computed(() => {
