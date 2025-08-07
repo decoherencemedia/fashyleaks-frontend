@@ -1,7 +1,7 @@
 <template>
   <!-- Mobile toolbar -->
   <q-toolbar v-if="$q.platform.is.mobile" class="bg-primary text-accent">
-    <q-btn no-caps flat stretch to="/" title="Decoherence Archive Home" class="q-px-none">
+    <q-btn no-caps flat stretch to="/" title="FashyLeaks Home" class="q-px-none">
       <img src="@/assets/logo_2.svg" alt="icon" style="height: 50px" />
     </q-btn>
     <q-space> </q-space>
@@ -88,22 +88,15 @@
         </q-item>
       </q-list>
     </q-btn-dropdown>
-    <q-btn
-      class="text-accent"
-      stretch
-      flat
-      label="About"
-      to="/about"
-      title="Acout Decoherence Archive"
-    >
+    <q-btn class="text-accent" stretch flat label="About" to="/about" title="Acout FashyLeaks">
     </q-btn>
     <q-btn
       stretch
       flat
       href="https://github.com/decoherencemedia/fashdata-frontend"
       target="_blank"
-      aria-label="Decoherence Archive on GitHub"
-      title="Decoherence Archive on GitHub"
+      aria-label="FashyLeaks on GitHub"
+      title="FashyLeaks on GitHub"
     >
       <git-hub-icon color="accent" size="2em" />
     </q-btn>

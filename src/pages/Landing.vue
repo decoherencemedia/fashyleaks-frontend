@@ -1,11 +1,11 @@
 <template>
   <div class="row justify-center">
     <TextBox>
-      <template #title> Decoherence Archive </template>
+      <template #title>FashyLeaks</template>
 
       <template #body>
-        This site provides an easy-to-use advanced search interface for Nazi forum datasets,
-        including <router-link to="/iron-march?tab=about">Iron March</router-link> and
+        This site provides a search interface for Nazi forum datasets, including
+        <router-link to="/iron-march?tab=about">Iron March</router-link> and
         <router-link to="/fascist-forge?tab=about">Fascist Forge</router-link>. Click on the
         <i>DATASETS</i> tab in the toolbar and select a dataset to start searching.
       </template>

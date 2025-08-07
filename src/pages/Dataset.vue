@@ -161,7 +161,7 @@ function metaDescription() {
       return `FascistForge.com was a neo-Nazi forum founded by American &quot;The Base&quot; member Matthew &quot;Mathias&quot; Baccari in May 2018 that was taken offline in February 2020.`
     }
   } else {
-    return `FashyLeaks is an easy-to-use advanced search interface for Nazi forum datasets, including Fascist Forge and Iron March.`
+    return `FashyLeaks is a search interface for Nazi forum datasets, including Fascist Forge and Iron March.`
   }
 }
 
@@ -196,7 +196,6 @@ useMeta(() => {
 </script>
 
 <style>
-
 .q-toolbar {
   margin-top: -1px; /* to fix aliasing artifact on certain display resolutions */
   z-index: 1;
