@@ -1,8 +1,8 @@
 <template>
   <!-- Mobile toolbar -->
-  <q-toolbar v-if="$q.platform.is.mobile" class="bg-primary text-accent">
+  <q-toolbar v-if="$q.platform.is.mobile" class="bg-accent text-primary app-toolbar-mobile">
     <q-btn no-caps flat stretch to="/" title="FashyLeaks Home" class="q-px-none">
-      <img src="@/assets/logo_2.svg" alt="icon" style="height: 50px" />
+      <img src="@/assets/logo.svg" alt="icon" style="height: 50px" />
     </q-btn>
     <q-space> </q-space>
     <q-btn flat round dense icon="menu" stretch tab aria-label="Menu">
@@ -49,9 +49,9 @@
     </q-btn>
   </q-toolbar>
   <!-- Non-mobile toolbar -->
-  <q-toolbar v-else class="bg-primary">
-    <q-btn flat to="/">
-      <img src="@/assets/logo_2.svg" alt="icon" style="height: 50px" />
+  <q-toolbar v-else class="bg-accent app-toolbar">
+    <q-btn flat to="/" class="absolute-center">
+      <img src="@/assets/logo.svg" alt="icon" style="height: 50px" />
     </q-btn>
 
     <q-space />
@@ -62,7 +62,7 @@
       title="Search a dataset"
       menu-anchor="bottom start"
       menu-self="top start"
-      class="text-accent"
+      class="text-primary"
     >
       <q-list>
         <q-item
@@ -88,7 +88,7 @@
         </q-item>
       </q-list>
     </q-btn-dropdown>
-    <q-btn class="text-accent" stretch flat label="About" to="/about" title="Acout FashyLeaks">
+    <q-btn class="text-primary" stretch flat label="About" to="/about" title="Acout FashyLeaks">
     </q-btn>
     <q-btn
       stretch
@@ -98,7 +98,7 @@
       aria-label="FashyLeaks on GitHub"
       title="FashyLeaks on GitHub"
     >
-      <git-hub-icon color="accent" size="2em" />
+      <git-hub-icon color="primary" size="2em" />
     </q-btn>
   </q-toolbar>
 

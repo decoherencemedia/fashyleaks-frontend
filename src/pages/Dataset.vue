@@ -1,12 +1,12 @@
 <template>
   <div :id="dataset">
-    <q-toolbar class="text-accent bg-primary">
-      <component :is="iconComponent" color="secondary" size="2rem" :title="title"> </component>
+    <q-toolbar class="text-primary bg-accent dataset-toolbar">
+      <component :is="iconComponent" color="info" size="2rem" :title="title"> </component>
       <q-tabs
         class="scroll"
         v-model="tab"
         inline-label
-        indicator-color="secondary"
+        indicator-color="info"
         mobile-arrows
         style="max-width: 100%"
       >
@@ -193,9 +193,9 @@ useMeta(() => {
 })
 </script>
 
-<style>
+<!-- <style>
 .q-toolbar {
   margin-top: -1px; /* to fix aliasing artifact on certain display resolutions */
   z-index: 1;
 }
-</style>
+</style> -->

@@ -94,3 +94,17 @@ tbody tr:nth-of-type(odd) {
 .rounded-button {
   border-radius: 6px;
 }
+
+.app-toolbar {
+  border-bottom: 2px solid #282828;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.app-toolbar-mobile {
+  border-bottom: 2px solid #282828;
+}
+
+.dataset-toolbar {
+  border-bottom: 2px solid #282828;
+}
