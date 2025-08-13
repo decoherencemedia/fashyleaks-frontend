@@ -107,7 +107,6 @@
 
 <script setup>
 import IronMarchIcon from '@/components/icons/IronMarchIcon.vue'
-import FascistForgeIcon from '@/components/icons/FascistForgeIcon.vue'
 import RopeCultureIcon from '@/components/icons/RopeCultureIcon.vue'
 import GitHubIcon from '@/components/icons/GitHubIcon.vue'
 
@@ -123,12 +122,6 @@ const menuItems = [
     path: '/rope-culture',
     tooltip: 'Search Rope Culture data',
     icon: RopeCultureIcon,
-  },
-  {
-    title: 'Fascist Forge',
-    path: '/fascist-forge',
-    tooltip: 'Search Fascist Forge data',
-    icon: FascistForgeIcon,
   },
 ]
 </script>

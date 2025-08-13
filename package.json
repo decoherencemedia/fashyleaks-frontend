@@ -1,7 +1,7 @@
 {
     "name": "fashyleaks",
     "version": "0.0.1",
-    "description": "Search interface for Nazi forum datasets, including Fascist Forge and Iron March.",
+    "description": "Search interface for Nazi forum datasets, including Iron March and Rope Culture.",
     "productName": "FashyLeaks",
     "author": "Tristan Lee>",
     "type": "module",

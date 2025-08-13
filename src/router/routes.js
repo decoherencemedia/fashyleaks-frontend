@@ -13,12 +13,6 @@ const routerOptions = [
     props: { dataset: 'iron-march' },
   },
   {
-    path: '/fascist-forge',
-    component: 'Dataset',
-    meta: { title: 'FashyLeaks| Fascist Forge' },
-    props: { dataset: 'fascist-forge' },
-  },
-  {
     path: '/rope-culture',
     component: 'Dataset',
     meta: { title: 'FashyLeaks| Rope Culture' },

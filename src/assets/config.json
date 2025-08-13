@@ -18,21 +18,6 @@
                 "user_table"
             ]
         },
-        "fascist-forge": {
-            "collections": [
-                "posts",
-                "threads",
-                "users"
-            ],
-            "lists": [
-                "users",
-                "thread_categories",
-                "user_table"
-            ],
-            "useMarkdown": [
-                "posts"
-            ]
-        },
         "rope-culture": {
             "collections": [
                 "articles",
@@ -253,20 +238,6 @@
                 }
             }
         },
-        "fascist-forge": {
-            "age": {
-                "text": "Age",
-                "property": "age"
-            },
-            "ideology": {
-                "text": "Ideology",
-                "property": "ideology"
-            },
-            "religion": {
-                "text": "Religion",
-                "property": "religion"
-            }
-        },
         "rope-culture": {
             "password": {
                 "text": "Password",
@@ -312,11 +283,6 @@
                 "country",
                 "posts",
                 "threads"
-            ],
-            "fascist-forge": [
-                "age",
-                "ideology",
-                "religion"
             ],
             "rope-culture": [
                 "password",

@@ -157,11 +157,9 @@ function metaDescription() {
       return `IronMarch.org was a neo-Nazi forum founded by Uzbek Russian Alisher &quot;Slavros&quot; Mukhitdinov in 2011, which significantly influenced the international neo-Nazi community.`
     } else if (props.dataset === 'rope-culture') {
       return `Rope Culture was the neo-Nazi forum Iron March&apos;s in-house online magazine. Prominent users contributed to it, providing longer-form articles and podcast.`
-    } else if (props.dataset === 'fascist-forge') {
-      return `FascistForge.com was a neo-Nazi forum founded by American &quot;The Base&quot; member Matthew &quot;Mathias&quot; Baccari in May 2018 that was taken offline in February 2020.`
     }
   } else {
-    return `FashyLeaks is a search interface for Nazi forum datasets, including Fascist Forge and Iron March.`
+    return `FashyLeaks is a search interface for Nazi forum datasets, including Iron March and Rope Culture.`
   }
 }
 
