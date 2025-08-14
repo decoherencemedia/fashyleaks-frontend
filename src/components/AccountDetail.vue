@@ -57,7 +57,7 @@
                   <td class="wrap-cell text-right">
                     <router-link
                       v-if="item.link"
-                      :to="item.link.path.replace('{value}', encodeURIComponent(datum.id))"
+                      :to="item.link.path.replace('{value}', encodeURIComponent(item.property === 'im_user_id' ? datum[item.property] : datum.id))"
                     >
                       {{ datum[item.property] }}
                     </router-link>
