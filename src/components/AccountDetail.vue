@@ -194,7 +194,7 @@ const displayFields = computed(() => {
   const nonLinked = filtered.filter((f) => !f.link && !f.a)
   const linked = filtered.filter((f) => f.link)
   const externalLinks = filtered.filter((f) => f.a)
-  return [...nonLinked, ...linked, ...externalLinks].filter((f) => datum.value[f.property])
+  return [...nonLinked, ...externalLinks, ...linked].filter((f) => datum.value[f.property])
 })
 
 console.log(displayFields)
