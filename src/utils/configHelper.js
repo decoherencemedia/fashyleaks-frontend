@@ -58,6 +58,10 @@ export function getResultFields(dataset, collection) {
       }
     }
 
+    if (field.a) {
+      result.a = field.a
+    }
+
     return result
   }).filter(Boolean)
 }

@@ -258,6 +258,11 @@
                 "text": "Other Names",
                 "property": "other_author_names"
             },
+            "author_url": {
+                "text": "URL",
+                "property": "author_url",
+                "a": "author_url"
+            },
             "author_ip": {
                 "text": "IP Address",
                 "property": "author_ip"
@@ -296,6 +301,7 @@
             "rope-culture": [
                 "author_name",
                 "id",
+                "author_url",
                 "other_author_names",
                 "author_ip",
                 "comments",
