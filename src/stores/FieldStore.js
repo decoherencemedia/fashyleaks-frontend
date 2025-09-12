@@ -5,7 +5,7 @@ import {
   getDatasetLists,
 } from '@/utils/configHelper.js'
 
-const api_url = 'https://api.decoherencemedia.com'
+const api_url = 'https://api.fashyleaks.com'
 // const api_url = 'http://localhost:5000/'
 
 let apiFetch = function (path) {
