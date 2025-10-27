@@ -36,10 +36,7 @@
           >
             <q-item-section class="text-center">About</q-item-section>
           </q-item>
-          <q-item
-            href="https://github.com/decoherencemedia/fashdata-frontend"
-            class="justify-center items-center"
-          >
+          <q-item href="https://github.com/decoherencemedia" class="justify-center items-center">
             <q-item-section class="flex justify-center items-center">
               <git-hub-icon color="black" size="1.5em" />
             </q-item-section>
@@ -93,10 +90,10 @@
     <q-btn
       stretch
       flat
-      href="https://github.com/decoherencemedia/fashdata-frontend"
+      href="https://github.com/decoherencemedia"
       target="_blank"
-      aria-label="FashyLeaks on GitHub"
-      title="FashyLeaks on GitHub"
+      aria-label="Decoherence Media on GitHub"
+      title="Decoherence Media on GitHub"
     >
       <git-hub-icon color="primary" size="2em" />
     </q-btn>

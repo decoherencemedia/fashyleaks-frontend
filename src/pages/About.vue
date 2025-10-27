@@ -26,7 +26,7 @@
       </p>
       <p>
         The source code for FashyLeaks's frontend, backend, and data pre-processing can be found on
-        Decoherence Media's <a href="https://github.com/decoherencemedia/">GitHub page</a>. If you
+        Decoherence Media's <a href="https://github.com/decoherencemedia">GitHub page</a>. If you
         have questions about how to use it, notice a bug, or have an idea for how to improve any
         part of FashyLeaks, you can create an issue on our GitHub page, or
         <a href="https://decoherence.media/contact">contact</a> Decoherence Media. We also encourage
