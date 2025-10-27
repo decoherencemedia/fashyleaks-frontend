@@ -22,7 +22,7 @@
       <p>
         To help familiarize yourself with the site, read our
         <a href="https://decoherence.media/how-to-use-fashyleaks">written guide</a> or watch our
-        <a href="https://youtu.be/8PlJTWg6Jkg">video guide</a>.
+        <a href="https://decoherence.media/how-to-use-fashyleaks-video/">video guide</a>.
       </p>
       <p>
         The source code for FashyLeaks's frontend, backend, and data pre-processing can be found on
