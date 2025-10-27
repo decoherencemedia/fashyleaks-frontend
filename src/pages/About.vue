@@ -11,7 +11,7 @@
         more to come.
       </p>
       <p>
-        Our gratitude goes out to the researchers and journalists who helped us test out the tool,
+        Our gratitude goes out to the researchers and journalists who helped us test out this tool,
         providing useful feedback and encouragement.
       </p>
       <p>
